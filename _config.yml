@@ -78,6 +78,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://carolyicheng666.github.io/
-  branch: [master]
-  message: []
+  repo: git@github.com:carolyicheng666/carolyicheng666.github.io.git
+  branch: master
