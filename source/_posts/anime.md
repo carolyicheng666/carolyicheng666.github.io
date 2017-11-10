@@ -2,9 +2,14 @@
 title: 有一种美好，叫做二次元
 date: 2017-11-07 17:37:17
 tags: [anime]
+categories: '随笔'
 ---
 
-<blockquote class="blockquote-center">没有未来的未来不是我想要的未来</blockquote>
+{% cq %}
+没有未来的未来不是我想要的未来
+
+**かんばら あきひと**
+{% endcq %}
 
 <!-- more -->
 

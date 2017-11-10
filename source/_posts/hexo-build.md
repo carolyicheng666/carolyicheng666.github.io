@@ -2,9 +2,10 @@
 title: Hexo+NexT搭建博客之踩坑
 date: 2017-11-08 10:24:24
 tags: [Hexo, NexT]
+categories: '编程'
 ---
 
-<blockquote class="blockquote-center">年轻人少看点成功学的书</blockquote>
+{% cq %}年轻人少看点成功学的书{% endcq %}
 
 <!-- more -->
 
@@ -13,7 +14,7 @@ tags: [Hexo, NexT]
 重要的事情
 ---
 
-先按照 [Hexo官方文档](https://hexo.io/zh-cn/docs/) 和 [NexT官方文档](http://theme-next.iissnan.com/) 按自己需要一步步搭建
+先按照 [<span style="color: red;">Hexo官方文档</span>](https://hexo.io/zh-cn/docs/) 和 [<span style="color: red;">NexT官方文档</span>](http://theme-next.iissnan.com/) 按自己需要一步步搭建
 下面才是本文的重点
 
 
@@ -24,8 +25,8 @@ tags: [Hexo, NexT]
 其实，`Hexo` 生成的文件里面是有一个 `.gitignore` 的，所以它的本意应该也是想我们把这些文件放到 `GitHub` 上存放的。但是考虑到如果每个 `GitHub Pages` 都需要额外的一个仓库存放这些文件，就显得特别冗余了。这个时候就可以用分支的思路！一个分支用来存放 `Hexo` 生成的网站原始的文件，另一个分支用来存放生成的静态网页。
 
 一、关于搭建的流程
-1. [创建仓库](https://github.com/carolyicheng666/carolyicheng666.github.io)
-2. 创建两个分支：master 与 hexo
+1. [<span style="color: red;">创建仓库</span>](https://github.com/carolyicheng666/carolyicheng666.github.io)
+2. 创建两个分支：`master` 与 `hexo`
 3. 设置 `hexo` 为默认分支（因为我们只需要手动管理这个分支上的 `Hexo` 网站文件）
 4. 拷贝仓库
 ``` bash
@@ -76,15 +77,17 @@ $ git push origin hexo
 ```
 	指令将改动推送到 `GitHub` （此时当前分支应为 `hexo` ）
 
-2. 然后才执行，发布网站到master分支上
+2. 然后才执行
 ``` bash
 $ hexo g -d
 ```
-	虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催....的情况，调转顺序就有问题了）。
+	发布网站到master分支上
+
+虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催....的情况，调转顺序就有问题了）。
 
 三、本地资料丢失后的流程
 当重装电脑之后，或者想在其他电脑上修改博客，可以使用下列步骤：
-1. 使用，拷贝仓库（默认分支为 `hexo` ）
+1. 使用如下命令，拷贝仓库（默认分支为 `hexo` ）
 ``` bash
 $ git clone git@github.com:carolyicheng666/carolyicheng666.github.io.git
 ```
@@ -112,14 +115,12 @@ $ hexo new page "about"
 建立标签云
 ---
 
-1. 步骤一
-新建一个页面，命名为 `tags` 。命令如下
+1. 新建一个页面，命名为 `tags` 。命令如下
 ``` bash
 $ hexo new page "tags"
 ```
 
-2. 步骤二
-编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。页面内容如下
+2. 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。页面内容如下
 ``` md
 title: Tagcloud
 date: 2014-12-22 12:39:04
@@ -128,8 +129,7 @@ type: "tags"
 ```
 	注意：如果有启用多说 或者 `Disqus` 评论，默认页面也会带有评论。需要关闭的话，请添加字段 `comments` 并将值设置为 `false`。
 
-3. 步骤三
-在菜单中添加链接。编辑 `主题配置文件` ，添加 `tags` 到 `menu` 中，如下
+3. 在菜单中添加链接。编辑 `主题配置文件` ，添加 `tags` 到 `menu` 中，如下
 ``` yml
 menu:
   tags: /tags/ || tags
@@ -150,10 +150,10 @@ menu:
 
 
 
-添加 `Fork me on GitHub`
+添加 Fork me on GitHub
 ---
 
-去 [Ribbons](https://github.com/blog/273-github-ribbons) 挑选自己喜欢的样式，并复制代码，添加到 `themes\next\layout_layout.swig` 的 `body` 标签之内即可，如果被顶部栏遮住了，在样式里设置 `z-index` 将其拉高即可，记得把里面的 `url` 换成自己的！
+去 [<span style="color: red;">Ribbons</span>](https://github.com/blog/273-github-ribbons) 挑选自己喜欢的样式，并复制代码，添加到 `themes\next\layout_layout.swig` 的 `body` 标签之内即可，如果被顶部栏遮住了，在样式里设置 `z-index` 将其拉高即可，记得把里面的 `url` 换成自己的！
 
 
 
@@ -174,7 +174,7 @@ border-radius: 50%;
 
 
 
-`hexo-wordcount` 实现统计功能
+hexo-wordcount 实现统计功能
 ---
 
 ``` bash
