@@ -108,7 +108,7 @@ $ npm install hexo-deployer-git
 ``` bash
 $ hexo new page "about"
 ```
-然后你会发现 `source` 里面多了个目录 `about` ，里面有个 `index.md` ，其实你也可以手动建立。页面的格式和文章一样，然后在 `themes/next/_config.yml` 将 `about: /about/ || user` 前面的注释取消即可
+然后你会发现 `source` 里面多了个目录 `about` ，里面有个 `index.md` ，其实你也可以手动建立。页面的格式和文章一样，然后在 `themes\next\_config.yml` 将 `about: /about/ || user` 前面的注释取消即可
 
 
 
@@ -140,7 +140,7 @@ menu:
 添加网易云音乐
 ---
 
-打开网易云音乐官网，直接搜索我们想要插入的音乐，然后点击生成外链播放器，然后可以根据你得设置生成相应的 `html` 代码，将获得的html代码插入到你想要插入的位置即可，比如我放在了侧边栏下，找到 `layout/_macro/sidebar.swig` 文件，添加如下代码
+打开网易云音乐官网，直接搜索我们想要插入的音乐，然后点击生成外链播放器，然后可以根据你得设置生成相应的 `html` 代码，将获得的html代码插入到你想要插入的位置即可，比如我放在了侧边栏下，找到 `layout\_macro\sidebar.swig` 文件，添加如下代码
 ``` html
 <div id="music163player">
       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="https://music.163.com/outchain/player?type=2&id=33875750&auto=1&height=66"></iframe>;;
@@ -153,14 +153,14 @@ menu:
 添加 Fork me on GitHub
 ---
 
-去 [<span style="color: red;">Ribbons</span>](https://github.com/blog/273-github-ribbons) 挑选自己喜欢的样式，并复制代码，添加到 `themes\next\layout_layout.swig` 的 `body` 标签之内即可，如果被顶部栏遮住了，在样式里设置 `z-index` 将其拉高即可，记得把里面的 `url` 换成自己的！
+去 [<span style="color: red;">Ribbons</span>](https://github.com/blog/273-github-ribbons) 挑选自己喜欢的样式，并复制代码，添加到 `themes\next\layout\_layout.swig` 的 `body` 标签之内即可，如果被顶部栏遮住了，在样式里设置 `z-index` 将其拉高即可，记得把里面的 `url` 换成自己的！
 
 
 
 站点头像改成圆形
 ---
 
-在 `themes/next/source/css/_common/components/sidebar/sidebar-author.styl` 中 `.site-author-image` 定义中增加
+在 `themes\next\source\css\_common\components\sidebar\sidebar-author.styl` 中 `.site-author-image` 定义中增加
 ``` styl
 border-radius: 50%;
 ```
@@ -170,7 +170,7 @@ border-radius: 50%;
 去掉站点链接前面的小圆点
 ---
 
-如果不太喜欢站点链接前面的小圆点，去掉 `themes/next/source/css/_common/components/sidebar/sidebar-author-links.styl` 中 `a::before` 的定义即可。
+如果不太喜欢站点链接前面的小圆点，去掉 `themes\next\source\css\_common\components\sidebar\sidebar-author-links.styl` 中 `a::before` 的定义即可。
 
 
 
