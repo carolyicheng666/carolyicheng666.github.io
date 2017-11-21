@@ -1,7 +1,7 @@
 ---
-title: 一些常用的gulp插件整理
+title: 一些常用的Gulp插件整理
 date: 2017-11-09 11:09:52
-tags: [gulp]
+tags: [Gulp]
 categories: '编程'
 ---
 
@@ -15,10 +15,10 @@ categories: '编程'
 
 
 
-gulp 和 grunt 对比
+Gulp 和 Grunt 对比
 ---
 
-我觉得 [<span style="color: red;">这篇对比介绍</span>](http://slides.com/contra/gulp#/) 写的很好，大家可以看看。其中作者提到了为什么 `grunt` 不好的原因：
+我觉得 [<span style="color: red;">这篇对比介绍</span>](http://slides.com/contra/gulp#/) 写的很好，大家可以看看。其中作者提到了为什么 `Grunt` 不好的原因：
 - Plugins do multiple things：Want a banner? Use the javascript minifier
 - Plugins do things that don't need to be plugins：Need to run your tests? Use a plugin
 - Grunt config format is a mess that tries to do everything：Not idiomatic with "the node way"
