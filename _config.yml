@@ -6,13 +6,13 @@
 title: 一成不变
 subtitle:
 description: 我的征途是星辰大海
-author: carolyicheng666
+author: 易成
 language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://carolyicheng666.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
