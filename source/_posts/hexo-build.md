@@ -204,3 +204,17 @@ post_wordcount:
 ...
 ```
 
+
+
+打赏功能和copyright
+---
+
+按照官网设置之后，本地测试成功，但是部署之后，生产环境会有问题。
+我在 [<span style="color: red;">这篇文章</span>](https://github.com/iissnan/hexo-theme-next/pull/687) 找到了答案，感谢 BalanceUhen 提供的解决办法：
+{% note info %}
+找到 `themes\next\source\css\_common\components\post\post.styl`，把 `@import "post-reward" `后面的 `if` 给删除掉后主题就会被导入到 `css` 中了。
+{% endnote %}
+
+另外，把 `@import "post-copyright"` 后面的 `if` 删除掉，copyright 也能生效了。
+
+
