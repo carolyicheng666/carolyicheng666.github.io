@@ -26,7 +26,7 @@ Gulp 和 Grunt 对比
 
 作者明确指出：
 {% note danger %}
-Your build system should empower not impede. 
+Your build system should empower not impede.
 It should only manipulate files - let other libraries handle the rest.
 {% endnote %}
 这一点我也表示赞同，不过还是看个人喜好吧，这里不做过多讨论。
@@ -76,6 +76,27 @@ gulp.task('compress', function () {
 
 
 
+[gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin)
+---
+{% note info %}
+gulp plugin to minify HTML.
+一款压缩html的插件
+{% endnote %}
+
+``` javascript
+var gulp = require('gulp');
+var htmlmin = require('gulp-htmlmin');
+ 
+gulp.task('minify', function() {
+  return gulp.src('src/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist'));
+});
+```
+更多配置选项设置请看 [<span style="color: red;">官方文档</span>](https://github.com/kangax/html-minifier)
+
+
+
 [gulp-uncss](https://www.npmjs.com/package/gulp-uncss)
 ---
 {% note info %}
@@ -97,6 +118,8 @@ gulp.task('default', function () {
 ```
 说明一下，`html` 中的文件指的是引入了前面的 `site.css` 的。
 **注意**，虽然 [<span style="color: red;">官方文档的Example</span>](https://www.npmjs.com/package/gulp-uncss) 中使用了 `gulp-cssnano` 插件压缩css，但是相比较于 `gulp-clean-css` 效果较差，故不推荐使用
+
+
 
 [gulp-concat](https://www.npmjs.com/package/gulp-concat)
 ---
@@ -164,6 +187,7 @@ gulp.task('default', () =>
 - svgo — Compress SVG images
 
 不过从结果来看，依然比不过强大的 [<span style="color: red;">tinypng</span>](https://tinypng.com/) ，如果对压缩的需求不是特别大，或者觉得手动 `tinypng` 太麻烦的话，就凑合着用吧，hiahia~
+
 
 
 [imagemin-pngquant](https://www.npmjs.com/package/imagemin-pngquant)
@@ -382,5 +406,77 @@ gulp.task('watch', ['default'], () => {
   gulp.watch(['./dist/*', './dist/**/*'], ['reload'])
 });
 ```
+
+
+
+[gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
+---
+{% note info %}
+Prefix CSS with Autoprefixer
+增加浏览器的私有前缀，让你不用再考虑为了写浏览器的兼容前缀而头疼
+{% endnote %}
+
+``` javascript
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+ 
+gulp.task('default', () =>
+  gulp.src('src/app.css')
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
+    .pipe(gulp.dest('dist'))
+);
+```
+autoprefixer 内置有 8 个选项可供配置：
+{% note success %}
+* `browsers` (array): list of browsers query (like `last 2 versions`), which are supported in your project. We recommend to use `browserslist` config or `browserslist` key in `package.json`, rather than this option to share browsers with other tools. See [Browserslist docs](https://github.com/ai/browserslist#queries) for available queries and default value.
+* `env` (string): environment for Browserslist.
+* `cascade` (boolean): should Autoprefixer use Visual Cascade, if CSS is uncompressed. Default: `true`
+* `add` (boolean): should Autoprefixer add prefixes. Default is `true`.
+* `remove` (boolean): should Autoprefixer [remove outdated] prefixes. Default is `true`.
+* `supports` (boolean): should Autoprefixer add prefixes for `@supports` parameters. Default is `true`.
+* `flexbox` (boolean|string): should Autoprefixer add prefixes for flexbox properties. With `"no-2009"` value Autoprefixer will add prefixes only for final and IE versions of specification. Default is `true`.
+* `grid` (boolean): should Autoprefixer add IE prefixes for Grid Layout properties. Default is `false`.
+* `stats` (object): custom [usage statistics](https://github.com/ai/browserslist#custom-usage-data) for `> 10% in my stats` browsers query.
+{% endnote %}
+
+官方的 Tip 中提到了 PostCSS：
+{% note success %}
+If you use other PostCSS based tools, like cssnano, you may want to run them together using gulp-postcss instead of gulp-autoprefixer. It will be faster, as the CSS is parsed only once for all PostCSS based tools, including Autoprefixer.
+{% endnote %}
+
+这段话大致是说，如果你只使用autoprefixer这一个插件，那么就用gulp-autoprefixer；如果还要使用别的插件，那就使用 PostCSS ，将其他插件写在它里面，速度更快。关于 PostCSS ，请看下一小节。
+
+
+
+[gulp-postcss](https://www.npmjs.com/package/gulp-postcss)
+---
+{% note info %}
+PostCSS gulp plugin to pipe CSS through several plugins, but parse CSS only once.
+PostCSS 将许多插件集成在一个 CSS 管道中，但只解析一次 CSS
+{% endnote %}
+
+比如说我们想要集成 autoprefixer 和 cssnano 这两个插件，那就要这么写：
+``` javascript
+var postcss = require('gulp-postcss');
+var gulp = require('gulp');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
+ 
+gulp.task('css', function () {
+  var plugins = [
+    autoprefixer({browsers: ['last 1 version']}),
+    cssnano()
+  ];
+  return gulp.src('./src/*.css')
+    .pipe(postcss(plugins))
+    .pipe(gulp.dest('./dest'));
+});
+```
+不过需要它的插件列表里有支持这个插件才行，具体支持情况请看 [<span style="color: red;">这里</span>](https://github.com/postcss/postcss/blob/master/docs/plugins.md)，当然，不要忘了它始终还是一款 CSS 插件，千万不要让它干别的事情，它也干不了呀，哈哈~
+
+
 
 
