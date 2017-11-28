@@ -46,20 +46,28 @@ After installing Zeal go to `Tools -> Docsets` to browse and download docsets.
 
 Sublime安装Zeal
 ---
-{% note danger %}
-`Ctrl + Shift + P`，输入 `zeal` 并选择 `Zeal` 插件安装。
 
-安装完成后，在 `Preference -> Package Settings -> Zeal -> Settings User` 中加入如下字段：
+- `Ctrl + Shift + P`，输入 `zeal` 并选择 `Zeal` 插件安装。
+
+- 安装完成后，在 `Preference -> Package Settings -> Zeal -> Settings User` 中加入如下字段：
 "zeal_command": "Zeal安装路径/zeal.exe"
 如："zeal_command": "C:/Program Files/Zeal/zeal.exe"
 **注意**，从目录复制过来的路径要把反斜杠改成斜杠
 
-使用方式：`F1` 和 `Shift + F1`
-- F1 - Open Zeal documentation for current/selected word.
-- Shift + F1 - Open Zeal search bar. 
-
-如果你使用的是别的编辑器，例如 Atom、Vim等等，[<span style="color: red;">这里</span>](https://zealdocs.org/usage.html) 也可以找到安装配置的方法
+- 使用方式：`F1` 和 `Shift + F1`
+{% note danger %}
+F1 - Open Zeal documentation for current/selected word.
+Shift + F1 - Open Zeal search bar. 
 {% endnote %}
+
+- 在Zeal内搜索方式是：
+{% note danger %}
+`string` will search all docsets for string
+`python:string` will search only docsets related to Python for string
+{% endnote %}
+
+- 如果你使用的是别的编辑器，例如 Atom、Vim等等，[<span style="color: red;">这里</span>](https://zealdocs.org/usage.html) 也可以找到安装配置的方法
+
 
 
 写在后面
