@@ -5,10 +5,11 @@ tags: [time]
 categories: '随笔'
 ---
 
-<blockquote class="blockquote-center">人生不只有眼前的苟且，还有诗和远方
+{% cq %}
+人生不只有眼前的苟且，还有诗和远方
 
-<strong>高晓松</strong>
-</blockquote>
+**高晓松**
+{% endcq %}
 
 <!-- more -->
 
