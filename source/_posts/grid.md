@@ -70,41 +70,38 @@ grid 的一些属性包括命名都与 flex 十分类似，相信熟悉 flex 布
 
 我们再来了解一下基本属性，这里只做简要概括，不常用的就不详细说了，也许以后再补充进去吧。  
 <strong style="color: red;font-size: 24px;">网格容器(Grid Container)</strong> 属性：
-- **display**
-
+- **display**  
 ``` css
 .wrapper {
     display: grid | inline-grid | subgrid;
 }
 ```
-这里有三个值，分别表示块级网格，内联网格，子网格（父级也是网格）
+	这里有三个值，分别表示块级网格，内联网格，子网格（父级也是网格）
 
-- **grid-template-columns / grid-template-rows**
-
+- **grid-template-columns / grid-template-rows**  
 ``` css
 .wrapper {
     grid-template-columns: 100px 100px 100px;
     grid-template-rows: 100px 100px;
 }
 ```
-这样设置就把上面6个item设置成了两行三列的、每项大小是100px\*100px的网格，这里的值也可以是百分比，或者fr（表示等分剩余可用空间），当然还有用网格线名称设置的高级操作（不建议使用）。上面的代码由于都是相同的值，则可以像下面这样写：
+	这样设置就把上面6个item设置成了两行三列的、每项大小是100px\*100px的网格，这里的值也可以是百分比，或者fr（表示等分剩余可用空间），当然还有用网格线名称设置的高级操作（不建议使用）。上面的代码由于都是相同的值，则可以像下面这样写：
 ``` css
 .wrapper {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(2, 100px);
 }
 ```
-显示效果是一样的。
+	显示效果是一样的。
 
-- **grid-template-areas**
-
+- **grid-template-areas**  
 ``` css
 .wrapper {
   grid-template-areas: 
     " . | none | ...";
 }
 ```
-这里有三个值，分别表示一个空的网格单元、不定义网格区域、指定的网格区域名称。还是举个例子吧：
+	这里有三个值，分别表示一个空的网格单元、不定义网格区域、指定的网格区域名称。还是举个例子吧：
 ``` css
 .wrapper {
   font-size: 20px;
@@ -142,14 +139,12 @@ grid 的一些属性包括命名都与 flex 十分类似，相信熟悉 flex 布
   background-color: #FCDCDD;
 }
 ```
-复制到编辑器，然后浏览器打开看看效果就明白了，是不是很简单！
+	复制到编辑器，然后浏览器打开看看效果就明白了，是不是很简单！
 
-- **grid-template**
-
+- **grid-template**  
 用于定义 grid-template-rows ，grid-template-columns ，grid-template-areas 缩写 (shorthand) 属性。看了API，设置起来真的麻烦，我个人不建议这么写，还是分开写比较好，这里就不过多介绍了，有兴趣的自己去看 API 吧。
 
-- **grid-column-gap / grid-row-gap**
-
+- **grid-column-gap / grid-row-gap**  
 指定网格线(grid lines)的大小。你可以把它想象为设置列/行之间间距的宽度。
 ``` css
 .wrapper {
@@ -157,79 +152,72 @@ grid 的一些属性包括命名都与 flex 十分类似，相信熟悉 flex 布
   grid-row-gap: 15px;
 }
 ```
-上述设置把列间距设置为 10px，行间距设置为 15px。
+	上述设置把列间距设置为 10px，行间距设置为 15px。
 
-- **grid-gap**
-
+- **grid-gap**  
 grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
 ``` css
 .wrapper {
   grid-gap: 15px 10px;
 }
 ```
-第一个值是行间距，第二个值是列间距。也可以只写一个值，表示行间距和列间距相等。
+	第一个值是行间距，第二个值是列间距。也可以只写一个值，表示行间距和列间距相等。
 
-- **justify-items**
-
+- **justify-items**  
 沿着 行轴线(row axis) 对齐 网格项(grid items) 内的内容，该值用于容器内的所有网格项。可以理解为所有网格项的水平对齐方式：
 ``` css
 .wrapper {
 	justify-items: start | end | center | stretch;
 }
 ```
-四个值分别表示左对齐，右对齐，中间对齐和填满整个网格宽度（默认）。
+	四个值分别表示左对齐，右对齐，中间对齐和填满整个网格宽度（默认）。
 
-- **align-items**
-
+- **align-items**  
 沿着 列轴线(column axis) 对齐 网格项(grid items) 内的内容，该值适用于容器内的所有网格项。可以理解为所有网格项的垂直对齐方式：
 ``` css
 .wrapper {
 	align-items: start | end | center | stretch;
 }
 ```
-四个值分别表示顶部对齐，底部对齐，垂直居中对齐和填满整个网格高度（默认）。
+	四个值分别表示顶部对齐，底部对齐，垂直居中对齐和填满整个网格高度（默认）。
 
-- **justify-content**
-
+- **justify-content**  
 有时，网格合计大小可能小于其 网格容器(grid container) 大小。 如果所有 网格项(grid items) 都使用像 px 这样的非灵活单位设置大小，在这种情况下，可以设置网格容器内的网格的对齐方式。 此属性沿着 行轴线(row axis) 对齐网格。
 ``` css
 .wrapper {
   justify-content: start | end | center | stretch | space-around | space-between | space-evenly;    
 }
 ```
-特别说明一下后面三个：  
-*space-around*：在每个网格项之间放置一个均匀的空间，左右两端放置一半的空间  
-*space-between*：在每个网格项之间放置一个均匀的空间，左右两端没有空间  
-*space-evenly*：在每个栅格项目之间放置一个均匀的空间，左右两端放置一个均匀的空间  
+	特别说明一下后面三个：  
+	*space-around*：在每个网格项之间放置一个均匀的空间，左右两端放置一半的空间  
+	*space-between*：在每个网格项之间放置一个均匀的空间，左右两端没有空间  
+	*space-evenly*：在每个栅格项目之间放置一个均匀的空间，左右两端放置一个均匀的空间  
 
-- **align-content**
-
+- **align-content**  
 ``` css
 .wrapper {
   align-content: start | end | center | stretch | space-around | space-between | space-evenly;  
 }
 ```
-与上面的情况类似，只是方向上的区别：
-*space-around*：在每个网格项之间放置一个均匀的空间，上下两端放置一半的空间  
-*space-between*：在每个网格项之间放置一个均匀的空间，上下两端没有空间  
-*space-evenly*：在每个栅格项目之间放置一个均匀的空间，上下两端放置一个均匀的空间  
+	与上面的情况类似，只是方向上的区别：
+	*space-around*：在每个网格项之间放置一个均匀的空间，上下两端放置一半的空间  
+	*space-between*：在每个网格项之间放置一个均匀的空间，上下两端没有空间  
+	*space-evenly*：在每个栅格项目之间放置一个均匀的空间，上下两端放置一个均匀的空间  
 
-- **grid-auto-columns / grid-auto-rows**
-
+- **grid-auto-columns / grid-auto-rows**  
 指定任何自动生成的网格轨道(grid tracks)（又名隐式网格轨道）的大小。在你明确定位的行或列（通过  grid-template-rows / grid-template-columns），超出定义的网格范围时，隐式网格轨道被创建了。我看了一下例子，功能确实强大，但是超出网格范围依然有元素，实际情况几乎用不到，影响到外部元素的做法并不是很可取，在此我不展开讲这个，以后如果有实际情况遇到了，我再加进来。
 
-- **grid-auto-flow**
-
+- **grid-auto-flow**  
 如果你有一些没有明确放置在网格上的网格项(grid items)，自动放置算法 会自动放置这些网格项。该属性控制自动布局算法如何工作。
 ``` css
 .wrapper {
   grid-auto-flow: row | column | row dense | column dense
 }
 ```
-*row*：告诉自动布局算法依次填充每行，根据需要添加新行
-*column*：告诉自动布局算法依次填入每列，根据需要添加新列
-*dense*：告诉自动布局算法在稍后出现较小的网格项时，尝试填充网格中较早的空缺，注意，这可能导致你的网格项出现乱序，不建议使用。  
-举个例子：
+	*row*：告诉自动布局算法依次填充每行，根据需要添加新行
+	*column*：告诉自动布局算法依次填入每列，根据需要添加新列
+	*dense*：告诉自动布局算法在稍后出现较小的网格项时，尝试填充网格中较早的空缺，注意，这可能导致你的网格项出现乱序，不建议使用。  
+	举个例子：
 ``` css
 .wrapper {
   display: grid;
@@ -246,19 +234,18 @@ grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
   grid-row: 1 / 3;
 }
 ```
-因为我们把 grid-auto-flow 设成了 row ，所以网格中未设置的item2、item3、item4和item5会在第一行。如果把 grid-auto-flow 设成了 column，则它们或按顺序垂直填充进前两列。
+	因为我们把 grid-auto-flow 设成了 row ，所以网格中未设置的item2、item3、item4和item5会在第一行。如果把 grid-auto-flow 设成了 column，则它们或按顺序垂直填充进前两列。
 
-- **grid**
-
+- **grid**  
 这个属性是老大哥，可以设置所有以下属性的简写： grid-template-rows, grid-template-columns,  grid-template-areas, grid-auto-rows, grid-auto-columns, 和 grid-auto-flow 。它还将grid-column-gap 和 grid-column-gap设置为初始值，即使它们不可以通过grid属性显式地设置。恩，不建议使用。
 
 
 
 <strong style="color: red;font-size: 24px;">网格项(Grid Items) </strong>属性
-- **grid-column-start / grid-column-end / grid-row-start / grid-row-end**
+- **grid-column-start / grid-column-end / grid-row-start / grid-row-end**  
 这里推荐简写形式，请看下面
 
-- **grid-column / grid-row**
+- **grid-column / grid-row**  
 分别为 grid-column-start + grid-column-end 和 grid-row-start + grid-row-end 的缩写形式。
 ``` css
 .item {
@@ -266,9 +253,10 @@ grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
   grid-row: <start-line> / <end-line> | <start-line> / span <value>;
 }
 ```
-这里设置方式有两种，两种都可以，前者用的比较多一些。**注意**，后面一个参数也可以省略，表示占据一个网格轨道。
+	这里设置方式有两种，两种都可以，前者用的比较多一些。  
+	**注意**，后面一个参数也可以省略：不加 `span` 表示占据一个网格轨道；加 `span` 表示跨越几个网格轨道，可以看例子中的 `wrapper2`
 
-- **grid-area**
+- **grid-area**  
 为网格项提供一个名称，以便可以 被使用网格容器 grid-template-areas 属性创建的模板进行引用。 另外，这个属性可以用作grid-row-start + grid-column-start + grid-row-end +  grid-column-end 的缩写。
 ``` css
 .item {
@@ -276,10 +264,10 @@ grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
 }
 ```
 
-- **justify-self**
+- **justify-self**  
 沿着 行轴线(row axis) 对齐 网格项 内的内容，此值适用于单个网格项内的内容。可以理解为所有网格项的水平对齐方式，设置方式可参考 justify-items 。
 
-- **align-self**
+- **align-self**  
 沿着 列轴线(row axis) 对齐 网格项 内的内容，此值适用于单个网格项内的内容。可以理解为所有网格项的垂直对齐方式，设置方式可参考 align-items 。
 
 
@@ -338,14 +326,29 @@ grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
     grid-template-rows: repeat(3, 100px);
     justify-content: center;
   }
-  .item1 {
+  .wrapper .item1 {
     grid-column: 1 / 3;
   }
-  .item3 {
+  .wrapper .item3 {
     grid-row: 2 / 4;
   }
-  .item4 {
+  .wrapper .item4 {
     grid-column: 2 / 4;
+  }
+
+  .wrapper2 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 40px 100px 40px;
+  }
+  .wrapper2 .item1, .wrapper2 .item4 {
+    grid-column: span 12;
+  }
+  .wrapper2 .item2 {
+    grid-column: span 4;
+  }
+  .wrapper2 .item3 {
+    grid-column: span 8;
   }
 </style>
 <body>
@@ -363,6 +366,13 @@ grid-column-gap 和 grid-row-gap 的缩写语法，建议用此写法。
     <div class="item4" style="background-color: #E6B4FD;">4</div>
     <div class="item5" style="background-color: #26DB0A;">5</div>
     <div class="item6" style="background-color: #FCDCDD;">6</div>
+  </div>
+
+  <div class="wrapper2">
+    <div class="item1" style="background-color: #ACF4B6;">1</div>
+    <div class="item2" style="background-color: #FFE975;">2</div>
+    <div class="item3" style="background-color: #5DFFFA;">3</div>
+    <div class="item4" style="background-color: #E6B4FD;">4</div>
   </div>
 </body>
 </html>
