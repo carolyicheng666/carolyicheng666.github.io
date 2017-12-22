@@ -3,6 +3,7 @@ title: canvas-api
 date: 2017-12-20 10:08:54
 tags: [Canvas, JavaScript]
 categories: '编程'
+mathjax: true
 ---
 
 
@@ -275,6 +276,167 @@ window.onload=function(){
 
 lineJoin 当两条线交汇时设置所创建边角的类型，同样有三个值，默认是miter，表示创建尖角；还可以设置成bevel，表示创建斜角；设置成round，表示创建圆角  
 miterLimit 设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，只有当 lineJoin 设置为 `miter` 时，miterLimit 才有效，默认值是10。这部分内容不做过多解释，有兴趣的朋友可以查阅 [W3C文档](http://www.w3school.com.cn/tags/canvas_miterlimit.asp) 
+
+
+
+图形变换
+---
+
+- translate(x, y) 平移变换，x和y分别代表水平和垂直的偏移量  
+我们拿之前矩形的例子做个试验：
+``` javascript
+window.onload = function() {
+  var canvas = document.getElementById("canvas");
+
+  canvas.width = 800;
+  canvas.height = 800;
+
+  var context = canvas.getContext("2d");
+
+  r(context, 100, 100, 400, 400, 10, "#058", "red", 100, 100);
+  r(context, 100, 100, 400, 400, 10, "#058", "green", 0, 0);
+}
+
+function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, translateX, translateY) {
+  // ctx.save();
+  ctx.translate(translateX, translateY);
+
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.closePath();
+
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = strokeStyle;
+  ctx.fillStyle = fillStyle;
+
+  ctx.fill();
+  ctx.stroke();
+  // ctx.restore();
+}
+```
+  上面的代码绘制了两个矩形，一个是红色的，一个是绿色的，可是运行出来却只有一个绿色的矩形，准确的说是红色的矩形和绿色的矩形重合了，但是我们可以看到，红色的矩形和绿色的矩形设置的偏移量并不同，这是怎么回事？  
+这是因为在canvas中，图形变换是叠加的，我们将红色的矩形向x轴和y轴各平移100个像素，而绿色的矩形没有做平移变换，这就使得绿色的矩形在红色矩形上方绘制，从而覆盖住了红色的矩形，大家可以改变绿色矩形的偏移量再看看效果。换一个角度说，translate()实际上是对原点的平移变换，改变了坐标系  
+canvas针对这种情况提供了它自己的解决办法，大家可以将代码中 `ctx.save();` 和 `ctx.restore();` 前面的注释去掉，save()用于保存当前canvas设置的所有状态，我们在save()之后执行各种操作，再调用一次restore()，这个方法用于返回到之前save()保存的状态，这两个方法是成对出现的，以后我们在做一些复杂的设置和图形绘制时，大家一定会体会到这两个方法的巨大作用  
+
+- rotate(angle) 旋转变换，angle表示旋转的角度，单位是弧度，角度转弧度的公式是：angle = degrees \* Math.PI / 180  
+有了上面平移的例子，我们应该能很好的理解旋转变换了，还是拿矩形的例子试验一下：
+``` javascript
+window.onload = function() {
+  var canvas = document.getElementById("canvas");
+
+  canvas.width = 800;
+  canvas.height = 800;
+
+  var context = canvas.getContext("2d");
+
+  r(context, 200, 200, 400, 400, 10, "#058", "red", 10*Math.PI/180);
+  r(context, 200, 200, 400, 400, 10, "#058", "green", -10*Math.PI/180);
+}
+
+function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, angle) {
+  ctx.save();
+  ctx.rotate(angle);
+
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.closePath();
+
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = strokeStyle;
+  ctx.fillStyle = fillStyle;
+
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+```
+
+- scale(x, y) 缩放变换，x和y分别表示水平方向和垂直方向的缩放倍数  
+依然是矩形的例子：
+``` javascript
+window.onload = function() {
+  var canvas = document.getElementById("canvas");
+
+  canvas.width = 800;
+  canvas.height = 800;
+
+  var context = canvas.getContext("2d");
+
+  r(context, 100, 100, 400, 400, 10, "#058", "red", 1.1, 1.1);
+  r(context, 200, 200, 400, 400, 10, "#058", "green", 1.3, 1.3);
+}
+
+function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, scaleX, scaleY) {
+  ctx.save();
+  ctx.scale(scaleX, scaleY);
+
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.closePath();
+
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = strokeStyle;
+  ctx.fillStyle = fillStyle;
+
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+```
+这里我们可以看到这个图形都进行了放大，细心的朋友会发现连 lineWidth 也一并进行了放大，很多人也许认为这是个canvas的bug或者是canvas对于图形缩放处理的不够好的地方，其实我倒觉得不是这样的，因为在translate()中我已经说过，translate()实际上是对原点的平移变换，scale()也可以看做是对该图形当前的坐标系进行了缩放变换而已  
+
+- transform(a, b, c, d, e, f) 添加一个变换矩阵，可以对图形进行平移、倾斜和缩放  
+$$
+ \left[
+ \begin{matrix}
+   a & c & e \\\\  
+   b & d & f \\\\  
+   0 & 0 & 1
+  \end{matrix}
+  \right] \tag{3}
+$$
+a:水平缩放  
+b:水平倾斜  
+c:垂直倾斜  
+d:垂直缩放  
+e:水平平移  
+f:垂直平移  
+画布中每个对象都有一个当前的变换矩阵，默认是单位矩阵，也就是transform(1, 0, 0, 1, 0, 0)，意思是缩放为1，倾斜和平移都为0，即不变换  
+大家根据下面的实例更改数值，就很好理解了，还可以加深记忆
+``` javascript
+window.onload = function() {
+  var canvas = document.getElementById("canvas");
+
+  canvas.width = 800;
+  canvas.height = 800;
+
+  var context = canvas.getContext("2d");
+
+  r(context, 100, 100, 400, 400, 10, "#058", "red", 1.1, 0.2, 0.3, 1.2, 20, 30);
+}
+
+function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, a, b, c, d, e, f) {
+  ctx.save();
+  ctx.transform(a, b, c, d, e, f);
+
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.closePath();
+
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = strokeStyle;
+  ctx.fillStyle = fillStyle;
+
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+```
+
+- setTransform(a, b, c, d, e, f) 把当前的变换矩阵重置为单位矩阵，然后以相同的参数运行 transform() ，不过我觉得每次图形的绘制都在save()和restore()中，重置矩阵的操作估计在这之中需要绘制多个图形的时候才可能用到吧  
+
+
+
 
 
 <strong style="color: red;">未完待续...</strong>
