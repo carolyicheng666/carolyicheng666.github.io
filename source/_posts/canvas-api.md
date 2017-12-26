@@ -642,7 +642,7 @@ window.onload=function(){
 }
 ```
 
-- arcTo(x1, y1, x2, y2, r) 创建介于两个切线之间的弧或曲线。这里面有一个当前点(x0,y0)，一般是先用 moveTo() 方法设置当前点，然后使用 arcTo() 方法创建同时相切于切线(x0,y0)到(x1,y1)和(x1,y1)到(x2,y2)，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：
+- arcTo(x1, y1, x2, y2, r) 创建介于两个切线之间的弧或曲线。这里面有几个概念：开始点(x0,y0)，控制点(x1,y1)，结束点(x2,y2)。一般是先用 moveTo() 方法设置开始点，然后使用 arcTo() 方法创建同时相切于开始点到控制点和控制点到结束点的两条切线，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -673,6 +673,268 @@ function arcToTest(cxt, x0, y0, x1, y1, x2, y2, R){
   cxt.stroke();
 }
 ```
+
+- quadraticCurveTo(x1, y1, x2, y2) 绘制二次贝塞尔曲线，学过图形学的朋友看到这个一定不会陌生，用法与arcTo()非常类似，同样先需要使用 moveTo() 方法设置开始点，然后再使用quadraticCurveTo()设置控制点(x1, y1)和结束点(x2, y2)，与arcTo()不同的是没有半径r，并且开始点就是曲线的开始点，结束点就是曲线的结束点，这样这条曲线就是唯一确定了，我们来使用它绘制一个月亮
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  fillMoon(context, 400, 400, 300, 0);
+}
+
+function fillMoon(cxt, x, y, R, rot, fillColor){
+  cxt.save();
+  cxt.translate(x, y);
+  cxt.rotate(rot*Math.PI/180);
+  cxt.scale(R, R);
+  pathMoon(cxt);
+  cxt.fillStyle=fillColor || "#fd5";
+  cxt.fill();
+  cxt.restore();
+}
+
+function pathMoon(cxt){
+  cxt.beginPath();
+  cxt.arc(0, 0, 1, 0.5*Math.PI, 1.5*Math.PI, true);
+  cxt.moveTo(0, -1);
+  cxt.quadraticCurveTo(1.2, 0, 0, 1);
+  cxt.closePath();
+}
+```
+
+- bezierCurveTo(x1, y1, x2, y2, x3, y3) 绘制三次贝塞尔曲线，类似二次贝塞尔曲线，只是中间多了一个控制点，这样我们就可以绘制出更复杂的曲线了，综合前面我们绘制的月亮星星的例子，我们来绘制一个星空的场景
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=1200;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  //sky
+  var radialGrad=context.createRadialGradient(
+    canvas.width/2, canvas.height, 0, 
+    canvas.width/2, canvas.height, canvas.height);
+  radialGrad.addColorStop(0.0, "#035");
+  radialGrad.addColorStop(1.0, "black");
+  context.fillStyle=radialGrad;
+
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  for (var i=0; i<200; i++) {
+    var r=Math.random()*5 + 5;
+    var x=Math.random()*canvas.width;
+    var y=Math.random()*canvas.height*0.6;
+    var a=Math.random()*360;
+    drawStar(context, x, y, r, r/2.0, a);   
+  }
+  fillMoon(context, 900, 200, 100, 30); 
+  drawland(context);
+}
+
+//land
+function drawland(cxt){
+  cxt.save();
+  cxt.beginPath();
+  cxt.moveTo(0, 600);
+  cxt.bezierCurveTo(540, 400, 660, 800, 1200, 600);
+  cxt.lineTo(1200, 800);
+  cxt.lineTo(0, 800);
+  cxt.closePath();
+
+  var landStyle=cxt.createLinearGradient(0, 800, 0, 0);
+  landStyle.addColorStop(0.0, "#030");
+  landStyle.addColorStop(1.0, "#580");
+  cxt.fillStyle=landStyle;
+  cxt.fill();
+  cxt.restore();
+}
+
+//star
+function drawStar(cxt, x, y, R, r, rot){
+  cxt.beginPath();
+  for(var i=0;i<5;i++){
+    cxt.lineTo(Math.cos((18+72*i-rot)/180*Math.PI)*R+x,-Math.sin((18+72*i-rot)/180*Math.PI)*R+y);
+    cxt.lineTo(Math.cos((54+72*i-rot)/180*Math.PI)*r+x,-Math.sin((54+72*i-rot)/180*Math.PI)*r+y);
+  }
+  cxt.closePath();
+  cxt.fillStyle="#fb3";
+  cxt.strokeStyle="#fd5";
+  cxt.lineWidth=3;
+  cxt.lineJoin="round";
+  cxt.fill();
+  cxt.stroke();
+}
+
+// moon
+function fillMoon(cxt, x, y, R, rot, fillColor){
+  cxt.save();
+  cxt.translate(x, y);
+  cxt.rotate(rot*Math.PI/180);
+  cxt.scale(R, R);
+  pathMoon(cxt);
+  cxt.fillStyle=fillColor || "#fd5";
+  cxt.fill();
+  cxt.restore();
+}
+
+function pathMoon(cxt){
+  cxt.beginPath();
+  cxt.arc(0, 0, 1, 0.5*Math.PI, 1.5*Math.PI, true);
+  cxt.moveTo(0, -1);
+  cxt.quadraticCurveTo(1.2, 0, 0, 1);
+  cxt.closePath();
+}
+```
+
+
+
+文字渲染
+---
+
+- font 设置文字的属性，与 CSS 设置方式一致。具体可设置的值请看 [W3C文档](http://www.w3school.com.cn/tags/canvas_font.asp)，比如这样：
+``` javascript
+context.font="italic small-caps bold 12px arial";
+```
+  那么如何填入文字呢？请看下面两个方法
+
+- fillText(text, x, y, maxWidth) 表示在画布上绘制填色的文本，默认是黑色，text是文本内容，x和y分别是开始绘制文本的（相对于画布）x坐标位置和y坐标位置，maxWidth可以设置文本最大的宽度，这个参数是可选的
+
+- strokeText(text, x, y, maxWidth) 表示在画布上绘制文本（没有填色），可以认为是绘制边框，默认同样是黑色，参数及含义与上面的 fillText() 一致，下面来看个综合实例
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  context.font="40px bold Arial";
+
+  context.fillStyle="#058";
+  context.fillText("欢迎大家学习《canvas绘图接口详解》！", 40, 100);
+
+  context.lineWidth=1;
+  context.strokeStyle="#058";
+  context.strokeText("欢迎大家学习《canvas绘图接口详解》！", 40, 200);
+
+  context.fillText("欢迎大家学习《canvas绘图接口详解》！", 40, 300, 200);
+  context.strokeText("欢迎大家学习《canvas绘图接口详解》！", 40, 400, 400);
+
+  var linearGrad=context.createLinearGradient(0, 0, 800, 0);
+  linearGrad.addColorStop(0.0, "red");
+  linearGrad.addColorStop(0.25, "orange");
+  linearGrad.addColorStop(0.5, "yellow");
+  linearGrad.addColorStop(0.75, "green");
+  linearGrad.addColorStop(1.0, "purple");
+  context.fillStyle=linearGrad;
+  context.fillText("欢迎大家学习《canvas绘图接口详解》！", 40, 500);
+
+  var backgroundImage=new Image();
+  backgroundImage.src="images/repeat.gif";
+  backgroundImage.onload=function(){
+    var pattern=context.createPattern(backgroundImage, "repeat");
+    context.fillStyle=pattern;
+    context.font="100px bold Arial";
+    context.fillText("Canvas!", 40, 650);
+    context.strokeText("Canvas!", 40, 650);
+  }
+}
+```
+
+- textAlign 设置文本的对齐方式，有五个取值：默认是start，表示文本在指定的位置开始；end，表示文本在指定的位置结束；center，表示居中对齐；left，表示左对齐；right，表示右对齐。来看个综合实例：
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  context.fillStyle="#058";
+  context.font="40px bold san-serif";
+
+  context.textAlign="left";
+  context.fillText("textAlign = left", 400, 100);
+
+  context.textAlign="center";
+  context.fillText("textAlign = center", 400, 200);
+
+  context.textAlign="right";
+  context.fillText("textAlign = right", 400, 300);
+
+  context.textAlign="start";
+  context.fillText("textAlign = start", 400, 400);
+
+  context.textAlign="end";
+  context.fillText("textAlign = end", 400, 500);
+
+  context.strokeStyle="#888";
+  context.moveTo(400, 0);
+  context.lineTo(400, 800);
+  context.stroke();
+}
+```
+
+- textBaseline 设置文本的基线，有六个取值：top，基线在顶端；middle，基线在正中；bottom，基线在低端；默认值alphabetic，普通字母的基线；hanging，印度语的基线；ideographic，方块字如中文日文等的基线。综合实例：
+``` javascript
+window.onload = function() {
+  var canvas = document.getElementById("canvas");
+
+  canvas.width = 800;
+  canvas.height = 800;
+
+  var context = canvas.getContext("2d");
+
+  context.fillStyle = "#058";
+  context.font = "40px bold san-serif";
+
+  context.textBaseline = "top";
+  context.fillText("textBaseline = top", 40, 100);
+  drawBaseline(context, 100);
+
+  context.textBaseline = "middle";
+  context.fillText("textBaseline = middle", 40, 200);
+  drawBaseline(context, 200);
+
+  context.textBaseline = "bottom";
+  context.fillText("textBaseline = bottom", 40, 300);
+  drawBaseline(context, 300);
+
+  context.textBaseline = "alphabetic";
+  context.fillText("中文日本語कितने बज रहे हैंalphabetic", 40, 500);
+  drawBaseline(context, 500);
+
+  context.textBaseline = "middle";
+  context.fillText("中文日本語कितने बज रहे हैंhanging", 40, 600);
+  drawBaseline(context, 600);
+
+  context.textBaseline = "bottom";
+  context.fillText("中文日本語कितने बज रहे हैंideographic", 40, 700);
+  drawBaseline(context, 700);
+
+  function drawBaseline(cxt, h) {
+    var width = cxt.canvas.width;
+
+    cxt.save();
+    cxt.strokeStyle = "#888";
+    cxt.lineWidth = 2;
+    cxt.moveTo(0, h);
+    cxt.lineTo(width, h);
+    cxt.stroke();
+    cxt.restore();
+  }
+}
+```
+
+- measureText(text) 这个方法能返回一个对象，截止目前只能用它来获取文本的宽度，使用方式是 context.measureText(text).width，希望将来能够获取更多关于这个文本的信息  
+
+
 
 
 
