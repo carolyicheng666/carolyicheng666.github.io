@@ -437,6 +437,243 @@ function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, a, b, c,
 
 
 
+fillStyle 属性设置
+---
+
+之前我们在介绍 fillStyle 的时候说过可以使用渐变色，现在我们来详细说明渐变色的用法（感觉就是将 Photoshop 中“渐变”代码化了）  
+- 线性渐变  
+设置分为两步：第一步，创建渐变的变量，设置其为何种渐变
+``` javascript
+linearGrad = context.createLinearGradient(xstart, ystart, xend, yend);
+```
+  createLinearGradient()中包含四个变量，代表线段两端的点的坐标(xstart,ystart)和(xend,yend)，表示在这个线段上做线性渐变  
+  第二步，在这条线段上设置关键帧，并为其指定颜色
+``` javascript
+linearGrad.addColorStop(0.0, "white");
+linearGrad.addColorStop(1.0, "black");
+```
+  addColorStop()表示添加关键帧，起始点为0，终止点为1，也就是上面设置的那两个点的坐标，这里用浮点数是为了让大家看得更方便，比如说我们要在线段中点位置添加一个关键帧，并设置灰色，那就可以这么写： 
+``` javascript
+linearGrad.addColorStop(0.5, "gray");
+```
+  上面的描述可能比较生硬，大家可以打开Photoshop，点击渐变工具，快捷键是G，不管学过没学过吧，都可以在里面实际操作一下，再回过头来看看代码，理解起来就比较容易了  
+  来看个实例
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  var linearGrad=context.createLinearGradient(0, 0, 800, 800);
+  linearGrad.addColorStop(0.0, "white");
+  linearGrad.addColorStop(0.25, "yellow");
+  linearGrad.addColorStop(0.5, "green");
+  linearGrad.addColorStop(0.75, "blue");
+  linearGrad.addColorStop(1.0, "black");
+  context.fillStyle=linearGrad;
+  context.fillRect(0, 0, 800, 800);
+}
+```
+
+- 径向渐变  
+有了线性渐变的基础，径向渐变就很好理解了  
+第一步，依然是创建渐变的变量，设置其为何种渐变
+``` javascript
+radialGrad = context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+```
+  createRadialGradient()中包含六个变量，分别是小圆圆心坐标(x0,y0)和小圆半径r0，大圆圆心坐标(x1,y1)和大圆半径r1，表示在这两个圆之间做径向渐变      
+  第二步和线性渐变一致，同样是设置关键帧
+``` javascript
+radialGrad.addColorStop(0.0, "white");
+radialGrad.addColorStop(1.0, "black");
+```
+  来看个例子
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  var radialGrad=context.createRadialGradient(400, 400, 0, 400, 400, 500);
+  radialGrad.addColorStop(0.0, "white");
+  radialGrad.addColorStop(0.25, "yellow");
+  radialGrad.addColorStop(0.5, "green");
+  radialGrad.addColorStop(0.75, "blue");
+  radialGrad.addColorStop(1.0, "black");
+  context.fillStyle=radialGrad;
+  context.fillRect(0, 0, 800, 800);
+}
+```
+
+除了可以填充渐变色以外，我们还可以填充图像
+- 填充图像
+  设置方式是先创建一个图像源对象，可以是如下几种：image, video, canvas, CanvasRenderingContext2D, ImageBitmap, ImageData, Blob，然后再用类似渐变的方式绑定到canvas中，我们这里只讨论image和canvas这两个，首先来看第一个：
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  var backgroundImage=new Image();
+  backgroundImage.src="images/repeat.gif";
+  backgroundImage.onload=function(){
+    var pattern=context.createPattern(backgroundImage, "repeat");
+    context.fillStyle=pattern;
+    context.fillRect(0, 0, 800, 800);
+  }
+}
+```
+  createPattern()包含两个参数，第一个是image对象，第二个是指定如何重复图像，和 CSS 中的设置一样
+  我们再来看第二个canvas的例子
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  var backCanvas=createBackgroundCanvas();
+  var pattern=context.createPattern(backCanvas, "repeat");
+  context.fillStyle=pattern;
+  context.fillRect(0, 0, 800, 800);
+}
+
+function createBackgroundCanvas(){
+  var backCanvas=document.createElement("canvas");
+  backCanvas.width=100;
+  backCanvas.height=100;
+  var backCanvasContext=backCanvas.getContext("2d");
+  drawStar(backCanvasContext, 50, 50, 50, 0);
+  return backCanvas;
+}
+
+function drawStar(cxt, x, y, R, rot){
+  cxt.save();
+
+  cxt.translate(x, y);
+  cxt.rotate(rot/180*Math.PI);
+  cxt.scale(R, R);
+
+  starPath(cxt);
+
+  cxt.fillStyle="#fb3";
+  cxt.fill();
+
+  cxt.restore();
+}
+
+function starPath(cxt){
+  cxt.beginPath();
+  for(var i=0;i<5;i++){
+    cxt.lineTo(Math.cos((18+72*i)/180*Math.PI),-Math.sin((18+72*i)/180*Math.PI));
+    cxt.lineTo(Math.cos((54+72*i)/180*Math.PI)*0.5,-Math.sin((54+72*i)/180*Math.PI)*0.5);
+  }
+  cxt.closePath();
+}
+```
+  上面的例子稍微有点复杂，首先创建了绘制五角星的方法drawStar()，然后用createBackgroundCanvas()其绘制到画布上，最后用createPattern()方法设置如何绘制  
+
+
+
+绘制曲线
+---
+
+- arc(x, y, r, sAngle, eAngle, counterclockwise) 用于绘制圆和部分圆，原点中心坐标为(x,y)，半径为r，起始角是sAngle，结束角是eAngle，单位是弧度，counterclockwise是布尔值，默认是false，表示顺时针绘制，反之为true时，表示逆时针绘制，具体请参考[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/arc)和[W3C](http://www.w3school.com.cn/tags/canvas_arc.asp)，这里提供一个便于理解的实例，例子中1和2，3和4，5和6对照着看
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=1024;
+  canvas.height=768;
+
+  var context=canvas.getContext("2d");
+
+  context.lineWidth=5;
+  context.strokeStyle="#005588";
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 60, 40, 0, 2*Math.PI*(i+1)/10);
+    context.stroke();
+  }
+
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 180, 40, 0, 2*Math.PI*(i+1)/10);
+    context.closePath();
+    context.stroke();
+  }
+
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 300, 40, 0, 2*Math.PI*(i+1)/10, true);
+    context.stroke();
+  }
+
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 420, 40, 0, 2*Math.PI*(i+1)/10, true);
+    context.closePath();
+    context.stroke();
+  }
+
+  context.fillStyle="#005588";
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 540, 40, 0, 2*Math.PI*(i+1)/10);
+    context.fill();
+  }
+
+  context.fillStyle="#005588";
+  for (var i=0; i<10; i++){
+    context.beginPath();
+    context.arc(50+i*100, 660, 40, 0, 2*Math.PI*(i+1)/10, true);
+    context.closePath();
+    context.fill();
+  }
+}
+```  
+
+- arcTo(x1, y1, x2, y2, r) 创建介于两个切线之间的弧或曲线。这里面有一个当前点(x0,y0)，一般是先用 moveTo() 方法设置当前点，然后使用 arcTo() 方法创建同时相切于切线(x0,y0)到(x1,y1)和(x1,y1)到(x2,y2)，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  arcToTest(context, 150, 100, 650, 100, 650, 600, 500);
+}
+
+function arcToTest(cxt, x0, y0, x1, y1, x2, y2, R){
+  cxt.beginPath();
+  cxt.moveTo(x0, y0);
+  cxt.arcTo(x1, y1, x2, y2, R);
+
+  cxt.lineWidth=6;
+  cxt.strokeStyle="red";
+  cxt.stroke();
+
+  cxt.beginPath();
+  cxt.moveTo(x0, y0);
+  cxt.lineTo(x1, y1);
+  cxt.lineTo(x2, y2);
+
+  cxt.lineWidth=2;
+  cxt.strokeStyle="gray";
+  cxt.stroke();
+}
+```
+
 
 
 [<strong style="color: red;">代码仓库</strong>](https://github.com/carolyicheng666/canvas-demo)  
