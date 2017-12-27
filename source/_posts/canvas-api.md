@@ -51,13 +51,13 @@ canvas 起初是空白的。为了展示，首先脚本需要找到渲染上下�
 ---
 
 在基本用法中，canvas 创建画布的同时也创建了坐标轴，默认规定原点在左上角，向右为x轴正方向，向下为y轴正方向  
-- moveTo()代表绘制的起点，包含两个参数x和y，分别代表起始点坐标的x值和y值  
-- lineTo()表示添加一个新的点，然后创建从该点到画布中最后指定点的线条，**特别提醒**：这个方法并不会创建线条  
-- stroke()实际绘制出通过 moveTo() 和 lineTo() 方法定义的路径  
+- **moveTo()**代表绘制的起点，包含两个参数x和y，分别代表起始点坐标的x值和y值  
+- **lineTo()**表示添加一个新的点，然后创建从该点到画布中最后指定点的线条，**特别提醒**：这个方法并不会创建线条  
+- **stroke()**实际绘制出通过 moveTo() 和 lineTo() 方法定义的路径  
 
 这里可以认为moveTo()和lineTo()都是对绘制状态的设置，最后都要通过stroke()进行实际的绘制，既然是先设置状态再绘制图形，我们自然而然就会想到可以设置线条的宽度、线条的颜色等等，是的，这些在canvas中都是可以设置的先来介绍最常用的这两个，下面可能会遇到其它的，到时候我们再一一细说  
-- 设置线条宽度使用的是lineWidth，设置时让它等于一个具体数值，不用带单位，它是按像素计算的  
-- 设置线条颜色使用的是strokeStyle，设置时让它等于一个具体的颜色值，这里可以使用渐变色，是一个高级用法，我们放到后面再说  
+- 设置线条宽度使用的是**lineWidth**，设置时让它等于一个具体数值，不用带单位，它是按像素计算的  
+- 设置线条颜色使用的是**strokeStyle**，设置时让它等于一个具体的颜色值，这里可以使用渐变色，是一个高级用法，我们放到后面再说  
 
 ``` javascript
 window.onload = function(){
@@ -126,8 +126,8 @@ window.onload = function() {
 
 有些朋友可能会用直线的例子绘制一个图形，并且如果结束点和起始点设置成同一个点，就能绘制成一个封闭图形，这里会有一个问题，如果把线条宽度lineWidth的值设大一些，这个问题就会显而易见：最后的这个点会有 lineWidth/2 * lineWidth/2 的小空隙！这个时候我们就需要使用closePath()将图形封闭起来，并且最后设置结束点为起始点的这一行代码可以不需要写，beginPath()和closePath()会将中间设置的代码封闭成为一个图形。  
 说到了封闭图形，我们自然会想到为其填充颜色，这里我们就来介绍一下：
-- 设置填充的颜色fillStyle，让其等于一个具体的颜色值即可，也可以使用渐变色
-- 设置完成之后调用fill()即可填充，类似于stroke()绘制图形一样
+- 设置填充的颜色**fillStyle**，让其等于一个具体的颜色值即可，也可以使用渐变色
+- 设置完成之后调用**fill()**即可填充，类似于stroke()绘制图形一样  
 这里有点小问题，先stroke()和先fill()的显示效果是不一样的，先stroke()会比先fill()少一半的线条宽度，大家可以自行编码体会一下  
 
 下面依然是举个例子，我们绘制了一个箭头，并填充黄色
@@ -233,7 +233,8 @@ function r1(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle) {
 线条的其它样式
 ---
 
-lineCap 设置线条末端线帽的样式，有三个值，默认是butt，表示向线条的每个末端添加平直的边缘；另外还可以设置成round，表示向线条的每个末端添加圆形线帽；设置成square，表示向线条的每个末端添加正方形线帽
+- **lineCap**  
+设置线条末端线帽的样式，有三个值，默认是butt，表示向线条的每个末端添加平直的边缘；另外还可以设置成round，表示向线条的每个末端添加圆形线帽；设置成square，表示向线条的每个末端添加正方形线帽
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -274,15 +275,18 @@ window.onload=function(){
 }
 ```
 
-lineJoin 当两条线交汇时设置所创建边角的类型，同样有三个值，默认是miter，表示创建尖角；还可以设置成bevel，表示创建斜角；设置成round，表示创建圆角  
-miterLimit 设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，只有当 lineJoin 设置为 `miter` 时，miterLimit 才有效，默认值是10。这部分内容不做过多解释，有兴趣的朋友可以查阅 [W3C文档](http://www.w3school.com.cn/tags/canvas_miterlimit.asp) 
+- **lineJoin**  
+当两条线交汇时设置所创建边角的类型，同样有三个值，默认是miter，表示创建尖角；还可以设置成bevel，表示创建斜角；设置成round，表示创建圆角  
+- **miterLimit**  
+设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，只有当 lineJoin 设置为 `miter` 时，miterLimit 才有效，默认值是10。这部分内容不做过多解释，有兴趣的朋友可以查阅 [W3C文档](http://www.w3school.com.cn/tags/canvas_miterlimit.asp) 
 
 
 
 图形变换
 ---
 
-- translate(x, y) 平移变换，x和y分别代表水平和垂直的偏移量  
+- **translate(x, y)**  
+平移变换，x和y分别代表水平和垂直的偏移量  
 我们拿之前矩形的例子做个试验：
 ``` javascript
 window.onload = function() {
@@ -318,7 +322,8 @@ function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, translat
 这是因为在canvas中，图形变换是叠加的，我们将红色的矩形向x轴和y轴各平移100个像素，而绿色的矩形没有做平移变换，这就使得绿色的矩形在红色矩形上方绘制，从而覆盖住了红色的矩形，大家可以改变绿色矩形的偏移量再看看效果。换一个角度说，translate()实际上是对原点的平移变换，改变了坐标系  
 canvas针对这种情况提供了它自己的解决办法，大家可以将代码中 `ctx.save();` 和 `ctx.restore();` 前面的注释去掉，save()用于保存当前canvas设置的所有状态，我们在save()之后执行各种操作，再调用一次restore()，这个方法用于返回到之前save()保存的状态，这两个方法是成对出现的，以后我们在做一些复杂的设置和图形绘制时，大家一定会体会到这两个方法的巨大作用  
 
-- rotate(angle) 旋转变换，angle表示旋转的角度，单位是弧度，角度转弧度的公式是：angle = degrees \* Math.PI / 180  
+- **rotate(angle)**  
+旋转变换，angle表示旋转的角度，单位是弧度，角度转弧度的公式是：angle = degrees \* Math.PI / 180  
 有了上面平移的例子，我们应该能很好的理解旋转变换了，还是拿矩形的例子试验一下：
 ``` javascript
 window.onload = function() {
@@ -351,7 +356,8 @@ function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, angle) {
 }
 ```
 
-- scale(x, y) 缩放变换，x和y分别表示水平方向和垂直方向的缩放倍数  
+- **scale(x, y)**  
+缩放变换，x和y分别表示水平方向和垂直方向的缩放倍数  
 依然是矩形的例子：
 ``` javascript
 window.onload = function() {
@@ -383,9 +389,9 @@ function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, scaleX, 
   ctx.restore();
 }
 ```
-这里我们可以看到这个图形都进行了放大，细心的朋友会发现连 lineWidth 也一并进行了放大，很多人也许认为这是个canvas的bug或者是canvas对于图形缩放处理的不够好的地方，其实我倒觉得不是这样的，因为在translate()中我已经说过，translate()实际上是对原点的平移变换，scale()也可以看做是对该图形当前的坐标系进行了缩放变换而已  
+  这里我们可以看到这个图形都进行了放大，细心的朋友会发现连 lineWidth 也一并进行了放大，很多人也许认为这是个canvas的bug或者是canvas对于图形缩放处理的不够好的地方，其实我倒觉得不是这样的，因为在translate()中我已经说过，translate()实际上是对原点的平移变换，scale()也可以看做是对该图形当前的坐标系进行了缩放变换而已  
 
-- transform(a, b, c, d, e, f) 添加一个变换矩阵，可以对图形进行平移、倾斜和缩放  
+- **transform(a, b, c, d, e, f)** 添加一个变换矩阵，可以对图形进行平移、倾斜和缩放  
 $$
  \left[
  \begin{matrix}
@@ -393,14 +399,9 @@ $$
    b & d & f \\\\  
    0 & 0 & 1
   \end{matrix}
-  \right] \tag{3}
+  \right] \tag{1}
 $$
-a:水平缩放  
-b:水平倾斜  
-c:垂直倾斜  
-d:垂直缩放  
-e:水平平移  
-f:垂直平移  
+*a:水平缩放  b:水平倾斜  c:垂直倾斜  d:垂直缩放  e:水平平移  f:垂直平移*  
 画布中每个对象都有一个当前的变换矩阵，默认是单位矩阵，也就是transform(1, 0, 0, 1, 0, 0)，意思是缩放为1，倾斜和平移都为0，即不变换  
 大家根据下面的实例更改数值，就很好理解了，还可以加深记忆
 ``` javascript
@@ -433,7 +434,8 @@ function r(ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, a, b, c,
 }
 ```
 
-- setTransform(a, b, c, d, e, f) 把当前的变换矩阵重置为单位矩阵，然后以相同的参数运行 transform() ，不过我觉得每次图形的绘制都在save()和restore()中，重置矩阵的操作估计在这之中需要绘制多个图形的时候才可能用到吧  
+- **setTransform(a, b, c, d, e, f)**  
+把当前的变换矩阵重置为单位矩阵，然后以相同的参数运行 transform() ，不过我觉得每次图形的绘制都在save()和restore()中，重置矩阵的操作估计在这之中需要绘制多个图形的时候才可能用到吧  
 
 
 
@@ -441,7 +443,7 @@ fillStyle 属性设置
 ---
 
 之前我们在介绍 fillStyle 的时候说过可以使用渐变色，现在我们来详细说明渐变色的用法（感觉就是将 Photoshop 中“渐变”代码化了）  
-- 线性渐变  
+- **线性渐变**  
 设置分为两步：第一步，创建渐变的变量，设置其为何种渐变
 ``` javascript
 linearGrad = context.createLinearGradient(xstart, ystart, xend, yend);
@@ -478,7 +480,7 @@ window.onload=function(){
 }
 ```
 
-- 径向渐变  
+- **径向渐变**  
 有了线性渐变的基础，径向渐变就很好理解了  
 第一步，依然是创建渐变的变量，设置其为何种渐变
 ``` javascript
@@ -512,8 +514,8 @@ window.onload=function(){
 ```
 
 除了可以填充渐变色以外，我们还可以填充图像
-- 填充图像
-  设置方式是先创建一个图像源对象，可以是如下几种：image, video, canvas, CanvasRenderingContext2D, ImageBitmap, ImageData, Blob，然后再用类似渐变的方式绑定到canvas中，我们这里只讨论image和canvas这两个，首先来看第一个：
+- **填充图像**  
+设置方式是先创建一个图像源对象，可以是如下几种：image, video, canvas, CanvasRenderingContext2D, ImageBitmap, ImageData, Blob，然后再用类似渐变的方式绑定到canvas中，我们这里只讨论image和canvas这两个，首先来看第一个：
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -532,7 +534,7 @@ window.onload=function(){
   }
 }
 ```
-  createPattern()包含两个参数，第一个是image对象，第二个是指定如何重复图像，和 CSS 中的设置一样
+  createPattern()包含两个参数，第一个是image对象，第二个是指定如何重复图像，和 CSS 中的设置一样  
   我们再来看第二个canvas的例子
 ``` javascript
 window.onload=function(){
@@ -588,7 +590,8 @@ function starPath(cxt){
 绘制曲线
 ---
 
-- arc(x, y, r, sAngle, eAngle, counterclockwise) 用于绘制圆和部分圆，原点中心坐标为(x,y)，半径为r，起始角是sAngle，结束角是eAngle，单位是弧度，counterclockwise是布尔值，默认是false，表示顺时针绘制，反之为true时，表示逆时针绘制，具体请参考[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/arc)和[W3C](http://www.w3school.com.cn/tags/canvas_arc.asp)，这里提供一个便于理解的实例，例子中1和2，3和4，5和6对照着看
+- **arc(x, y, r, sAngle, eAngle, counterclockwise)**  
+用于绘制圆和部分圆，原点中心坐标为(x,y)，半径为r，起始角是sAngle，结束角是eAngle，单位是弧度，counterclockwise是布尔值，默认是false，表示顺时针绘制，反之为true时，表示逆时针绘制，具体请参考[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/arc)和[W3C](http://www.w3school.com.cn/tags/canvas_arc.asp)，这里提供一个便于理解的实例，例子中1和2，3和4，5和6对照着看
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -642,7 +645,8 @@ window.onload=function(){
 }
 ```
 
-- arcTo(x1, y1, x2, y2, r) 创建介于两个切线之间的弧或曲线。这里面有几个概念：开始点(x0,y0)，控制点(x1,y1)，结束点(x2,y2)。一般是先用 moveTo() 方法设置开始点，然后使用 arcTo() 方法创建同时相切于开始点到控制点和控制点到结束点的两条切线，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：
+- **arcTo(x1, y1, x2, y2, r)**  
+创建介于两个切线之间的弧或曲线。这里面有几个概念：开始点(x0,y0)，控制点(x1,y1)，结束点(x2,y2)。一般是先用 moveTo() 方法设置开始点，然后使用 arcTo() 方法创建同时相切于开始点到控制点和控制点到结束点的两条切线，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -674,7 +678,8 @@ function arcToTest(cxt, x0, y0, x1, y1, x2, y2, R){
 }
 ```
 
-- quadraticCurveTo(x1, y1, x2, y2) 绘制二次贝塞尔曲线，学过图形学的朋友看到这个一定不会陌生，用法与arcTo()非常类似，同样先需要使用 moveTo() 方法设置开始点，然后再使用quadraticCurveTo()设置控制点(x1, y1)和结束点(x2, y2)，与arcTo()不同的是没有半径r，并且开始点就是曲线的开始点，结束点就是曲线的结束点，这样这条曲线就是唯一确定了，我们来使用它绘制一个月亮
+- **quadraticCurveTo(x1, y1, x2, y2)**  
+绘制二次贝塞尔曲线，学过图形学的朋友看到这个一定不会陌生，用法与arcTo()非常类似，同样先需要使用 moveTo() 方法设置开始点，然后再使用quadraticCurveTo()设置控制点(x1, y1)和结束点(x2, y2)，与arcTo()不同的是没有半径r，并且开始点就是曲线的开始点，结束点就是曲线的结束点，这样这条曲线就是唯一确定了，我们来使用它绘制一个月亮
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -706,7 +711,8 @@ function pathMoon(cxt){
 }
 ```
 
-- bezierCurveTo(x1, y1, x2, y2, x3, y3) 绘制三次贝塞尔曲线，类似二次贝塞尔曲线，只是中间多了一个控制点，这样我们就可以绘制出更复杂的曲线了，综合前面我们绘制的月亮星星的例子，我们来绘制一个星空的场景
+- **bezierCurveTo(x1, y1, x2, y2, x3, y3)**  
+绘制三次贝塞尔曲线，类似二次贝塞尔曲线，只是中间多了一个控制点，这样我们就可以绘制出更复杂的曲线了，综合前面我们绘制的月亮星星的例子，我们来绘制一个星空的场景
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -795,15 +801,18 @@ function pathMoon(cxt){
 文字渲染
 ---
 
-- font 设置文字的属性，与 CSS 设置方式一致。具体可设置的值请看 [W3C文档](http://www.w3school.com.cn/tags/canvas_font.asp)，比如这样：
+- **font**  
+设置文字的属性，与 CSS 设置方式一致。具体可设置的值请看 [W3C文档](http://www.w3school.com.cn/tags/canvas_font.asp)，比如这样：
 ``` javascript
 context.font="italic small-caps bold 12px arial";
 ```
   那么如何填入文字呢？请看下面两个方法
 
-- fillText(text, x, y, maxWidth) 表示在画布上绘制填色的文本，默认是黑色，text是文本内容，x和y分别是开始绘制文本的（相对于画布）x坐标位置和y坐标位置，maxWidth可以设置文本最大的宽度，这个参数是可选的
+- **fillText(text, x, y, maxWidth)**  
+表示在画布上绘制填色的文本，默认是黑色，text是文本内容，x和y分别是开始绘制文本的（相对于画布）x坐标位置和y坐标位置，maxWidth可以设置文本最大的宽度，这个参数是可选的
 
-- strokeText(text, x, y, maxWidth) 表示在画布上绘制文本（没有填色），可以认为是绘制边框，默认同样是黑色，参数及含义与上面的 fillText() 一致，下面来看个综合实例
+- **strokeText(text, x, y, maxWidth)**  
+表示在画布上绘制文本（没有填色），可以认为是绘制边框，默认同样是黑色，参数及含义与上面的 fillText() 一致，下面来看个综合实例
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -846,7 +855,8 @@ window.onload=function(){
 }
 ```
 
-- textAlign 设置文本的对齐方式，有五个取值：默认是start，表示文本在指定的位置开始；end，表示文本在指定的位置结束；center，表示居中对齐；left，表示左对齐；right，表示右对齐。来看个综合实例：
+- **textAlign**  
+设置文本的对齐方式，有五个取值：默认是start，表示文本在指定的位置开始；end，表示文本在指定的位置结束；center，表示居中对齐；left，表示左对齐；right，表示右对齐。来看个综合实例：
 ``` javascript
 window.onload=function(){
   var canvas=document.getElementById("canvas");
@@ -881,7 +891,8 @@ window.onload=function(){
 }
 ```
 
-- textBaseline 设置文本的基线，有六个取值：top，基线在顶端；middle，基线在正中；bottom，基线在低端；默认值alphabetic，普通字母的基线；hanging，印度语的基线；ideographic，方块字如中文日文等的基线。综合实例：
+- **textBaseline**  
+设置文本的基线，有六个取值：top，基线在顶端；middle，基线在正中；bottom，基线在低端；默认值alphabetic，普通字母的基线；hanging，印度语的基线；ideographic，方块字如中文日文等的基线。综合实例：
 ``` javascript
 window.onload = function() {
   var canvas = document.getElementById("canvas");
@@ -932,10 +943,241 @@ window.onload = function() {
 }
 ```
 
-- measureText(text) 这个方法能返回一个对象，截止目前只能用它来获取文本的宽度，使用方式是 context.measureText(text).width，希望将来能够获取更多关于这个文本的信息  
+- **measureText(text)**  
+这个方法能返回一个对象，截止目前只能用它来获取文本的宽度，使用方式是 context.measureText(text).width，希望将来能够获取更多关于这个文本的信息  
 
 
 
+高级属性
+---
+
+- **阴影**  
+shadowColor：设置阴影的颜色  
+shadowOffsetX：设置图形与阴影的水平距离  
+shadowOffsetY：设置图形与阴影的垂直距离  
+shadowBlur：设置阴影的模糊级数  
+同样，这些属性对于使用过 Photoshop 中模糊滤镜的朋友都非常简单易懂，我们举个例子，给之前绘制的那个五角星加个阴影
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  context.shadowColor="#058";
+  context.shadowOffsetX=10;
+  context.shadowOffsetY=10;
+  context.shadowBlur=5;
+
+  drawStar(context, 150, 300, 400, 400, 30);
+}
+
+//五角星
+function drawStar(cxt, R, r, x, y, rot){
+  cxt.beginPath();
+  for(var i=0;i<5;i++){
+    cxt.lineTo(Math.cos((18+72*i-rot)/180*Math.PI)*R+x,-Math.sin((18+72*i-rot)/180*Math.PI)*R+y);
+    cxt.lineTo(Math.cos((54+72*i-rot)/180*Math.PI)*r+x,-Math.sin((54+72*i-rot)/180*Math.PI)*r+y);
+  }
+  cxt.closePath();
+  cxt.stroke();
+  cxt.fillStyle="#fd5";
+  cxt.fill();
+}
+```
+
+- **合成**  
+globalAlpha：设置当前绘图的透明度，与 CSS 一致，0是完全透明，1是完全不透明。大家可以更改下面例子的数值看下效果
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=1200;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  context.globalAlpha=0.7;
+  for (var i=0; i<100; i++) {
+    var r = Math.floor(Math.random()*255);
+    var g = Math.floor(Math.random()*255);
+    var b = Math.floor(Math.random()*255);
+
+    context.fillStyle="rgb("+ r +","+ g +","+ b +")";
+
+    context.beginPath();
+    context.arc(Math.random()*canvas.width, Math.random()*canvas.height, Math.random()*100, 0, 2*Math.PI);
+    context.fill();
+  }
+}
+```
+  globalCompositeOperation：设置如何将新的图像绘制到旧的图像中去，总共有11个取值，大家可以查看 [W3C文档](http://www.w3school.com.cn/tags/canvas_globalcompositeoperation.asp)，我这里提供一个交互式的例子，把这11个取值都放进去了，大家可以点击看看，对比他们之间的不同
+``` html
+// css
+#buttons {
+  width: 1200px;
+  margin: 10px auto;
+  clear: both;
+}
+#buttons a {
+  font-size: 16px;
+  display: block;
+  float: left;
+  margin-right: 14px;
+}
+
+// html
+<canvas id="canvas" style="border: 1px solid #aaa; display: block; margin: 50px auto;"></canvas>
+<div id="buttons">
+  <a href="#">source-over</a>
+  <a href="#">source-atop</a>
+  <a href="#">source-in</a>
+  <a href="#">source-out</a>
+  <a href="#">destination-over</a>
+  <a href="#">destination-atop</a>
+  <a href="#">destination-in</a>
+  <a href="#">destination-out</a>
+  <a href="#">lighter</a>
+  <a href="#">copy</a>
+  <a href="#">xor</a>
+</div>
+
+//js
+window.onload=function(){
+  draw("source-over");
+
+  var buttons=document.getElementById("buttons").getElementsByTagName("a");
+  for (var i=0; i<buttons.length; i++) {
+    buttons[i].onclick=function() {
+      draw(this.text);
+      return false;
+    }
+  }
+}
+function draw(compositeStyle) {
+  var canvas=document.getElementById("canvas");
+  canvas.width=1200;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  context.font="bold 40px Arial";
+  context.textAlign="center";
+  context.textBaseline="middle";
+  context.fillStyle="#058";
+  context.fillText("globalCompositeOperation=" + compositeStyle, canvas.width/2, 60);
+
+  context.fillStyle="blue";
+  context.fillRect(300, 150, 500, 500);
+
+  context.globalCompositeOperation=compositeStyle;
+  context.fillStyle="red";
+  context.beginPath();
+  context.moveTo(700, 250);
+  context.lineTo(1000, 750);
+  context.lineTo(400, 750);
+  context.closePath();
+  context.fill();
+}
+```
+
+- **clip()**  
+从原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内（不能访问画布上的其他区域）。您也可以在使用 clip() 方法前通过使用 save() 方法对当前画布区域进行保存，并在以后的任意时间对其进行恢复（通过 restore() 方法）。我们来做一个类似管中窥豹的效果：
+``` javascript
+window.onload=function(){
+  var canvas=document.getElementById("canvas");
+  canvas.width=800;
+  canvas.height=800;
+
+  var context=canvas.getContext("2d");
+
+  context.beginPath();
+  context.fillStyle="black";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.beginPath();
+  context.arc(400, 400, 150, 0, 2*Math.PI);
+  context.fillStyle="#fff";
+  context.fill();
+  context.clip();
+
+  context.font="bold 150px Arial";
+  context.textAlign="center";
+  context.textBaseline="middle";
+  context.fillStyle="#058";
+  context.fillText("CANVAS", canvas.width/2, canvas.height/2);
+}
+```
+
+- **非零环绕原则**  
+我们可以利用非零环绕原则制作一些图形中部的镂空效果，这里虽然可以使用覆盖白色图形的方式实现，但是这样实现不了内部的阴影效果。另外，非零环绕原则在拓扑学应用的非常广，不懂的小伙伴们可以自行百度，系统的学习一下。我们现在来制作一个带有阴影的圆环效果：
+``` javascript
+window.onload = function(){
+  var canvas = document.getElementById("canvas");
+  canvas.width = 800;
+  canvas.height = 600;
+  var context = canvas.getContext("2d");
+  context.fillStyle = "#FFF";
+  context.fillRect(0, 0, 800, 600);
+
+  context.shadowColor = "#545454";
+  context.shadowOffsetX = 5;
+  context.shadowOffsetY = 5;
+  context.shadowBlur = 2;
+
+  context.arc(400, 300, 150, 0, Math.PI * 2 ,false);
+  context.arc(400, 300, 230, 0, Math.PI * 2 ,true);
+  context.fillStyle = "#00AAAA";
+  context.fill();
+}
+```
+
+- **isPointInPath(x, y)**  
+如果指定的点(x,y)位于当前的路径中，则返回true；否则返回false。我们可以利用这个特性制作一些交互的效果，下面的例子当用户点击画布中的圆形小球时，该小球会变成红色的：
+``` javascript
+var balls = [];
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+window.onload=function(){
+  canvas.width=800;
+  canvas.height=800;
+
+  for (var i=0; i<10; i++) {
+    balls.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*50+30});
+  }
+
+  draw();
+  canvas.addEventListener("mouseup", detect);
+}
+
+function draw() {
+  for (var i=0; i<balls.length; i++) {
+    context.beginPath();
+    context.arc(balls[i].x, balls[i].y, balls[i].r, 0, 2*Math.PI);
+    context.fillStyle="#058";
+    context.fill();
+  }
+}
+
+function detect(e) {
+  var x = e.clientX - canvas.getBoundingClientRect().left;
+  var y = e.clientY - canvas.getBoundingClientRect().top;
+
+  for (var i=0; i<balls.length; i++) {
+    context.beginPath();
+    context.arc(balls[i].x, balls[i].y, balls[i].r, 0, 2*Math.PI);
+    if (context.isPointInPath(x, y)) {
+      context.fillStyle="#f00";
+      context.fill();
+    }
+  }
+}
+```
+
+- **clearRect(x, y, width, height)**  
+用于清空一个矩形的内部元素，参数与rect()一致。这个方法之前我们在 globalCompositeOperation 这一小节用到过，我们在每一次绘制之前都清空一下画布中的元素。
 
 
 [<strong style="color: red;">代码仓库</strong>](https://github.com/carolyicheng666/canvas-demo)  
