@@ -1180,6 +1180,64 @@ function detect(e) {
 用于清空一个矩形的内部元素，参数与rect()一致。这个方法之前我们在 globalCompositeOperation 这一小节用到过，我们在每一次绘制之前都清空一下画布中的元素。
 
 
+
+图像处理
+---
+
+前面我们介绍了如何在canvas上自定义绘制一些图形，那么如何在canvas上绘制一张已有的图片呢？有的朋友可能会想到用fillStyle那一小节的填充图像的方式，但是这样无法处理复杂问题，而且有点像是一种临时解决的办法。其实canvas有它自己专门绘制图像的方法drawImage()，它有三种用法，下面我们来一一介绍
+- **drawImage(img, x, y)**  
+img表示绘制的图像源，它可以是HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D, 或 ImageBitmap中任意一个对象，我们这一节主要是使用HTMLImageElement对象。后面两个参数表示在canvas画布的(x,y)位置处开始绘制图像
+
+- **drawImage(img, x, y, width, height)**  
+width和height表示绘制在画布上的图像的宽度和高度，其余参数和上面一致
+
+- **drawImage(img, sx, sy, swidth, sheight, x, y, width, height)**  
+sx和sy表示裁剪图像的起始点位置，swidth和sheight表示裁剪图像的宽度和高度，其余参数和上面一致。这里参数比较多，记住顺序就很好理解了，是先裁剪图像，再绘制图像
+
+简单改造一下W3C的实例
+``` javascript
+var canvas = document.getElementById("canvas")
+var context = canvas.getContext("2d")
+var image = new Image()
+
+window.onload = function() {
+  canvas.width = 1300
+  canvas.height = 800
+
+  image.src = "img.jpg"
+  image.onload = function() {
+    context.drawImage(image, 100, 100, (image.width-100)/2, (image.height-100)/2, 200, 200, (image.width-100)/2, (image.height-100)/2)
+  }
+}
+```
+
+另外，canvas在图像处理中还有三个比较重要的方法：getImageData()、putImageData()、createImageData()  
+- **getImageData(x, y, width, height)**  
+参数及含义与rect()一致，方法返回 ImageData 对象，对象拷贝了画布指定矩形的像素数据。这个 ImageData 对象中的 data 属性非常有用，它是一个数组，按顺序存储指定矩形中每个像素的 rgba 的值。例如下面的代码就会返回指定矩形的第一个像素的rgba的值：
+``` javascript
+var imgData=ctx.getImageData(10, 10, 50, 50);
+var red=imgData.data[0];
+var green=imgData.data[1];
+var blue=imgData.data[2];
+var alpha=imgData.data[3];
+```
+当然聪明的你一定能想到使用4个数组把这个指定矩形每个像素的rgba的值封装起来，然后做一些类似 Photoshop 中模糊、反色、去色等非常有意思的操作，哈哈，赶紧动手试试吧！
+
+- **putImageData(imgData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight)**  
+第一个参数是getImageData()方法返回的对象，(x,y)表示绘制的起始点的位置，(dirtyX, dirtyY)表示裁剪图像的起始点位置，(dirtyWidth, dirtyHeight)表示裁剪的图像宽度和高度，这里与drawImage()不同的是最终绘制的时候，x会和dirtyX叠加，y会和dirtyY叠加，下面的代码可以实现图像复制并粘贴的效果
+``` javascript
+var imageData = context1.getImageData(0, 0, canvas1.width, canvas1.height)
+context2.putImageData(imageData, 0, 0, 0, 0, canvas2.width, canvas2.height)
+```
+
+- **createImageData(width,height) 或 createImageData(imageData)**  
+这个方法可以创建一个 ImageData 对象，前者可以指定宽度和高度，后者可以指定创建与imageData对象尺寸相同的新 ImageData 对象，此时并不会复制旧imageData的图像数据  
+用法呢，目前我只能想到利用循环设置或修改之前提到的ImageData对象的data属性的数据，从而绘制出一个新的图像
+
+
+
+
+
 [<strong style="color: red;">代码仓库</strong>](https://github.com/carolyicheng666/canvas-demo)  
-<strong style="color: red;">未完待续...</strong>
+<!-- <strong style="color: red;">未完待续...</strong> -->
 
