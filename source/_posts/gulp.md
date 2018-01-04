@@ -37,7 +37,7 @@ It should only manipulate files - let other libraries handle the rest.
 [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css)
 ---
 {% note info %}
-gulp plugin to minify CSS, using clean-css
+gulp plugin to minify CSS, using clean-css  
 一款压缩css的插件
 {% endnote %}
 
@@ -58,7 +58,7 @@ gulp.task('minify-css', () => {
 [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
 ---
 {% note info %}
-Minify JavaScript with UglifyJS2
+Minify JavaScript with UglifyJS2  
 一款压缩js的插件
 {% endnote %}
 
@@ -79,7 +79,7 @@ gulp.task('compress', function () {
 [gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin)
 ---
 {% note info %}
-gulp plugin to minify HTML.
+gulp plugin to minify HTML.  
 一款压缩html的插件
 {% endnote %}
 
@@ -100,7 +100,7 @@ gulp.task('minify', function() {
 [gulp-rename](https://github.com/hparra/gulp-rename)
 ---
 {% note info %}
-gulp-rename is a gulp plugin to rename files easily.
+gulp-rename is a gulp plugin to rename files easily.  
 一款重命名文件名的插件
 {% endnote %}
 
@@ -138,7 +138,7 @@ gulp.src("./src/main/text/hello.txt", { base: process.cwd() })
 [gulp-uncss](https://www.npmjs.com/package/gulp-uncss)
 ---
 {% note info %}
-Remove unused CSS with UnCSS
+Remove unused CSS with UnCSS  
 一款移除无用css的插件
 {% endnote %}
 
@@ -162,7 +162,7 @@ gulp.task('default', function () {
 [gulp-concat](https://www.npmjs.com/package/gulp-concat)
 ---
 {% note info %}
-Concatenates files
+Concatenates files  
 一款合并文件的插件
 {% endnote %}
 
@@ -181,7 +181,7 @@ gulp.task('scripts', function() {
 [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
 ---
 {% note info %}
-Minify PNG, JPEG, GIF and SVG images with imagemin
+Minify PNG, JPEG, GIF and SVG images with imagemin  
 一款压缩图片的插件
 {% endnote %}
 
@@ -231,7 +231,7 @@ gulp.task('default', () =>
 [imagemin-pngquant](https://www.npmjs.com/package/imagemin-pngquant)
 ---
 {% note info %}
-pngquant imagemin plugin
+pngquant imagemin plugin  
 配合 `gulp-imagemin` 进一步压缩图片的插件
 {% endnote %}
 
@@ -249,7 +249,7 @@ imagemin(['images/*.png'], 'build/images', {use: [imageminPngquant()]}).then(() 
 [gulp-clean](https://www.npmjs.com/package/gulp-clean)
 ---
 {% note info %}
-Removes files and folders
+Removes files and folders  
 一款移除文件和文件夹的插件
 {% endnote %}
 
@@ -269,7 +269,7 @@ gulp.task('default', function () {
 [gulp-compass](https://www.npmjs.com/package/gulp-compass)
 ---
 {% note info %}
-Compile Sass to CSS using Compass
+Compile Sass to CSS using Compass  
 用 `compass` 把 `sass`编译成 `css` 的插件，即把手动编译的操作集成到 `gulp` 的 `task` 中
 {% endnote %}
 
@@ -290,10 +290,38 @@ gulp.task('compass', function() {
 
 
 
+[gulp-sass](https://www.npmjs.com/package/gulp-sass)
+---
+{% note info %}
+Sass plugin for Gulp.  
+为gulp编译sass的插件
+{% endnote %}
+
+弃用compass后，我才开始使用这个，功能比较单一，经常要与PostCSS混合使用
+
+``` javascript
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+
+gulp.task('sass', function () {
+  return gulp.src('./sass/**/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(gulp.dest('./css'));
+});
+```
+
+我们可以修改outputStyle，还是我们熟悉的那四种方式：  
+嵌套输出方式——nested  
+展开输出方式——expanded  
+紧凑输出方式——compact  
+压缩输出方式——compressed
+
+
+
 [gulp-watch](https://www.npmjs.com/package/gulp-watch)
 ---
 {% note info %}
-File watcher that uses super-fast chokidar and emits vinyl objects
+File watcher that uses super-fast chokidar and emits vinyl objects  
 文件监控，热更新
 {% endnote %}
 
@@ -322,7 +350,7 @@ gulp.task('callback', function () {
 [gulp-html-replace](https://www.npmjs.com/package/gulp-html-replace)
 ---
 {% note info %}
-Replace build blocks in HTML. Like useref but done right
+Replace build blocks in HTML. Like useref but done right  
 替换 `HTML` 中的代码块，比 `gulp-useref` 做的更好
 {% endnote %}
 
@@ -365,7 +393,7 @@ htmlreplace({
 [gulp-useref](https://www.npmjs.com/package/gulp-useref)
 ---
 {% note info %}
-Parse build blocks in HTML files to replace references to non-optimized scripts or stylesheets with useref
+Parse build blocks in HTML files to replace references to non-optimized scripts or stylesheets with useref  
 与 `gulp-html-replace`一样，也是替换 `HTML` 中的代码块，但是可以创建新的文件，写在注释中即可，说白了就是 `gulp-html-replace` 和 `gulp-concat` 的集成，如果同时使用 `gulp-if` ，可以把 `gulp-uglify` 和 `gulp-clean-css` 都写在这个 `task` 中，相当于把原先的多个 `task` 合并成一个
 {% endnote %}
 
@@ -421,7 +449,7 @@ gulp.task('html', function () {
 [browser-sync](https://www.npmjs.com/package/browser-sync)
 ---
 {% note info %}
-Time-saving synchronised browser testing. Keep multiple browsers & devices in sync when building websites.
+Time-saving synchronised browser testing. Keep multiple browsers & devices in sync when building websites.  
 浏览器同步测试，可以保证多个浏览器和设备的同步
 {% endnote %}
 
@@ -445,12 +473,13 @@ gulp.task('watch', ['default'], () => {
 });
 ```
 
+这里面server的值前面一定要加上 `./` ，大家可以试一试，效果是不一样的
 
 
 [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer)
 ---
 {% note info %}
-Prefix CSS with Autoprefixer
+Prefix CSS with Autoprefixer  
 增加浏览器的私有前缀，让你不用再考虑为了写浏览器的兼容前缀而头疼
 {% endnote %}
 
@@ -487,12 +516,19 @@ If you use other PostCSS based tools, like cssnano, you may want to run them tog
 
 这段话大致是说，如果你只使用autoprefixer这一个插件，那么就用gulp-autoprefixer；如果还要使用别的插件，那就使用 PostCSS ，将其他插件写在它里面，速度更快。关于 PostCSS ，请看下一小节。
 
+<span style="color: red;">更新一下，</span>大家在PostCSS中使用这个插件或者别的插件的时候可能会遇到如下问题：
+``` bash
+...
+Error: [object Object] is not a PostCSS plugin
+...
+```
+额，这里PostCSS支持的插件列表里并没有gulp-autoprefixer，而支持的是它的原版autoprefixer，我们只要改一下require就行了，用法是一样的，以后遇到这类问题一定得回头找一下PostCSS支持的[插件列表](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
 
 
 [gulp-postcss](https://www.npmjs.com/package/gulp-postcss)
 ---
 {% note info %}
-PostCSS gulp plugin to pipe CSS through several plugins, but parse CSS only once.
+PostCSS gulp plugin to pipe CSS through several plugins, but parse CSS only once.  
 PostCSS 将许多插件集成在一个 CSS 管道中，但只解析一次 CSS
 {% endnote %}
 
