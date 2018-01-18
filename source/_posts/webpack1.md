@@ -42,9 +42,9 @@ $ npm install --save-dev webpack
 - 添加npm脚本  
   在 `package.json` 中 scripts 字段内添加
 ``` json
-"start": "webpack"
+"build": "webpack"
 ```
-  这样我们就可以使用 `npm start` 来执行 `webpack.config.js` 了
+  这样我们就可以使用 `npm run build` 来执行 `webpack.config.js` 了
 
 接下来我们来介绍如何配置 webpack.config.js 。官网给出的[可配置项](https://doc.webpack-china.org/configuration)特别多，我在前面说过了，我只挑符合我开发习惯的讲，所以不会太全面和深入  
 
@@ -81,18 +81,14 @@ module: {
   rules: [
     {
       test: /\.scss$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'postcss-loader',
-        'sass-loader'
-      ]
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'postcss-loader', 'sass-loader']
+      })
     },
     {
       test: /\.(png|svg|jpg|gif)$/,
-      use: [
-        'file-loader?name=images/[hash].[ext]'
-      ]
+      use: ['file-loader?name=images/[hash].[ext]']
     },
     {
       test: /\.html$/,
@@ -120,6 +116,7 @@ module.exports = {
 ``` javascript
 plugins: [
   new webpack.BannerPlugin('版权所有，翻版必究'),
+  new ExtractTextPlugin("[name]-[contenthash].css"),//分离css文件，使之提前加载
   new webpack.optimize.CommonsChunkPlugin({
     names: ['vendor', 'manifest']
   }),
@@ -134,12 +131,41 @@ plugins: [
 ``` javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 ```
 这些插件的作用分别是：  
-- **BannerPlugin** 表示在输出文件头部打上注释 `版权所有，翻版必究`；  
+- **BannerPlugin** 表示在输出文件头部打上注释 `版权所有，翻版必究`；
+- **ExtractTextPlugin**  表示分离出css文件，提高运行效率；  
 - **CommonsChunkPlugin** 表示将公共模块拆分出来单独打包，这样在调用时只需要加载一次，提高运行速度，*注意*，name传入的是名称，如果是第三方库可以在入口entry处写上路径；  
 - **CleanWebpackPlugin** 表示编译时清空 `webpack-build` 文件夹；
 - **UglifyJsPlugin** 表示使编译后的文件压缩；
 - **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件  
+
+
+
+webpack-dev-server
+---
+
+{% note info %}
+webpack-dev-server 为你提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)
+{% endnote %}
+
+需要先下载 webpack-dev-server
+``` bash
+$ npm install --save-dev webpack-dev-server
+```
+详细的配置可以根据自己项目的实际情况参考[<span style="color: red;">官网</span>](https://doc.webpack-china.org/configuration/dev-server/#src/components/Sidebar/Sidebar.jsx)进行设置，我这个项目只用到了很小的一部分，使用 `npm start` 启动后，就能在 `127.0.0.1:8080` 看到主页的效果了，下面是配置信息
+``` javascript
+devServer: {
+  contentBase: './webpack-build',
+  host: '127.0.0.1',
+  proxy: {
+    '/api/': {
+      target: 'http://127.0.0.1:8080',
+      pathRewrite: {'^/api': ''}
+    }
+  }
+}
+```
 
 Webpack还有很多值得探索和学习的东西，大家加油~
