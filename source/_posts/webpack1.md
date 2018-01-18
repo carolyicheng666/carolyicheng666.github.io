@@ -53,9 +53,11 @@ $ npm install --save-dev webpack
 输入输出
 ---
 
-任何一种打包工具，大家最关心的可能都是如何输入输出，比如 gulp 采用管道的方式，开始的 `gulp.src()` 作为输入，一级一级向后，每一个管道的输入都是上一个管道的输出，最终由 `gulp.dest()` 输出。
+任何一种打包工具，大家最关心的可能都是如何输入输出，比如基于任务流的 gulp 采用管道的方式，开始的 `gulp.src()` 作为输入，一级一级向后，每一个管道的输入都是上一个管道的输出，最终由 `gulp.dest()` 输出。
 
-在 webpack 中  
+当然，拿 gulp 和 webpack 比较是不恰当的。gulp 是一种工具，能够优化前端工作流程，而 webpack 本身是一种 js 模块化的方案，通过配置模块loader和插件等可以将css，html等也进行模块化，两者功能上有重合之处，但各自侧重点不同。
+
+回到正题，还是来说一下webpack是如何输入输出的：    
 **输入**  
 `entry:` 后写的是输入的文件路径，可以接受字符串、字符串数组和对象。如果是字符串或字符串数组，那么默认输出文件会被命名为main；如果是对象，那么默认输出文件就会被命名为其对应的key，当然在输出的时候都可以更改这些默认名。  
 **输出**  
@@ -118,6 +120,9 @@ module.exports = {
 ``` javascript
 plugins: [
   new webpack.BannerPlugin('版权所有，翻版必究'),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor', 'manifest']
+  }),
   new CleanWebpackPlugin(['webpack-build'], { verbose: true }),
   new webpack.optimize.UglifyJsPlugin(),
   new HtmlWebpackPlugin({
@@ -125,11 +130,16 @@ plugins: [
   })
 ]
 ```
-这里用到了四个插件，`webpack.XXX` 为 webpack 内置插件，不需要额外下载，只需要在文件头部引入webpack即可，即 `const webpack = require('webpack');` ，其余都需要额外下载和引入，如上面这个例子下载完还需要
+`webpack.XXX` 为 webpack 内置插件，不需要额外下载，只需要在文件头部引入webpack即可，即 `const webpack = require('webpack');` ，其余都需要额外下载和引入，比如上面这个例子下载完还需要
 ``` javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 ```
-这四个插件的作用分别是：在输出文件头部打上注释 `版权所有，翻版必究`；编译时清空 `webpack-build` 文件夹；使编译后的文件压缩；使用已有 `html` 模板生成 html 文件  
+这些插件的作用分别是：  
+- **BannerPlugin** 表示在输出文件头部打上注释 `版权所有，翻版必究`；  
+- **CommonsChunkPlugin** 表示将公共模块拆分出来单独打包，这样在调用时只需要加载一次，提高运行速度，*注意*，name传入的是名称，如果是第三方库可以在入口entry处写上路径；  
+- **CleanWebpackPlugin** 表示编译时清空 `webpack-build` 文件夹；
+- **UglifyJsPlugin** 表示使编译后的文件压缩；
+- **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件  
 
 Webpack还有很多值得探索和学习的东西，大家加油~
