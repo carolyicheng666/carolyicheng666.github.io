@@ -168,4 +168,165 @@ devServer: {
 }
 ```
 
+
+
+resolve
+---
+
+顾名思义，这个属性的设置能够告诉webpack如何解析模块。该属性的配置项也有很多，这里重点介绍alias和modules。  
+
+- alias  
+创建 import 或 require 的别名，来确保模块引入变得更简单。比如我这个项目像如下这样写：
+``` javascript
+resolve: {
+  alias: {
+    Js: path.resolve(__dirname, 'dist/js'),
+    Style: path.resolve(__dirname, 'dist/sass')
+  }
+}
+```
+  那么入口文件main.js就可以写成这样
+``` javascript
+import 'Style/reset.scss';
+import 'Style/common.scss';
+import 'Style/index.scss';
+
+import ScrollReveal from 'Js/scrollreveal.min.js';
+```
+
+- module  
+告诉 webpack 解析模块时应该搜索的目录。默认是在 node_modules 中搜索，如果想添加一个目录到模块搜索目录，并优先于 node_modules 搜索，可以用如下写法
+``` javascript
+resolve: {
+  modules: [path.resolve(__dirname, "src"), "node_modules"]
+}
+```
+
+
+
+devtool
+---
+
+这个配置可选参数很多，似乎还存在一些问题在里面，官网有这么一段话：
+{% note warning %}
+There are some issues with Source Maps in Chrome. We need your help!.
+{% endnote %}
+
+下面是官网的配置项列表及说明：
+
+<table>
+  <tr>
+    <th width="30%" style="text-align:center;">devtool</th>
+    <th width="10%" style="text-align:center;">build</th>
+    <th width="10%" style="text-align:center;">rebuild</th>
+    <th width="20%" style="text-align:center;">production</th>
+    <th style="text-align:center;">quality</th>
+  </tr>
+  <tr>
+    <td style="text-align:center;">(none)</td>
+    <td style="text-align:center;">+++</td>
+    <td style="text-align:center;">+++</td>
+    <td style="text-align:center;">yes</td>
+    <td style="text-align:center;">bundled code</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">eval</td>
+    <td style="text-align:center;">+++</td>
+    <td style="text-align:center;">+++</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">generated code</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">cheap-eval-source-map</td>
+    <td style="text-align:center;">+</td>
+    <td style="text-align:center;">++</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">transformed code (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">cheap-module-eval-source-map</td>
+    <td style="text-align:center;">o</td>
+    <td style="text-align:center;">++</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">original source (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">eval-source-map</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">+</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">original source</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">cheap-source-map</td>
+    <td style="text-align:center;">+</td>
+    <td style="text-align:center;">o</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">transformed code (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">cheap-module-source-map</td>
+    <td style="text-align:center;">o</td>
+    <td style="text-align:center;">-</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">original source (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">inline-cheap-source-map</td>
+    <td style="text-align:center;">+</td>
+    <td style="text-align:center;">o</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">transformed code (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">inline-cheap-module-source-map</td>
+    <td style="text-align:center;">o</td>
+    <td style="text-align:center;">-</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">original source (lines only)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">source-map</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">yes</td>
+    <td style="text-align:center;">original source</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">inline-source-map</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">no</td>
+    <td style="text-align:center;">original source</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">hidden-source-map</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">yes</td>
+    <td style="text-align:center;">original source</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">nosources-source-map</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">- -</td>
+    <td style="text-align:center;">yes</td>
+    <td style="text-align:center;">without source content</td>
+  </tr>
+</table>
+
+**说明**：  
+*+++*: super fast  
+*++*: fast  
+*+*: pretty fast  
+*o*: medium  
+*-*: pretty slow  
+*- -*: slow
+
+网上有资料显示，在开发环境推荐使用：`cheap-module-eval-source-map`；在生产环境推荐使用：`cheap-module-source-map`。考虑到上面提到的chrome存在的问题，大家可以选择适当降级，个人建议开发环境使用：`eval-source-map`；生产环境使用：`source-map`。当然，大家也可以根据自己的实际情况使用。
+
+
+写在后面
+---
+
 Webpack还有很多值得探索和学习的东西，大家加油~
