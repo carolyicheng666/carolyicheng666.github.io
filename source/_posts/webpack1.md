@@ -57,15 +57,32 @@ $ npm install --save-dev webpack
 
 当然，拿 gulp 和 webpack 比较是不恰当的。gulp 是一种工具，能够优化前端工作流程，而 webpack 本身是一种 js 模块化的方案，通过配置模块loader和插件等可以将css，html等也进行模块化，两者功能上有重合之处，但各自侧重点不同。
 
-回到正题，还是来说一下webpack是如何输入输出的：    
+回到正题，还是来说一下webpack是如何输入输出的：
+
 **输入**  
-`entry:` 后写的是输入的文件路径，可以接受字符串、字符串数组和对象。如果是字符串或字符串数组，那么默认输出文件会被命名为main；如果是对象，那么默认输出文件就会被命名为其对应的key，当然在输出的时候都可以更改这些默认名。  
+`entry:` 后写的是输入的文件路径，可以接受字符串、字符串数组和对象。如果是字符串或字符串数组，那么默认输出文件会被命名为main；如果是对象，那么默认输出文件就会被命名为其对应的key，当然在输出的时候都可以更改这些默认名。例如：
+``` javascript
+entry: {
+  //通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。
+  vendor: __dirname + "/dist/js/scrollreveal.min.js",//公共模块
+  main: __dirname + "/dist/main.js"
+}
+```
+
 **输出**  
+直接把例子搬出来：
+``` javascript
+output: {
+  path: __dirname + "/webpack-build",//打包后的文件存放的地方
+  filename: "[name]-[chunkhash].js"//打包后输出文件的文件名
+}
+```
+
 `output:` 后写的是输出的配置，配置项特别多，大概有二三十个，挑几个比较重要的说下：  
-*path*表示所有输出文件的目标路径，特别说明必须是绝对路径，所以请使用 `__dirname` 这个参数，这里有两种写法，一种是官方使用的 `path.resolve(__dirname, "dist")` ，这种方式需要在文件头部引入path，即 `const path = require('path');` ；另一种是使用字符串拼接的办法，即 `__dirname + "/dist/"`，两种方式效果是一样的  
-*filename*表示输出文件的文件名，可以动态设置，如 `[name].js` 或 `[chunkhash].js` 等等  
-*publicPath*表示输出解析文件的目录，在 path 不确定的情况下这个配置会很有用  
-*chunkFilename*表示非入口文件的名称  
+- *path* 表示所有输出文件的目标路径，特别说明必须是绝对路径，所以请使用 `__dirname` 这个参数，这里有两种写法，一种是官方使用的 `path.resolve(__dirname, "dist")` ，这种方式需要在文件头部引入path，即 `const path = require('path');` ；另一种是使用字符串拼接的办法，即 `__dirname + "/dist/"`，两种方式效果是一样的  
+- *filename* 表示输出文件的文件名，可以动态设置，如 `[name].js` 或 `[chunkhash].js` 等等  
+- *publicPath* 表示输出解析文件的目录，在 path 不确定的情况下这个配置会很有用  
+- *chunkFilename* 表示非入口文件的名称  
 ......
 
 
@@ -91,8 +108,9 @@ module: {
       use: ['file-loader?name=images/[hash].[ext]']
     },
     {
-      test: /\.html$/,
-      loader: 'html-withimg-loader'
+      //更新，具体情况参见插件小节中HtmlWebpackPlugin部分
+      test: /\.(html|ejs)$/,
+      loader: 'html-loader'
     }
   ]
 }
@@ -122,8 +140,11 @@ plugins: [
   }),
   new CleanWebpackPlugin(['webpack-build'], { verbose: true }),
   new webpack.optimize.UglifyJsPlugin(),
+  //更新
   new HtmlWebpackPlugin({
-    template: __dirname + "/dist/index.tmpl.html"
+    filename: 'index.html',
+    title: 'this is psd-to-html',
+    template: path.resolve(__dirname, "dist/index.tmpl.ejs")
   })
 ]
 ```
@@ -139,7 +160,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 - **CommonsChunkPlugin** 表示将公共模块拆分出来单独打包，这样在调用时只需要加载一次，提高运行速度，*注意*，name传入的是名称，如果是第三方库可以在入口entry处写上路径；  
 - **CleanWebpackPlugin** 表示编译时清空 `webpack-build` 文件夹；
 - **UglifyJsPlugin** 表示使编译后的文件压缩；
-- **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件  
+- **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件，每调用一次生成一个，使用插件的chunks和excludeChunks参数可以设置和去除在入口引入的js，可以用此插件建立多页面项目
+
+<span style="color: red;font-weight: 700;">更新</span>，HtmlWebpackPlugin插件存在一点问题，按照[插件的github主页](https://github.com/jantimon/html-webpack-plugin)设置title等属性会不起作用，作者解释道，如果使用了html-loader就会出现这个问题，在 [issue176](https://github.com/jantimon/html-webpack-plugin/issues/176) 中有一些相关的解释，但是html中有图片的src路径，必须要使用html-loader，webpack打包时才能将其打包进去，暂时还没想到比较好的解决办法，这里我先把html改成ejs。
 
 
 
