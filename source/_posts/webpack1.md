@@ -100,7 +100,16 @@ module: {
       test: /\.scss$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'postcss-loader', 'sass-loader']
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }  
+          },
+          'postcss-loader', 
+          'sass-loader'
+        ]
       })
     },
     {
@@ -139,7 +148,16 @@ plugins: [
   new HtmlWebpackPlugin({
     filename: 'index.html',
     title: 'this is psd-to-html',
-    template: path.resolve(__dirname, "dist/index.tmpl.html")
+    template: path.resolve(__dirname, "src/index.tmpl.html"),
+    minify: {
+      removeAttributeQuotes: true,
+      collapseWhitespace: true,
+      html5: true,
+      minifyCSS: true,
+      removeComments: true,
+      removeEmptyAttributes: true
+    },
+    hash: true
   })
 ]
 ```
@@ -155,7 +173,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 - **CommonsChunkPlugin** 表示将公共模块拆分出来单独打包，这样在调用时只需要加载一次，提高运行速度，*注意*，name传入的是名称，如果是第三方库可以在入口entry处写上路径；  
 - **CleanWebpackPlugin** 表示编译时清空 `webpack-build` 文件夹；
 - **UglifyJsPlugin** 表示使编译后的文件压缩；
-- **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件，每调用一次生成一个，使用插件的chunks和excludeChunks参数可以设置和去除在入口引入的js，可以用此插件建立多页面项目
+- **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件，每调用一次生成一个，使用插件的chunks和excludeChunks参数可以设置和去除在入口引入的js，可以用此插件建立多页面项目，更多配置点击[这里](https://github.com/jantimon/html-webpack-plugin#Configuration)
 
 <span style="color: red;font-weight: 700;">更新</span>，HtmlWebpackPlugin插件存在一点问题，按照[插件的github主页](https://github.com/jantimon/html-webpack-plugin)设置title等属性会不起作用，作者解释道，如果使用了html-loader就会出现这个问题，我在 [issue176](https://github.com/jantimon/html-webpack-plugin/issues/176) 中找到了一些相关的解释。
 
