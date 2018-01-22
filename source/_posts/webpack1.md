@@ -106,11 +106,6 @@ module: {
     {
       test: /\.(png|svg|jpg|gif)$/,
       use: ['file-loader?name=images/[hash].[ext]']
-    },
-    {
-      //更新，具体情况参见插件小节中HtmlWebpackPlugin部分
-      test: /\.(html|ejs)$/,
-      loader: 'html-loader'
     }
   ]
 }
@@ -144,7 +139,7 @@ plugins: [
   new HtmlWebpackPlugin({
     filename: 'index.html',
     title: 'this is psd-to-html',
-    template: path.resolve(__dirname, "dist/index.tmpl.ejs")
+    template: path.resolve(__dirname, "dist/index.tmpl.html")
   })
 ]
 ```
@@ -162,7 +157,16 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 - **UglifyJsPlugin** 表示使编译后的文件压缩；
 - **HtmlWebpackPlugin** 表示使用已有 `html` 模板生成 html 文件，每调用一次生成一个，使用插件的chunks和excludeChunks参数可以设置和去除在入口引入的js，可以用此插件建立多页面项目
 
-<span style="color: red;font-weight: 700;">更新</span>，HtmlWebpackPlugin插件存在一点问题，按照[插件的github主页](https://github.com/jantimon/html-webpack-plugin)设置title等属性会不起作用，作者解释道，如果使用了html-loader就会出现这个问题，在 [issue176](https://github.com/jantimon/html-webpack-plugin/issues/176) 中有一些相关的解释，但是html中有图片的src路径，必须要使用html-loader，webpack打包时才能将其打包进去，暂时还没想到比较好的解决办法，这里我先把html改成ejs。
+<span style="color: red;font-weight: 700;">更新</span>，HtmlWebpackPlugin插件存在一点问题，按照[插件的github主页](https://github.com/jantimon/html-webpack-plugin)设置title等属性会不起作用，作者解释道，如果使用了html-loader就会出现这个问题，我在 [issue176](https://github.com/jantimon/html-webpack-plugin/issues/176) 中找到了一些相关的解释。
+
+所以现在的问题是，如果使用html-loader，它就会先将模板解析成html，从而无法使用ejs语法动态设置；如果不使用html-loader，webpack就无法打包html内的静态资源，比如src中引入的图片等。那么要如何解决这个问题呢？
+
+[html-loader](https://webpack.js.org/loaders/html-loader/#interpolation)的作者给了我们解决的方案，采用ES6模板字符串的方式require图片等静态资源，webpack就能将其打包了，即
+``` html
+<img src="./images/gallery.png">
+改写成
+<img src="${require(`./images/gallery.png`)}">
+```
 
 
 
