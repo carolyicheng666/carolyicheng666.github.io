@@ -32,4 +32,5 @@ categories: '随笔'
 写在后面
 ---
 
-我制作了视频，[传送门](https://pan.baidu.com/s/1htUhl2k)，密码是：jcgy，有兴趣的朋友可以看看。
+这是大学期间制作的视频的台词，当时找素材时回头把 《CLANNAD》 和 《CLANNAD AFTER STORY》 看了一遍，在宿舍哭了好久......  
+附上我当时做的视频：[传送门](https://pan.baidu.com/s/1htUhl2k)，密码是：jcgy，有兴趣的朋友可以看看。
