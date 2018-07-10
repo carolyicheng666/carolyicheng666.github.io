@@ -14,7 +14,7 @@ categories: '编程'
 重要的事情
 ---
 
-先按照 [<span style="color: red;">Hexo官方文档</span>](https://hexo.io/zh-cn/docs/) 和 [<span style="color: red;">NexT官方文档</span>](http://theme-next.iissnan.com/) 按自己需要一步步搭建
+先按照 [<span style="color: red;">Hexo官方文档</span>](https://hexo.io/zh-cn/docs/) 和 [<span style="color: red;">NexT官方文档</span>](http://theme-next.iissnan.com/) 按自己需要一步步搭建  
 下面才是本文的重点
 
 
@@ -67,7 +67,7 @@ $ hexo g -d
 
 这样一来，在 `GitHub` 上的仓库就有两个分支，一个 `hexo` 分支用来存放网站的原始文件，一个 `master` 分支用来存放生成的静态网页。
 
-二、关于日常的改动流程
+二、关于日常的改动流程  
 在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理。
 1. 依次执行
 ``` bash
@@ -85,7 +85,7 @@ $ hexo g -d
 
 虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催....的情况，调转顺序就有问题了）。
 
-三、本地资料丢失后的流程
+三、本地资料丢失后的流程  
 当重装电脑之后，或者想在其他电脑上修改博客，可以使用下列步骤：
 1. 使用如下命令，拷贝仓库（默认分支为 `hexo` ）
 ``` bash

@@ -453,7 +453,7 @@ Time-saving synchronised browser testing. Keep multiple browsers & devices in sy
 浏览器同步测试，可以保证多个浏览器和设备的同步
 {% endnote %}
 
-关于在 `gulp` 中的搭建方式建议看 [<span style="color: red;">这里</span>](https://browsersync.io/docs/gulp)
+关于在 `gulp` 中的搭建方式建议看 [<span style="color: red;">这里</span>](https://browsersync.io/docs/gulp)  
 我自己的项目结构一般是这样的，首先，主文件夹下放各种配置文件，比如上面有提到过的 `config.rb` 、 `package.json` 、 `LICENSE` 、 `appcache` 、 `gulpfile.js` 等等，其次，主文件夹下有个 `dist` 文件夹放项目的原文件，执行 `gulp` 输出到同级的 `build` 文件夹， `build` 这个文件夹是可以直接放入生产环境的，所以针对官方文档的样例，我需要改造一下：
 
 ``` javascript
