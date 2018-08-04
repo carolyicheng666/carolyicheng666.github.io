@@ -14,6 +14,19 @@ categories: '编程'
 
 <!-- more -->
 
+# 检测方法
+
+- ## Array.isArray()
+  isArray() 方法用于检测是否是数组。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  if (Array.isArray(nums)) {
+    console.log(true)
+  } else {
+    console.log(false)
+  }
+  ```
+
 # 转换方法
 
 - ## join()
@@ -122,5 +135,194 @@ categories: '编程'
   ```
 
 # 位置方法
+
+- ## indexOf()
+  indexOf() 方法接收两个参数，分别是要查找的项和查找起点位置的索引，其中第二个参数可选，不设置时则默认从数组开头进行查找，方法返回要查找的项在起点位置之后首次出现时位置的索引值，如果没有找到，则返回-1。查找时，查找的项要严格相等（ === ）。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  console.log(nums.indexOf(4)) // 3
+  console.log(nums.indexOf(4, 4)) // 5
+  ```
+
+- ## lastIndexOf()
+  lastIndexOf() 方法与 indexOf() 方法使用方式一致，唯一不同的是 lastIndexOf() 方法是从数组的末尾开始向前查找。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  console.log(nums.lastIndexOf(4)) // 5
+  console.log(nums.lastIndexOf(4, 4)) // 3
+  ```
+
 # 迭代方法
+迭代方法一共有5个，每个方法都接收两个参数，分别是要在每一项运行的函数和运行该函数的作用域对象，第二个参数可选。第一个参数中传入的函数会接收三个参数，分别是数组项的值、该数组项的索引值和数组本身，其中后两个参数可选。
+
+- ## every()
+  every() 方法对数组中的每一项运行给定函数，如果函数对每一项都返回true，则返回true。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  var everyResult = nums.every(function(item, index, array) {
+    return item > 2
+  })
+  console.log(everyResult) // false
+  ```
+
+- ## some()
+  some() 方法对数组中的每一项运行给定函数，如果函数对任意一项返回true，则返回true。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  var someResult = nums.some(function(item, index, array) {
+    return item > 2
+  })
+  console.log(someResult) // true
+  ```
+
+- ## filter()
+  filter() 方法对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  var filterResult = nums.filter(function(item, index, array) {
+    return item > 2
+  })
+  console.log(filterResult) // [ 3, 4, 5, 4, 3 ]
+  ```
+
+- ## map()
+  map() 方法对数组中的每一项运行给定函数，返回每次调用的结果组成的数组。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  var mapResult = nums.map(function(item, index, array) {
+    return item * 2
+  })
+  console.log(mapResult) // [ 2, 4, 6, 8, 10, 8, 6, 4, 2 ]
+  ```
+
+- ## forEach()
+  forEach() 方法对数组中的每一项运行给定函数，这个方法没有返回值，本质上与使用for循环迭代数组一样。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+  nums.forEach(function(item, index, array) {
+    // do something
+  })
+  ```
+
 # 归并方法
+
+- ## reduce()
+  reduce() 方法会迭代数组的所有项，然后构建一个最终返回的值。方法接收两个参数。分别是一个在每一项上调用的函数和作为归并的初始值，第二个参数可选。第一个参数函数接收四个参数，分别是数组的前一个值、当前值、项的索引值和数组本身。如果设置了初始值，则函数第一次执行时，第一个参数就是这个初始值；如果没有设置初始值，则函数第一次执行是，第一个参数就是数组的第一项。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  var sum = nums.reduce(function(prev, cur, index, array) {
+    return prev + cur
+  })
+  console.log(sum) // 15
+  ```
+
+- ## reduceRight()
+  reduceRight() 方法使用方式与 reduce() 一致，唯一的区别是 reduceRight() 方法是从数组最后一项向前遍历。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  var sum = nums.reduceRight(function(prev, cur, index, array) {
+    return prev + cur
+  })
+  console.log(sum) // 15
+  ```
+
+# ES6 新增
+
+- ## Array.from()
+  Array.from() 方法从一个类似数组或可迭代对象中创建一个新的数组实例。这个方法接收两个参数，分别是想要转换成数组的伪数组对象或可迭代对象
+  、新数组中的每个元素要执行的回调函数，第二个参数可选，其实第二个参数相当于一个 map() 方法。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  console.log(Array.from(nums, function(item, index, array) {
+    return item * 2
+  }))
+  ```
+
+- ## Array.of()
+  Array.of() 方法创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。这个方法接收任意数量的参数，返回按参数顺序组成的数组。
+  ``` javascript
+  console.log(Array.of(7)) // [ 7 ]
+  console.log(Array.of(1, 2, 3)) // [ 1, 2, 3 ]
+  ```
+
+- ## copyWithin()
+  copyWithin() 方法浅复制数组的一部分到同一数组中的另一个位置，并返回它，而不修改其大小。这个方法接收三个参数，分别是复制到某位置的索引值、开始复制的起始位置（包括）和结束位置（不包括），后两个参数可选，不设置起始位置表示从数组开始进行复制，不设置结束位置表示一致复制到数组末尾。这个方法会该表原数组。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  console.log(nums.copyWithin(0, 3, 4)) // [ 4, 2, 3, 4, 5 ]
+  console.log(nums.copyWithin(1, 3)) // [ 4, 4, 5, 4, 5 ]
+  console.log(nums) // [ 4, 4, 5, 4, 5 ]
+  ```
+
+- ## fill() 
+  fill() 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。参数释义及使用方式和上面的 copyWithin() 一致。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  console.log(nums.fill(0, 2, 4)) // [ 1, 2, 0, 0, 5 ]
+  console.log(nums.fill(5, 1)) // [ 1, 5, 5, 5, 5 ]
+  console.log(nums.fill(6)) // [ 6, 6, 6, 6, 6 ]
+  ```
+
+- ## entries()
+  entries() 方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的[key,value]。可以调用 next() 方法遍历迭代器取得原数组的[key,value]。
+  ``` javascript
+  var arr = ["a", "b", "c"]
+  var iterator = arr.entries()
+  for(let e of iterator) {
+    console.log(e)
+  }
+  // [ 0, 'a' ]
+  // [ 1, 'b' ]
+  // [ 2, 'c' ]
+  ```
+
+- ## keys()
+  keys() 方法返回一个新的Array Iterator对象，它包含数组中每个索引的键。
+  ``` javascript
+  var arr = ["a", "b", "c"]
+  var iterator = arr.keys()
+  for(let key of iterator) {
+    console.log(key)
+  }
+  // 0
+  // 1
+  // 2
+  ```
+
+- ## values()
+  values() 方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。这个方法目前存在兼容性的问题，建议使用上面的 entries() 方法获取。
+  ``` javascript
+  var arr = ["a", "b", "c"]
+  var iterator = arr.values()
+  for(let value of iterator) {
+    console.log(value)
+  }
+  ```
+
+- ## find()
+  find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  var found = nums.find(function(item) {
+    return item > 3
+  })
+  console.log(found) // 4
+  ```
+
+- ## findIndex()
+  findIndex() 方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  var found = nums.findIndex(function(item) {
+    return item > 3
+  })
+  console.log(found) // 3
+  ```
+
+- ## includes()
+  includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。这个方法接收两个参数，分别是指定值和搜索开始的数组索引值，第二个参数可选。第二个参数如果为负值，则按升序从这个负值加上数组长度的索引开始搜索。默认为 0。
+  ``` javascript
+  var nums = [1, 2, 3, 4, 5]
+  console.log(nums.includes(3)) // true
+  console.log(nums.includes(10)) // false
+  ```
