@@ -236,3 +236,27 @@ console.log(instance2.sayAge())  // 20
 ```
 
 上面的寄生组合式继承的例子，只调用了一次superType构造函数，又避免了在subType.prototype上创建不必要的属性，还保持了原型链不变，应该是最理想的继承方式了。
+
+# 为什么要做 A.prototype.constructor=A 这样的修正
+
+我们在组合继承和寄生组合继承中有一段这样的修正：
+
+``` javascript
+// 组合继承
+subType.prototype.constructor = subType
+
+// 寄生组合继承
+clone.constructor = subType
+```
+
+如果我们将这两行代码删去，上面的例子依然可以完美运行。那么，我们为什么要这样做呢？  
+我在[stackoverflow](https://stackoverflow.com/questions/4012998/what-it-the-significance-of-the-javascript-constructor-property)找到了答案。  
+总结下来，就是说如果我们不做这样的修正，那么我们在subType的实例化对象上显示调用其构造函数时，找到的就是其超类型的构造函数。即：
+
+``` javascript
+// 删除前
+console.log(instance.constructor) // [Function: subType]
+
+// 而删除后
+console.log(instance.constructor) // [Function: superType]
+```
