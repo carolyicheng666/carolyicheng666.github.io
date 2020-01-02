@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>一成不变</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://carolyicheng666.github.io/"/>
+  <updated>2020-01-02T08:52:57.950Z</updated>
+  <id>https://carolyicheng666.github.io/</id>
+  
+  <author>
+    <name>易成</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>闭包经典面试题</title>
+    <link href="https://carolyicheng666.github.io/2018/08/29/setTimeout/"/>
+    <id>https://carolyicheng666.github.io/2018/08/29/setTimeout/</id>
+    <published>2018-08-29T12:40:11.000Z</published>
+    <updated>2020-01-02T08:52:57.950Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;今天的风儿甚是喧嚣  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;男子高中生的日常&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 数组方法</title>
+    <link href="https://carolyicheng666.github.io/2018/08/03/array/"/>
+    <id>https://carolyicheng666.github.io/2018/08/03/array/</id>
+    <published>2018-08-03T13:51:04.000Z</published>
+    <updated>2020-01-02T08:52:57.943Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;越是美好的回忆，有时可能会令人越痛苦&lt;br&gt;幸福和美好的回忆并不一定是救赎&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;可塑性记忆&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 创建对象</title>
+    <link href="https://carolyicheng666.github.io/2018/07/20/create-object/"/>
+    <id>https://carolyicheng666.github.io/2018/07/20/create-object/</id>
+    <published>2018-07-20T02:21:03.000Z</published>
+    <updated>2020-01-02T08:52:57.945Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;无可取代的东西要等到失去之后才懂得珍惜呢&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;干物妹！小埋&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 继承</title>
+    <link href="https://carolyicheng666.github.io/2018/07/17/inheritance/"/>
+    <id>https://carolyicheng666.github.io/2018/07/17/inheritance/</id>
+    <published>2018-07-17T12:01:25.000Z</published>
+    <updated>2020-01-02T08:52:57.948Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;只要有想见的人&lt;br&gt;就一定不会孤单&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;夏目友人帐&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MikuMikudance 制作 MMD</title>
+    <link href="https://carolyicheng666.github.io/2018/07/07/MikuMikudance/"/>
+    <id>https://carolyicheng666.github.io/2018/07/07/MikuMikudance/</id>
+    <published>2018-07-07T13:21:32.000Z</published>
+    <updated>2020-01-02T08:52:57.939Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;相信曾经相信过的自己&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Megalo Box&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="https://carolyicheng666.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="MikuMikudance" scheme="https://carolyicheng666.github.io/tags/MikuMikudance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VSCode 快捷键 （Windows版）</title>
+    <link href="https://carolyicheng666.github.io/2018/06/30/vscode-shortcuts-windows/"/>
+    <id>https://carolyicheng666.github.io/2018/06/30/vscode-shortcuts-windows/</id>
+    <published>2018-06-30T05:51:40.000Z</published>
+    <updated>2020-01-02T08:52:57.953Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;努力保持清醒，只怕再次睁眼，便已不再是我  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kill Me Heal Me&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="VSCode" scheme="https://carolyicheng666.github.io/tags/VSCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>软件测试基础</title>
+    <link href="https://carolyicheng666.github.io/2018/06/13/test/"/>
+    <id>https://carolyicheng666.github.io/2018/06/13/test/</id>
+    <published>2018-06-13T06:13:49.000Z</published>
+    <updated>2020-01-02T08:52:57.951Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;大千世界&lt;br&gt;多的是想不通的事，多的是猜不透的心，多的是看不透的人&lt;br&gt;不如不想，不如不猜，不如不看&lt;br&gt;不如寄情山水，不如快意人生&lt;br&gt;不如，吃茶去  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;许嵩《不如吃茶去》&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="test" scheme="https://carolyicheng666.github.io/tags/test/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>离职</title>
+    <link href="https://carolyicheng666.github.io/2018/04/26/2018-4/"/>
+    <id>https://carolyicheng666.github.io/2018/04/26/2018-4/</id>
+    <published>2018-04-26T05:23:13.000Z</published>
+    <updated>2020-01-02T08:52:57.938Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;将来（江莱）路远（陆远）&lt;br&gt;和过去断个干净（甘敬）&lt;br&gt;放下陈年旧事（陈放）&lt;br&gt;家和（嘉禾）万事兴&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《好先生》&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://carolyicheng666.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>rollup 入门实例教程</title>
+    <link href="https://carolyicheng666.github.io/2018/03/13/rollup/"/>
+    <id>https://carolyicheng666.github.io/2018/03/13/rollup/</id>
+    <published>2018-03-13T03:33:59.000Z</published>
+    <updated>2020-01-02T08:52:57.950Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;向来缘浅 奈何情深&lt;br&gt;既然琴瑟起 何以笙箫默&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;顾漫《何以笙箫默》&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="rollup" scheme="https://carolyicheng666.github.io/tags/rollup/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>commit 规范</title>
+    <link href="https://carolyicheng666.github.io/2018/02/23/commit/"/>
+    <id>https://carolyicheng666.github.io/2018/02/23/commit/</id>
+    <published>2018-02-23T09:03:50.000Z</published>
+    <updated>2020-01-02T08:52:57.944Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;当你凝视深渊时，深渊也在凝视你&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;尼采《善恶的彼岸》&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://carolyicheng666.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Travis 持续集成入门</title>
+    <link href="https://carolyicheng666.github.io/2018/02/22/travis-start/"/>
+    <id>https://carolyicheng666.github.io/2018/02/22/travis-start/</id>
+    <published>2018-02-22T03:13:05.000Z</published>
+    <updated>2020-01-02T08:52:57.953Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;你指尖跃动的电光，是我此生不灭的信仰&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;某科学的超电磁炮&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Travis" scheme="https://carolyicheng666.github.io/tags/Travis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大爱无声</title>
+    <link href="https://carolyicheng666.github.io/2018/02/16/father/"/>
+    <id>https://carolyicheng666.github.io/2018/02/16/father/</id>
+    <published>2018-02-16T07:50:36.000Z</published>
+    <updated>2020-01-02T08:52:57.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;笑是对身边的事物感到一瞬间的幸福而表现出来的东西  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CLANNAD&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://carolyicheng666.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 之 this</title>
+    <link href="https://carolyicheng666.github.io/2018/02/07/this/"/>
+    <id>https://carolyicheng666.github.io/2018/02/07/this/</id>
+    <published>2018-02-07T09:06:04.000Z</published>
+    <updated>2020-01-02T08:52:57.952Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;不管前方的路有多苦&lt;br&gt;只要走的方向正确&lt;br&gt;不管多么崎岖不平&lt;br&gt;都比站在原地更接近幸福  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;千与千寻&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>印象笔记·剪藏</title>
+    <link href="https://carolyicheng666.github.io/2018/01/24/webclipper/"/>
+    <id>https://carolyicheng666.github.io/2018/01/24/webclipper/</id>
+    <published>2018-01-24T07:10:32.000Z</published>
+    <updated>2020-01-02T08:52:57.954Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;吾王剑锋所指&lt;br&gt;吾等心之所向&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fate/Zero&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="https://carolyicheng666.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="Evernote" scheme="https://carolyicheng666.github.io/tags/Evernote/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Webpack学习记录</title>
+    <link href="https://carolyicheng666.github.io/2018/01/16/webpack1/"/>
+    <id>https://carolyicheng666.github.io/2018/01/16/webpack1/</id>
+    <published>2018-01-16T02:54:46.000Z</published>
+    <updated>2020-01-02T08:52:57.954Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;爱的时候不辜负人&lt;br&gt;玩的时候不辜负风景&lt;br&gt;睡觉时不辜负床&lt;br&gt;一个人时不辜负自己  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;卢思浩&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Webpack" scheme="https://carolyicheng666.github.io/tags/Webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Element</title>
+    <link href="https://carolyicheng666.github.io/2018/01/10/element/"/>
+    <id>https://carolyicheng666.github.io/2018/01/10/element/</id>
+    <published>2018-01-10T09:46:21.000Z</published>
+    <updated>2020-01-02T08:52:57.945Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;无主之物啊&lt;br&gt;汇聚于梦之杖，成为吾之力量吧&lt;br&gt;Secure!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;魔卡少女樱 CLEAR CARD篇&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Element" scheme="https://carolyicheng666.github.io/tags/Element/"/>
+    
+      <category term="Vue" scheme="https://carolyicheng666.github.io/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>animation</title>
+    <link href="https://carolyicheng666.github.io/2017/12/28/animation/"/>
+    <id>https://carolyicheng666.github.io/2017/12/28/animation/</id>
+    <published>2017-12-28T07:27:02.000Z</published>
+    <updated>2020-01-02T08:52:57.940Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;只要那一抹笑容尚存，我便心无旁骛  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;声之形&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="CSS" scheme="https://carolyicheng666.github.io/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>canvas-api</title>
+    <link href="https://carolyicheng666.github.io/2017/12/20/canvas-api/"/>
+    <id>https://carolyicheng666.github.io/2017/12/20/canvas-api/</id>
+    <published>2017-12-20T02:08:54.000Z</published>
+    <updated>2020-01-02T08:52:57.943Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;就算有讨厌的事，悲伤的事&lt;br&gt;但在这世上还有很多我想保护的东西&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;魔法少女小圆&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+      <category term="Canvas" scheme="https://carolyicheng666.github.io/tags/Canvas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 高阶函数之 map、filter、reduce</title>
+    <link href="https://carolyicheng666.github.io/2017/12/14/map-filter-reduce/"/>
+    <id>https://carolyicheng666.github.io/2017/12/14/map-filter-reduce/</id>
+    <published>2017-12-14T03:10:28.000Z</published>
+    <updated>2020-01-02T08:52:57.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;月色如水，虽不如阳光般耀眼，但我的眼中却只有比那月色更可爱的你&lt;br&gt;心跳不知不觉中加速，嘴角也绷不住那溢出来的幸福笑意&lt;br&gt;月色确实醉人，却是因为你才显得更美&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;月色真美&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="JavaScript" scheme="https://carolyicheng666.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github 设置 SSH Key</title>
+    <link href="https://carolyicheng666.github.io/2017/12/12/github-ssh/"/>
+    <id>https://carolyicheng666.github.io/2017/12/12/github-ssh/</id>
+    <published>2017-12-12T02:29:05.000Z</published>
+    <updated>2020-01-02T08:52:57.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;只要记住你的名字&lt;br&gt;不管你在世界的哪个地方&lt;br&gt;我一定会，去见你  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;你的名字&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://carolyicheng666.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Github" scheme="https://carolyicheng666.github.io/tags/Github/"/>
+    
+  </entry>
+  
+</feed>

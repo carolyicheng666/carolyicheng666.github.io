@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Canvas,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一成不变" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="就算有讨厌的事，悲伤的事但在这世上还有很多我想保护的东西 魔法少女小圆">
+<meta name="keywords" content="JavaScript,Canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas-api">
+<meta property="og:url" content="https://carolyicheng666.github.io/2017/12/20/canvas-api/index.html">
+<meta property="og:site_name" content="一成不变">
+<meta property="og:description" content="就算有讨厌的事，悲伤的事但在这世上还有很多我想保护的东西 魔法少女小圆">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-02T08:52:57.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas-api">
+<meta name="twitter:description" content="就算有讨厌的事，悲伤的事但在这世上还有很多我想保护的东西 魔法少女小圆">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://carolyicheng666.github.io/2017/12/20/canvas-api/">
+
+
+
+
+
+  <title>canvas-api | 一成不变</title>
+  
+
+
+
+
+
+
+
+
+  <style>
+    @media (max-width: 950px) {
+      #fork {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <a id="fork" href="https://github.com/carolyicheng666/carolyicheng666.github.io"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 9999;" src="https://camo.githubusercontent.com/c6625ac1f3ee0a12250227cf83ce904423abf351/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png"></a>
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一成不变</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://carolyicheng666.github.io/2017/12/20/canvas-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="易成">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/main-header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一成不变">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">canvas-api</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T10:08:54+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9,463
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  44 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>就算有讨厌的事，悲伤的事<br>但在这世上还有很多我想保护的东西</p>
+<p><strong>魔法少女小圆</strong></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><div class="note danger"><p>canvas 是 HTML5 新增的元素，可用于通过使用JavaScript中的脚本来绘制图形。例如，它可以用于绘制图形，制作照片，创建动画，甚至可以进行实时视频处理或渲染。</p></div>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在这之后ctx变量调用canvas中的api绘制函数即可绘制图形</span></span><br></pre></td></tr></table></figure>
+<p>canvas 元素创造了一个固定大小的画布，它公开了一个或多个渲染上下文，其可以用来绘制和处理要展示的内容<br>canvas 起初是空白的。为了展示，首先脚本需要找到渲染上下文，然后在它的上面绘制。canvas 元素有一个叫做 getContext() 的方法，这个方法是用来获得渲染上下文和它的绘画功能。getContext()只有一个参数，上下文的格式。如上所示，传入 <code>2d</code> 表示绘制的是一个 <code>2d</code> 的平面图形，当然如果传入 <code>3d</code> 就可以绘制 <code>3d</code> 图形，奇妙的是canvas的 <code>2d</code> 和 <code>3d</code> 绘制完全是不同的世界，本教程只介绍 <code>2d</code> 的api </p>
+<h2 id="使用moveTo-、lineTo-和stroke-绘制一条直线"><a href="#使用moveTo-、lineTo-和stroke-绘制一条直线" class="headerlink" title="使用moveTo()、lineTo()和stroke()绘制一条直线"></a>使用moveTo()、lineTo()和stroke()绘制一条直线</h2><p>在基本用法中，canvas 创建画布的同时也创建了坐标轴，默认规定原点在左上角，向右为x轴正方向，向下为y轴正方向  </p>
+<ul>
+<li><strong>moveTo()</strong>代表绘制的起点，包含两个参数x和y，分别代表起始点坐标的x值和y值  </li>
+<li><strong>lineTo()</strong>表示添加一个新的点，然后创建从该点到画布中最后指定点的线条，<strong>特别提醒</strong>：这个方法并不会创建线条  </li>
+<li><strong>stroke()</strong>实际绘制出通过 moveTo() 和 lineTo() 方法定义的路径  </li>
+</ul>
+<p>这里可以认为moveTo()和lineTo()都是对绘制状态的设置，最后都要通过stroke()进行实际的绘制，既然是先设置状态再绘制图形，我们自然而然就会想到可以设置线条的宽度、线条的颜色等等，是的，这些在canvas中都是可以设置的先来介绍最常用的这两个，下面可能会遇到其它的，到时候我们再一一细说  </p>
+<ul>
+<li>设置线条宽度使用的是<strong>lineWidth</strong>，设置时让它等于一个具体数值，不用带单位，它是按像素计算的  </li>
+<li>设置线条颜色使用的是<strong>strokeStyle</strong>，设置时让它等于一个具体的颜色值，这里可以使用渐变色，是一个高级用法，我们放到后面再说  </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">700</span>);</span><br><span class="line">  context.lineWidth = <span class="number">10</span>;</span><br><span class="line">  context.strokeStyle = <span class="string">"#058"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用beginPath-重置当前路径"><a href="#使用beginPath-重置当前路径" class="headerlink" title="使用beginPath()重置当前路径"></a>使用beginPath()重置当前路径</h2><p>上一小节我们绘制了一条直线，有拓展意识的朋友可能会利用其绘制多条直线或折线，但是细心的你一定会发现在我们第二次设置lineWidth或StrokeStyle后，该效果会影响第一次的设置，为什么呢？这么说吧，canvas是基于状态的绘制，无论使用多少次stroke()，最后一次stroke()总会重新绘制之前的stroke()，这时候就需要使用beginPath()，stroke()向上查找直到遇到beginPath()结束，然后根据当前设置进行绘制，这样说比较抽象，举个例子吧，假如说我们想要绘制三条不同颜色的折线：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.lineWidth = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineTo(<span class="number">300</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineTo(<span class="number">100</span>, <span class="number">600</span>);</span><br><span class="line">  context.strokeStyle = <span class="string">"red"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">300</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineTo(<span class="number">300</span>, <span class="number">600</span>);</span><br><span class="line">  context.strokeStyle = <span class="string">"green"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">500</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">600</span>);</span><br><span class="line">  context.strokeStyle = <span class="string">"blue"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有三个stroke()，分别绘制这三条折线，根据上面对beginPath()的描述，可以很清晰的看到这三条折线的设置方式，这里有两点要说明一下：<br>第一，绘制第一条线的beginPath()是可以不需要写的，加上这一行是为了保持格式上的统一；<br>第二，我们看到对于lineWidth的设置放在了最外面，这样是比较显式的将线条宽度都设置成10个像素的做法，因为根据第一点，我们也可以放在第一个beginPath()后且在第一个stroke()前，也是一样的效果，但是我们在第二个beginPath()和第二个stroke()之间重置lineWidth，例如说在其中添加一行 <code>context.lineWidth = 5;</code> ，根据前面对beginPath()的描述，那么效果就应该是第一条折线的线条宽度是10个像素，而后两条折线的线条宽度是5个像素，大家可以自己动手实践一下。</p>
+<h2 id="使用closePath-绘制封闭图形"><a href="#使用closePath-绘制封闭图形" class="headerlink" title="使用closePath()绘制封闭图形"></a>使用closePath()绘制封闭图形</h2><p>有些朋友可能会用直线的例子绘制一个图形，并且如果结束点和起始点设置成同一个点，就能绘制成一个封闭图形，这里会有一个问题，如果把线条宽度lineWidth的值设大一些，这个问题就会显而易见：最后的这个点会有 lineWidth/2 * lineWidth/2 的小空隙！这个时候我们就需要使用closePath()将图形封闭起来，并且最后设置结束点为起始点的这一行代码可以不需要写，beginPath()和closePath()会将中间设置的代码封闭成为一个图形。<br>说到了封闭图形，我们自然会想到为其填充颜色，这里我们就来介绍一下：</p>
+<ul>
+<li>设置填充的颜色<strong>fillStyle</strong>，让其等于一个具体的颜色值即可，也可以使用渐变色</li>
+<li>设置完成之后调用<strong>fill()</strong>即可填充，类似于stroke()绘制图形一样<br>这里有点小问题，先stroke()和先fill()的显示效果是不一样的，先stroke()会比先fill()少一半的线条宽度，大家可以自行编码体会一下  </li>
+</ul>
+<p>下面依然是举个例子，我们绘制了一个箭头，并填充黄色
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">350</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">350</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">600</span>);</span><br><span class="line">  context.lineTo(<span class="number">500</span>, <span class="number">450</span>);</span><br><span class="line">  context.lineTo(<span class="number">100</span>, <span class="number">450</span>);</span><br><span class="line">  context.closePath();</span><br><span class="line"></span><br><span class="line">  context.lineWidth = <span class="number">10</span>;</span><br><span class="line">  context.strokeStyle = <span class="string">"#058"</span>;</span><br><span class="line">  context.fillStyle = <span class="string">"yellow"</span>;</span><br><span class="line"></span><br><span class="line">  context.fill();</span><br><span class="line">  context.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用rect-绘制矩形"><a href="#使用rect-绘制矩形" class="headerlink" title="使用rect()绘制矩形"></a>使用rect()绘制矩形</h2><p>按照上面的方法，如果我们要绘制一个矩形，那么就需要绘制其中三条边即可，这里我们也可以使用rect()进行绘制，这个方法接收4个参数，分别是矩形左上角x坐标、矩形左上角y坐标、矩形的宽度和矩形的高度，单位按像素计算，我们只需传入具体数值即可，举个例子：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>);</span><br><span class="line">  r(context, <span class="number">300</span>, <span class="number">300</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"rgba(0, 255, 0, 0.5)"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle</span>) </span>&#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>绘制矩形我们也可以使用fillRect()和strokeRect()一起绘制，参数与rect()一致，<strong>注意</strong>，这两个方法与rect()本质是不同的，rect()是设置，最终还是需要fill()和stroke()进行绘制；而fillRect()和strokeRect()是绘制，也就是说使用它们就不需要额外使用fill()和stroke()了。我们将上面的例子改进一下：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>);</span><br><span class="line">  r(context, <span class="number">300</span>, <span class="number">300</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"rgba(0, 255, 0, 0.5)"</span>);</span><br><span class="line">  r1(context, <span class="number">400</span>, <span class="number">50</span>, <span class="number">350</span>, <span class="number">350</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"rgba(0, 0, 255, 0.3)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle</span>) </span>&#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r1</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle</span>) </span>&#123;</span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fillRect(x, y, width, height);</span><br><span class="line">  ctx.strokeRect(x, y, width, height);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="线条的其它样式"><a href="#线条的其它样式" class="headerlink" title="线条的其它样式"></a>线条的其它样式</h2><ul>
+<li><p><strong>lineCap</strong><br>设置线条末端线帽的样式，有三个值，默认是butt，表示向线条的每个末端添加平直的边缘；另外还可以设置成round，表示向线条的每个末端添加圆形线帽；设置成square，表示向线条的每个末端添加正方形线帽</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">  </span><br><span class="line">  context.lineWidth=<span class="number">50</span>;</span><br><span class="line">  context.strokeStyle=<span class="string">"#058"</span>;</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">200</span>);</span><br><span class="line">  context.lineCap=<span class="string">"butt"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">400</span>);</span><br><span class="line">  context.lineCap=<span class="string">"round"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">600</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">600</span>);</span><br><span class="line">  context.lineCap=<span class="string">"square"</span>;</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">  context.lineWidth=<span class="number">1</span>;</span><br><span class="line">  context.strokeStyle=<span class="string">"#27a"</span>;</span><br><span class="line">  context.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">  context.lineTo(<span class="number">100</span>, <span class="number">700</span>);</span><br><span class="line">  context.moveTo(<span class="number">700</span>, <span class="number">100</span>);</span><br><span class="line">  context.lineTo(<span class="number">700</span>, <span class="number">700</span>);</span><br><span class="line">  context.stroke();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>lineJoin</strong><br>当两条线交汇时设置所创建边角的类型，同样有三个值，默认是miter，表示创建尖角；还可以设置成bevel，表示创建斜角；设置成round，表示创建圆角  </p>
+</li>
+<li><strong>miterLimit</strong><br>设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，只有当 lineJoin 设置为 <code>miter</code> 时，miterLimit 才有效，默认值是10。这部分内容不做过多解释，有兴趣的朋友可以查阅 <a href="http://www.w3school.com.cn/tags/canvas_miterlimit.asp" target="_blank" rel="noopener">W3C文档</a> </li>
+</ul>
+<h2 id="图形变换"><a href="#图形变换" class="headerlink" title="图形变换"></a>图形变换</h2><ul>
+<li><p><strong>translate(x, y)</strong><br>平移变换，x和y分别代表水平和垂直的偏移量<br>我们拿之前矩形的例子做个试验：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"green"</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, translateX, translateY</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ctx.save();</span></span><br><span class="line">  ctx.translate(translateX, translateY);</span><br><span class="line"></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  <span class="comment">// ctx.restore();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码绘制了两个矩形，一个是红色的，一个是绿色的，可是运行出来却只有一个绿色的矩形，准确的说是红色的矩形和绿色的矩形重合了，但是我们可以看到，红色的矩形和绿色的矩形设置的偏移量并不同，这是怎么回事？<br>这是因为在canvas中，图形变换是叠加的，我们将红色的矩形向x轴和y轴各平移100个像素，而绿色的矩形没有做平移变换，这就使得绿色的矩形在红色矩形上方绘制，从而覆盖住了红色的矩形，大家可以改变绿色矩形的偏移量再看看效果。换一个角度说，translate()实际上是对原点的平移变换，改变了坐标系<br>canvas针对这种情况提供了它自己的解决办法，大家可以将代码中 <code>ctx.save();</code> 和 <code>ctx.restore();</code> 前面的注释去掉，save()用于保存当前canvas设置的所有状态，我们在save()之后执行各种操作，再调用一次restore()，这个方法用于返回到之前save()保存的状态，这两个方法是成对出现的，以后我们在做一些复杂的设置和图形绘制时，大家一定会体会到这两个方法的巨大作用  </p>
+</li>
+<li><p><strong>rotate(angle)</strong><br>旋转变换，angle表示旋转的角度，单位是弧度，角度转弧度的公式是：angle = degrees * Math.PI / 180<br>有了上面平移的例子，我们应该能很好的理解旋转变换了，还是拿矩形的例子试验一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">200</span>, <span class="number">200</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>, <span class="number">10</span>*<span class="built_in">Math</span>.PI/<span class="number">180</span>);</span><br><span class="line">  r(context, <span class="number">200</span>, <span class="number">200</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"green"</span>, <span class="number">-10</span>*<span class="built_in">Math</span>.PI/<span class="number">180</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, angle</span>) </span>&#123;</span><br><span class="line">  ctx.save();</span><br><span class="line">  ctx.rotate(angle);</span><br><span class="line"></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  ctx.restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>scale(x, y)</strong><br>缩放变换，x和y分别表示水平方向和垂直方向的缩放倍数<br>依然是矩形的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>, <span class="number">1.1</span>, <span class="number">1.1</span>);</span><br><span class="line">  r(context, <span class="number">200</span>, <span class="number">200</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"green"</span>, <span class="number">1.3</span>, <span class="number">1.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, scaleX, scaleY</span>) </span>&#123;</span><br><span class="line">  ctx.save();</span><br><span class="line">  ctx.scale(scaleX, scaleY);</span><br><span class="line"></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  ctx.restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们可以看到这个图形都进行了放大，细心的朋友会发现连 lineWidth 也一并进行了放大，很多人也许认为这是个canvas的bug或者是canvas对于图形缩放处理的不够好的地方，其实我倒觉得不是这样的，因为在translate()中我已经说过，translate()实际上是对原点的平移变换，scale()也可以看做是对该图形当前的坐标系进行了缩放变换而已  </p>
+</li>
+<li><p><strong>transform(a, b, c, d, e, f)</strong> 添加一个变换矩阵，可以对图形进行平移、倾斜和缩放<br>$$
+\left[
+\begin{matrix}
+ a &amp; c &amp; e \\<br> b &amp; d &amp; f \\<br> 0 &amp; 0 &amp; 1
+\end{matrix}
+\right] \tag{1}
+$$
+<em>a:水平缩放  b:水平倾斜  c:垂直倾斜  d:垂直缩放  e:水平平移  f:垂直平移</em><br>画布中每个对象都有一个当前的变换矩阵，默认是单位矩阵，也就是transform(1, 0, 0, 1, 0, 0)，意思是缩放为1，倾斜和平移都为0，即不变换<br>大家根据下面的实例更改数值，就很好理解了，还可以加深记忆</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  r(context, <span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">10</span>, <span class="string">"#058"</span>, <span class="string">"red"</span>, <span class="number">1.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">1.2</span>, <span class="number">20</span>, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">ctx, x, y, width, height, lineWidth, strokeStyle, fillStyle, a, b, c, d, e, f</span>) </span>&#123;</span><br><span class="line">  ctx.save();</span><br><span class="line">  ctx.transform(a, b, c, d, e, f);</span><br><span class="line"></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.rect(x, y, width, height);</span><br><span class="line">  ctx.closePath();</span><br><span class="line"></span><br><span class="line">  ctx.lineWidth = lineWidth;</span><br><span class="line">  ctx.strokeStyle = strokeStyle;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line"></span><br><span class="line">  ctx.fill();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  ctx.restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>setTransform(a, b, c, d, e, f)</strong><br>把当前的变换矩阵重置为单位矩阵，然后以相同的参数运行 transform() ，不过我觉得每次图形的绘制都在save()和restore()中，重置矩阵的操作估计在这之中需要绘制多个图形的时候才可能用到吧  </p>
+</li>
+</ul>
+<h2 id="fillStyle-属性设置"><a href="#fillStyle-属性设置" class="headerlink" title="fillStyle 属性设置"></a>fillStyle 属性设置</h2><p>之前我们在介绍 fillStyle 的时候说过可以使用渐变色，现在我们来详细说明渐变色的用法（感觉就是将 Photoshop 中“渐变”代码化了）  </p>
+<ul>
+<li><p><strong>线性渐变</strong><br>设置分为两步：第一步，创建渐变的变量，设置其为何种渐变</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linearGrad = context.createLinearGradient(xstart, ystart, xend, yend);</span><br></pre></td></tr></table></figure>
+<p>createLinearGradient()中包含四个变量，代表线段两端的点的坐标(xstart,ystart)和(xend,yend)，表示在这个线段上做线性渐变<br>第二步，在这条线段上设置关键帧，并为其指定颜色</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linearGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"white"</span>);</span><br><span class="line">linearGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"black"</span>);</span><br></pre></td></tr></table></figure>
+<p>addColorStop()表示添加关键帧，起始点为0，终止点为1，也就是上面设置的那两个点的坐标，这里用浮点数是为了让大家看得更方便，比如说我们要在线段中点位置添加一个关键帧，并设置灰色，那就可以这么写： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linearGrad.addColorStop(<span class="number">0.5</span>, <span class="string">"gray"</span>);</span><br></pre></td></tr></table></figure>
+<p>上面的描述可能比较生硬，大家可以打开Photoshop，点击渐变工具，快捷键是G，不管学过没学过吧，都可以在里面实际操作一下，再回过头来看看代码，理解起来就比较容易了<br>来看个实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> linearGrad=context.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"white"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.25</span>, <span class="string">"yellow"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.5</span>, <span class="string">"green"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.75</span>, <span class="string">"blue"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"black"</span>);</span><br><span class="line">  context.fillStyle=linearGrad;</span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>径向渐变</strong><br>有了线性渐变的基础，径向渐变就很好理解了<br>第一步，依然是创建渐变的变量，设置其为何种渐变</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radialGrad = context.createRadialGradient(x0, y0, r0, x1, y1, r1);</span><br></pre></td></tr></table></figure>
+<p>createRadialGradient()中包含六个变量，分别是小圆圆心坐标(x0,y0)和小圆半径r0，大圆圆心坐标(x1,y1)和大圆半径r1，表示在这两个圆之间做径向渐变<br>第二步和线性渐变一致，同样是设置关键帧</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">radialGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"white"</span>);</span><br><span class="line">radialGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"black"</span>);</span><br></pre></td></tr></table></figure>
+<p>来看个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> radialGrad=context.createRadialGradient(<span class="number">400</span>, <span class="number">400</span>, <span class="number">0</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">500</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"white"</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">0.25</span>, <span class="string">"yellow"</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">0.5</span>, <span class="string">"green"</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">0.75</span>, <span class="string">"blue"</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"black"</span>);</span><br><span class="line">  context.fillStyle=radialGrad;</span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>除了可以填充渐变色以外，我们还可以填充图像</p>
+<ul>
+<li><p><strong>填充图像</strong><br>设置方式是先创建一个图像源对象，可以是如下几种：image, video, canvas, CanvasRenderingContext2D, ImageBitmap, ImageData, Blob，然后再用类似渐变的方式绑定到canvas中，我们这里只讨论image和canvas这两个，首先来看第一个：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> backgroundImage=<span class="keyword">new</span> Image();</span><br><span class="line">  backgroundImage.src=<span class="string">"images/repeat.gif"</span>;</span><br><span class="line">  backgroundImage.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pattern=context.createPattern(backgroundImage, <span class="string">"repeat"</span>);</span><br><span class="line">    context.fillStyle=pattern;</span><br><span class="line">    context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>createPattern()包含两个参数，第一个是image对象，第二个是指定如何重复图像，和 CSS 中的设置一样<br>我们再来看第二个canvas的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> backCanvas=createBackgroundCanvas();</span><br><span class="line">  <span class="keyword">var</span> pattern=context.createPattern(backCanvas, <span class="string">"repeat"</span>);</span><br><span class="line">  context.fillStyle=pattern;</span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createBackgroundCanvas</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> backCanvas=<span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);</span><br><span class="line">  backCanvas.width=<span class="number">100</span>;</span><br><span class="line">  backCanvas.height=<span class="number">100</span>;</span><br><span class="line">  <span class="keyword">var</span> backCanvasContext=backCanvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">  drawStar(backCanvasContext, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> backCanvas;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawStar</span>(<span class="params">cxt, x, y, R, rot</span>)</span>&#123;</span><br><span class="line">  cxt.save();</span><br><span class="line"></span><br><span class="line">  cxt.translate(x, y);</span><br><span class="line">  cxt.rotate(rot/<span class="number">180</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">  cxt.scale(R, R);</span><br><span class="line"></span><br><span class="line">  starPath(cxt);</span><br><span class="line"></span><br><span class="line">  cxt.fillStyle=<span class="string">"#fb3"</span>;</span><br><span class="line">  cxt.fill();</span><br><span class="line"></span><br><span class="line">  cxt.restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">starPath</span>(<span class="params">cxt</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">18</span>+<span class="number">72</span>*i)/<span class="number">180</span>*<span class="built_in">Math</span>.PI),-<span class="built_in">Math</span>.sin((<span class="number">18</span>+<span class="number">72</span>*i)/<span class="number">180</span>*<span class="built_in">Math</span>.PI));</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">54</span>+<span class="number">72</span>*i)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*<span class="number">0.5</span>,-<span class="built_in">Math</span>.sin((<span class="number">54</span>+<span class="number">72</span>*i)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*<span class="number">0.5</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  cxt.closePath();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的例子稍微有点复杂，首先创建了绘制五角星的方法drawStar()，然后用createBackgroundCanvas()其绘制到画布上，最后用createPattern()方法设置如何绘制  </p>
+</li>
+</ul>
+<h2 id="绘制曲线"><a href="#绘制曲线" class="headerlink" title="绘制曲线"></a>绘制曲线</h2><ul>
+<li><p><strong>arc(x, y, r, sAngle, eAngle, counterclockwise)</strong><br>用于绘制圆和部分圆，原点中心坐标为(x,y)，半径为r，起始角是sAngle，结束角是eAngle，单位是弧度，counterclockwise是布尔值，默认是false，表示顺时针绘制，反之为true时，表示逆时针绘制，具体请参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/arc" target="_blank" rel="noopener">MDN</a>和<a href="http://www.w3school.com.cn/tags/canvas_arc.asp" target="_blank" rel="noopener">W3C</a>，这里提供一个便于理解的实例，例子中1和2，3和4，5和6对照着看</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">1024</span>;</span><br><span class="line">  canvas.height=<span class="number">768</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.lineWidth=<span class="number">5</span>;</span><br><span class="line">  context.strokeStyle=<span class="string">"#005588"</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">60</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>);</span><br><span class="line">    context.stroke();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">180</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>);</span><br><span class="line">    context.closePath();</span><br><span class="line">    context.stroke();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">300</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>, <span class="literal">true</span>);</span><br><span class="line">    context.stroke();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">420</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>, <span class="literal">true</span>);</span><br><span class="line">    context.closePath();</span><br><span class="line">    context.stroke();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.fillStyle=<span class="string">"#005588"</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">540</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>);</span><br><span class="line">    context.fill();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  context.fillStyle=<span class="string">"#005588"</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="number">50</span>+i*<span class="number">100</span>, <span class="number">660</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI*(i+<span class="number">1</span>)/<span class="number">10</span>, <span class="literal">true</span>);</span><br><span class="line">    context.closePath();</span><br><span class="line">    context.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>arcTo(x1, y1, x2, y2, r)</strong><br>创建介于两个切线之间的弧或曲线。这里面有几个概念：开始点(x0,y0)，控制点(x1,y1)，结束点(x2,y2)。一般是先用 moveTo() 方法设置开始点，然后使用 arcTo() 方法创建同时相切于开始点到控制点和控制点到结束点的两条切线，且半径为r的圆弧，这里我们可以想象的到，如果半径比某条切线长度要大时，切点就不会在切线的所在的线段上，而是在切线的延长线上，这种情况也是可以的。举个例子，大家可以自行更改数值看看效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  arcToTest(context, <span class="number">150</span>, <span class="number">100</span>, <span class="number">650</span>, <span class="number">100</span>, <span class="number">650</span>, <span class="number">600</span>, <span class="number">500</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arcToTest</span>(<span class="params">cxt, x0, y0, x1, y1, x2, y2, R</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  cxt.moveTo(x0, y0);</span><br><span class="line">  cxt.arcTo(x1, y1, x2, y2, R);</span><br><span class="line"></span><br><span class="line">  cxt.lineWidth=<span class="number">6</span>;</span><br><span class="line">  cxt.strokeStyle=<span class="string">"red"</span>;</span><br><span class="line">  cxt.stroke();</span><br><span class="line"></span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  cxt.moveTo(x0, y0);</span><br><span class="line">  cxt.lineTo(x1, y1);</span><br><span class="line">  cxt.lineTo(x2, y2);</span><br><span class="line"></span><br><span class="line">  cxt.lineWidth=<span class="number">2</span>;</span><br><span class="line">  cxt.strokeStyle=<span class="string">"gray"</span>;</span><br><span class="line">  cxt.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>quadraticCurveTo(x1, y1, x2, y2)</strong><br>绘制二次贝塞尔曲线，学过图形学的朋友看到这个一定不会陌生，用法与arcTo()非常类似，同样先需要使用 moveTo() 方法设置开始点，然后再使用quadraticCurveTo()设置控制点(x1, y1)和结束点(x2, y2)，与arcTo()不同的是没有半径r，并且开始点就是曲线的开始点，结束点就是曲线的结束点，这样这条曲线就是唯一确定了，我们来使用它绘制一个月亮</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  fillMoon(context, <span class="number">400</span>, <span class="number">400</span>, <span class="number">300</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillMoon</span>(<span class="params">cxt, x, y, R, rot, fillColor</span>)</span>&#123;</span><br><span class="line">  cxt.save();</span><br><span class="line">  cxt.translate(x, y);</span><br><span class="line">  cxt.rotate(rot*<span class="built_in">Math</span>.PI/<span class="number">180</span>);</span><br><span class="line">  cxt.scale(R, R);</span><br><span class="line">  pathMoon(cxt);</span><br><span class="line">  cxt.fillStyle=fillColor || <span class="string">"#fd5"</span>;</span><br><span class="line">  cxt.fill();</span><br><span class="line">  cxt.restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pathMoon</span>(<span class="params">cxt</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  cxt.arc(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>*<span class="built_in">Math</span>.PI, <span class="number">1.5</span>*<span class="built_in">Math</span>.PI, <span class="literal">true</span>);</span><br><span class="line">  cxt.moveTo(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">  cxt.quadraticCurveTo(<span class="number">1.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">  cxt.closePath();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>bezierCurveTo(x1, y1, x2, y2, x3, y3)</strong><br>绘制三次贝塞尔曲线，类似二次贝塞尔曲线，只是中间多了一个控制点，这样我们就可以绘制出更复杂的曲线了，综合前面我们绘制的月亮星星的例子，我们来绘制一个星空的场景</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">1200</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//sky</span></span><br><span class="line">  <span class="keyword">var</span> radialGrad=context.createRadialGradient(</span><br><span class="line">    canvas.width/<span class="number">2</span>, canvas.height, <span class="number">0</span>, </span><br><span class="line">    canvas.width/<span class="number">2</span>, canvas.height, canvas.height);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"#035"</span>);</span><br><span class="line">  radialGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"black"</span>);</span><br><span class="line">  context.fillStyle=radialGrad;</span><br><span class="line"></span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">200</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> r=<span class="built_in">Math</span>.random()*<span class="number">5</span> + <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">var</span> x=<span class="built_in">Math</span>.random()*canvas.width;</span><br><span class="line">    <span class="keyword">var</span> y=<span class="built_in">Math</span>.random()*canvas.height*<span class="number">0.6</span>;</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random()*<span class="number">360</span>;</span><br><span class="line">    drawStar(context, x, y, r, r/<span class="number">2.0</span>, a);   </span><br><span class="line">  &#125;</span><br><span class="line">  fillMoon(context, <span class="number">900</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>); </span><br><span class="line">  drawland(context);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//land</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawland</span>(<span class="params">cxt</span>)</span>&#123;</span><br><span class="line">  cxt.save();</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  cxt.moveTo(<span class="number">0</span>, <span class="number">600</span>);</span><br><span class="line">  cxt.bezierCurveTo(<span class="number">540</span>, <span class="number">400</span>, <span class="number">660</span>, <span class="number">800</span>, <span class="number">1200</span>, <span class="number">600</span>);</span><br><span class="line">  cxt.lineTo(<span class="number">1200</span>, <span class="number">800</span>);</span><br><span class="line">  cxt.lineTo(<span class="number">0</span>, <span class="number">800</span>);</span><br><span class="line">  cxt.closePath();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> landStyle=cxt.createLinearGradient(<span class="number">0</span>, <span class="number">800</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  landStyle.addColorStop(<span class="number">0.0</span>, <span class="string">"#030"</span>);</span><br><span class="line">  landStyle.addColorStop(<span class="number">1.0</span>, <span class="string">"#580"</span>);</span><br><span class="line">  cxt.fillStyle=landStyle;</span><br><span class="line">  cxt.fill();</span><br><span class="line">  cxt.restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//star</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawStar</span>(<span class="params">cxt, x, y, R, r, rot</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">18</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*R+x,-<span class="built_in">Math</span>.sin((<span class="number">18</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*R+y);</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">54</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*r+x,-<span class="built_in">Math</span>.sin((<span class="number">54</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*r+y);</span><br><span class="line">  &#125;</span><br><span class="line">  cxt.closePath();</span><br><span class="line">  cxt.fillStyle=<span class="string">"#fb3"</span>;</span><br><span class="line">  cxt.strokeStyle=<span class="string">"#fd5"</span>;</span><br><span class="line">  cxt.lineWidth=<span class="number">3</span>;</span><br><span class="line">  cxt.lineJoin=<span class="string">"round"</span>;</span><br><span class="line">  cxt.fill();</span><br><span class="line">  cxt.stroke();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// moon</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillMoon</span>(<span class="params">cxt, x, y, R, rot, fillColor</span>)</span>&#123;</span><br><span class="line">  cxt.save();</span><br><span class="line">  cxt.translate(x, y);</span><br><span class="line">  cxt.rotate(rot*<span class="built_in">Math</span>.PI/<span class="number">180</span>);</span><br><span class="line">  cxt.scale(R, R);</span><br><span class="line">  pathMoon(cxt);</span><br><span class="line">  cxt.fillStyle=fillColor || <span class="string">"#fd5"</span>;</span><br><span class="line">  cxt.fill();</span><br><span class="line">  cxt.restore();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pathMoon</span>(<span class="params">cxt</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  cxt.arc(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>*<span class="built_in">Math</span>.PI, <span class="number">1.5</span>*<span class="built_in">Math</span>.PI, <span class="literal">true</span>);</span><br><span class="line">  cxt.moveTo(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">  cxt.quadraticCurveTo(<span class="number">1.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">  cxt.closePath();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文字渲染"><a href="#文字渲染" class="headerlink" title="文字渲染"></a>文字渲染</h2><ul>
+<li><p><strong>font</strong><br>设置文字的属性，与 CSS 设置方式一致。具体可设置的值请看 <a href="http://www.w3school.com.cn/tags/canvas_font.asp" target="_blank" rel="noopener">W3C文档</a>，比如这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context.font=<span class="string">"italic small-caps bold 12px arial"</span>;</span><br></pre></td></tr></table></figure>
+<p>那么如何填入文字呢？请看下面两个方法</p>
+</li>
+<li><p><strong>fillText(text, x, y, maxWidth)</strong><br>表示在画布上绘制填色的文本，默认是黑色，text是文本内容，x和y分别是开始绘制文本的（相对于画布）x坐标位置和y坐标位置，maxWidth可以设置文本最大的宽度，这个参数是可选的</p>
+</li>
+<li><p><strong>strokeText(text, x, y, maxWidth)</strong><br>表示在画布上绘制文本（没有填色），可以认为是绘制边框，默认同样是黑色，参数及含义与上面的 fillText() 一致，下面来看个综合实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.font=<span class="string">"40px bold Arial"</span>;</span><br><span class="line"></span><br><span class="line">  context.fillStyle=<span class="string">"#058"</span>;</span><br><span class="line">  context.fillText(<span class="string">"欢迎大家学习《canvas绘图接口详解》！"</span>, <span class="number">40</span>, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">  context.lineWidth=<span class="number">1</span>;</span><br><span class="line">  context.strokeStyle=<span class="string">"#058"</span>;</span><br><span class="line">  context.strokeText(<span class="string">"欢迎大家学习《canvas绘图接口详解》！"</span>, <span class="number">40</span>, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">  context.fillText(<span class="string">"欢迎大家学习《canvas绘图接口详解》！"</span>, <span class="number">40</span>, <span class="number">300</span>, <span class="number">200</span>);</span><br><span class="line">  context.strokeText(<span class="string">"欢迎大家学习《canvas绘图接口详解》！"</span>, <span class="number">40</span>, <span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> linearGrad=context.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">0</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.0</span>, <span class="string">"red"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.25</span>, <span class="string">"orange"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.5</span>, <span class="string">"yellow"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">0.75</span>, <span class="string">"green"</span>);</span><br><span class="line">  linearGrad.addColorStop(<span class="number">1.0</span>, <span class="string">"purple"</span>);</span><br><span class="line">  context.fillStyle=linearGrad;</span><br><span class="line">  context.fillText(<span class="string">"欢迎大家学习《canvas绘图接口详解》！"</span>, <span class="number">40</span>, <span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> backgroundImage=<span class="keyword">new</span> Image();</span><br><span class="line">  backgroundImage.src=<span class="string">"images/repeat.gif"</span>;</span><br><span class="line">  backgroundImage.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pattern=context.createPattern(backgroundImage, <span class="string">"repeat"</span>);</span><br><span class="line">    context.fillStyle=pattern;</span><br><span class="line">    context.font=<span class="string">"100px bold Arial"</span>;</span><br><span class="line">    context.fillText(<span class="string">"Canvas!"</span>, <span class="number">40</span>, <span class="number">650</span>);</span><br><span class="line">    context.strokeText(<span class="string">"Canvas!"</span>, <span class="number">40</span>, <span class="number">650</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>textAlign</strong><br>设置文本的对齐方式，有五个取值：默认是start，表示文本在指定的位置开始；end，表示文本在指定的位置结束；center，表示居中对齐；left，表示左对齐；right，表示右对齐。来看个综合实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.fillStyle=<span class="string">"#058"</span>;</span><br><span class="line">  context.font=<span class="string">"40px bold san-serif"</span>;</span><br><span class="line"></span><br><span class="line">  context.textAlign=<span class="string">"left"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textAlign = left"</span>, <span class="number">400</span>, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">  context.textAlign=<span class="string">"center"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textAlign = center"</span>, <span class="number">400</span>, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">  context.textAlign=<span class="string">"right"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textAlign = right"</span>, <span class="number">400</span>, <span class="number">300</span>);</span><br><span class="line"></span><br><span class="line">  context.textAlign=<span class="string">"start"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textAlign = start"</span>, <span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">  context.textAlign=<span class="string">"end"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textAlign = end"</span>, <span class="number">400</span>, <span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">  context.strokeStyle=<span class="string">"#888"</span>;</span><br><span class="line">  context.moveTo(<span class="number">400</span>, <span class="number">0</span>);</span><br><span class="line">  context.lineTo(<span class="number">400</span>, <span class="number">800</span>);</span><br><span class="line">  context.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>textBaseline</strong><br>设置文本的基线，有六个取值：top，基线在顶端；middle，基线在正中；bottom，基线在低端；默认值alphabetic，普通字母的基线；hanging，印度语的基线；ideographic，方块字如中文日文等的基线。综合实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"></span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.fillStyle = <span class="string">"#058"</span>;</span><br><span class="line">  context.font = <span class="string">"40px bold san-serif"</span>;</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"top"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textBaseline = top"</span>, <span class="number">40</span>, <span class="number">100</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"middle"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textBaseline = middle"</span>, <span class="number">40</span>, <span class="number">200</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"bottom"</span>;</span><br><span class="line">  context.fillText(<span class="string">"textBaseline = bottom"</span>, <span class="number">40</span>, <span class="number">300</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">300</span>);</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"alphabetic"</span>;</span><br><span class="line">  context.fillText(<span class="string">"中文日本語कितने बज रहे हैंalphabetic"</span>, <span class="number">40</span>, <span class="number">500</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"middle"</span>;</span><br><span class="line">  context.fillText(<span class="string">"中文日本語कितने बज रहे हैंhanging"</span>, <span class="number">40</span>, <span class="number">600</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">  context.textBaseline = <span class="string">"bottom"</span>;</span><br><span class="line">  context.fillText(<span class="string">"中文日本語कितने बज रहे हैंideographic"</span>, <span class="number">40</span>, <span class="number">700</span>);</span><br><span class="line">  drawBaseline(context, <span class="number">700</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">drawBaseline</span>(<span class="params">cxt, h</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width = cxt.canvas.width;</span><br><span class="line"></span><br><span class="line">    cxt.save();</span><br><span class="line">    cxt.strokeStyle = <span class="string">"#888"</span>;</span><br><span class="line">    cxt.lineWidth = <span class="number">2</span>;</span><br><span class="line">    cxt.moveTo(<span class="number">0</span>, h);</span><br><span class="line">    cxt.lineTo(width, h);</span><br><span class="line">    cxt.stroke();</span><br><span class="line">    cxt.restore();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>measureText(text)</strong><br>这个方法能返回一个对象，截止目前只能用它来获取文本的宽度，使用方式是 context.measureText(text).width，希望将来能够获取更多关于这个文本的信息  </p>
+</li>
+</ul>
+<h2 id="高级属性"><a href="#高级属性" class="headerlink" title="高级属性"></a>高级属性</h2><ul>
+<li><p><strong>阴影</strong><br>shadowColor：设置阴影的颜色<br>shadowOffsetX：设置图形与阴影的水平距离<br>shadowOffsetY：设置图形与阴影的垂直距离<br>shadowBlur：设置阴影的模糊级数<br>同样，这些属性对于使用过 Photoshop 中模糊滤镜的朋友都非常简单易懂，我们举个例子，给之前绘制的那个五角星加个阴影</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.shadowColor=<span class="string">"#058"</span>;</span><br><span class="line">  context.shadowOffsetX=<span class="number">10</span>;</span><br><span class="line">  context.shadowOffsetY=<span class="number">10</span>;</span><br><span class="line">  context.shadowBlur=<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">  drawStar(context, <span class="number">150</span>, <span class="number">300</span>, <span class="number">400</span>, <span class="number">400</span>, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//五角星</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawStar</span>(<span class="params">cxt, R, r, x, y, rot</span>)</span>&#123;</span><br><span class="line">  cxt.beginPath();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">18</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*R+x,-<span class="built_in">Math</span>.sin((<span class="number">18</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*R+y);</span><br><span class="line">    cxt.lineTo(<span class="built_in">Math</span>.cos((<span class="number">54</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*r+x,-<span class="built_in">Math</span>.sin((<span class="number">54</span>+<span class="number">72</span>*i-rot)/<span class="number">180</span>*<span class="built_in">Math</span>.PI)*r+y);</span><br><span class="line">  &#125;</span><br><span class="line">  cxt.closePath();</span><br><span class="line">  cxt.stroke();</span><br><span class="line">  cxt.fillStyle=<span class="string">"#fd5"</span>;</span><br><span class="line">  cxt.fill();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>合成</strong><br>globalAlpha：设置当前绘图的透明度，与 CSS 一致，0是完全透明，1是完全不透明。大家可以更改下面例子的数值看下效果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">1200</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.globalAlpha=<span class="number">0.7</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> r = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">255</span>);</span><br><span class="line">    <span class="keyword">var</span> g = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">255</span>);</span><br><span class="line">    <span class="keyword">var</span> b = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">255</span>);</span><br><span class="line"></span><br><span class="line">    context.fillStyle=<span class="string">"rgb("</span>+ r +<span class="string">","</span>+ g +<span class="string">","</span>+ b +<span class="string">")"</span>;</span><br><span class="line"></span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(<span class="built_in">Math</span>.random()*canvas.width, <span class="built_in">Math</span>.random()*canvas.height, <span class="built_in">Math</span>.random()*<span class="number">100</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">    context.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>globalCompositeOperation：设置如何将新的图像绘制到旧的图像中去，总共有11个取值，大家可以查看 <a href="http://www.w3school.com.cn/tags/canvas_globalcompositeoperation.asp" target="_blank" rel="noopener">W3C文档</a>，我这里提供一个交互式的例子，把这11个取值都放进去了，大家可以点击看看，对比他们之间的不同</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">// css</span><br><span class="line">#buttons &#123;</span><br><span class="line">  width: 1200px;</span><br><span class="line">  margin: 10px auto;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br><span class="line">#buttons a &#123;</span><br><span class="line">  font-size: 16px;</span><br><span class="line">  display: block;</span><br><span class="line">  float: left;</span><br><span class="line">  margin-right: 14px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// html</span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #aaa; display: block; margin: 50px auto;"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"buttons"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>source-over<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>source-atop<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>source-in<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>source-out<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>destination-over<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>destination-atop<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>destination-in<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>destination-out<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>lighter<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>copy<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>xor<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//js</span><br><span class="line">window.onload=function()&#123;</span><br><span class="line">  draw("source-over");</span><br><span class="line"></span><br><span class="line">  var buttons=document.getElementById("buttons").getElementsByTagName("a");</span><br><span class="line">  for (var i=0; i<span class="tag">&lt;<span class="name">buttons.length;</span> <span class="attr">i</span>++) &#123;</span></span><br><span class="line"><span class="tag">    <span class="attr">buttons</span>[<span class="attr">i</span>]<span class="attr">.onclick</span>=<span class="string">function()</span> &#123;</span></span><br><span class="line"><span class="tag">      <span class="attr">draw</span>(<span class="attr">this.text</span>);</span></span><br><span class="line"><span class="tag">      <span class="attr">return</span> <span class="attr">false</span>;</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag">  &#125;</span></span><br><span class="line"><span class="tag">&#125;</span></span><br><span class="line"><span class="tag"><span class="attr">function</span> <span class="attr">draw</span>(<span class="attr">compositeStyle</span>) &#123;</span></span><br><span class="line"><span class="tag">  <span class="attr">var</span> <span class="attr">canvas</span>=<span class="string">document.getElementById(</span>"<span class="attr">canvas</span>");</span></span><br><span class="line"><span class="tag">  <span class="attr">canvas.width</span>=<span class="string">1200;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">canvas.height</span>=<span class="string">800;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">  <span class="attr">var</span> <span class="attr">context</span>=<span class="string">canvas.getContext(</span>"<span class="attr">2d</span>");</span></span><br><span class="line"><span class="tag">  <span class="attr">context.clearRect</span>(<span class="attr">0</span>, <span class="attr">0</span>, <span class="attr">canvas.width</span>, <span class="attr">canvas.height</span>);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">  <span class="attr">context.font</span>=<span class="string">"bold 40px Arial"</span>;</span></span><br><span class="line"><span class="tag">  <span class="attr">context.textAlign</span>=<span class="string">"center"</span>;</span></span><br><span class="line"><span class="tag">  <span class="attr">context.textBaseline</span>=<span class="string">"middle"</span>;</span></span><br><span class="line"><span class="tag">  <span class="attr">context.fillStyle</span>=<span class="string">"#058"</span>;</span></span><br><span class="line"><span class="tag">  <span class="attr">context.fillText</span>("<span class="attr">globalCompositeOperation</span>=<span class="string">" + compositeStyle, canvas.width/2, 60);</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">  context.fillStyle="</span><span class="attr">blue</span>";</span></span><br><span class="line"><span class="tag">  <span class="attr">context.fillRect</span>(<span class="attr">300</span>, <span class="attr">150</span>, <span class="attr">500</span>, <span class="attr">500</span>);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">  <span class="attr">context.globalCompositeOperation</span>=<span class="string">compositeStyle;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">context.fillStyle</span>=<span class="string">"red"</span>;</span></span><br><span class="line"><span class="tag">  <span class="attr">context.beginPath</span>();</span></span><br><span class="line"><span class="tag">  <span class="attr">context.moveTo</span>(<span class="attr">700</span>, <span class="attr">250</span>);</span></span><br><span class="line"><span class="tag">  <span class="attr">context.lineTo</span>(<span class="attr">1000</span>, <span class="attr">750</span>);</span></span><br><span class="line"><span class="tag">  <span class="attr">context.lineTo</span>(<span class="attr">400</span>, <span class="attr">750</span>);</span></span><br><span class="line"><span class="tag">  <span class="attr">context.closePath</span>();</span></span><br><span class="line"><span class="tag">  <span class="attr">context.fill</span>();</span></span><br><span class="line"><span class="tag">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>clip()</strong><br>从原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内（不能访问画布上的其他区域）。您也可以在使用 clip() 方法前通过使用 save() 方法对当前画布区域进行保存，并在以后的任意时间对其进行恢复（通过 restore() 方法）。我们来做一个类似管中窥豹的效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> context=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.fillStyle=<span class="string">"black"</span>;</span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line"></span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.arc(<span class="number">400</span>, <span class="number">400</span>, <span class="number">150</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">  context.fillStyle=<span class="string">"#fff"</span>;</span><br><span class="line">  context.fill();</span><br><span class="line">  context.clip();</span><br><span class="line"></span><br><span class="line">  context.font=<span class="string">"bold 150px Arial"</span>;</span><br><span class="line">  context.textAlign=<span class="string">"center"</span>;</span><br><span class="line">  context.textBaseline=<span class="string">"middle"</span>;</span><br><span class="line">  context.fillStyle=<span class="string">"#058"</span>;</span><br><span class="line">  context.fillText(<span class="string">"CANVAS"</span>, canvas.width/<span class="number">2</span>, canvas.height/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>非零环绕原则</strong><br>我们可以利用非零环绕原则制作一些图形中部的镂空效果，这里虽然可以使用覆盖白色图形的方式实现，但是这样实现不了内部的阴影效果。另外，非零环绕原则在拓扑学应用的非常广，不懂的小伙伴们可以自行百度，系统的学习一下。我们现在来制作一个带有阴影的圆环效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line">  canvas.width = <span class="number">800</span>;</span><br><span class="line">  canvas.height = <span class="number">600</span>;</span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">  context.fillStyle = <span class="string">"#FFF"</span>;</span><br><span class="line">  context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">  context.shadowColor = <span class="string">"#545454"</span>;</span><br><span class="line">  context.shadowOffsetX = <span class="number">5</span>;</span><br><span class="line">  context.shadowOffsetY = <span class="number">5</span>;</span><br><span class="line">  context.shadowBlur = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  context.arc(<span class="number">400</span>, <span class="number">300</span>, <span class="number">150</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span> ,<span class="literal">false</span>);</span><br><span class="line">  context.arc(<span class="number">400</span>, <span class="number">300</span>, <span class="number">230</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span> ,<span class="literal">true</span>);</span><br><span class="line">  context.fillStyle = <span class="string">"#00AAAA"</span>;</span><br><span class="line">  context.fill();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>isPointInPath(x, y)</strong><br>如果指定的点(x,y)位于当前的路径中，则返回true；否则返回false。我们可以利用这个特性制作一些交互的效果，下面的例子当用户点击画布中的圆形小球时，该小球会变成红色的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> balls = [];</span><br><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  canvas.width=<span class="number">800</span>;</span><br><span class="line">  canvas.height=<span class="number">800</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">    balls.push(&#123;<span class="attr">x</span>: <span class="built_in">Math</span>.random()*canvas.width, <span class="attr">y</span>: <span class="built_in">Math</span>.random()*canvas.height, <span class="attr">r</span>: <span class="built_in">Math</span>.random()*<span class="number">50</span>+<span class="number">30</span>&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  draw();</span><br><span class="line">  canvas.addEventListener(<span class="string">"mouseup"</span>, detect);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;balls.length; i++) &#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(balls[i].x, balls[i].y, balls[i].r, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">    context.fillStyle=<span class="string">"#058"</span>;</span><br><span class="line">    context.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">detect</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = e.clientX - canvas.getBoundingClientRect().left;</span><br><span class="line">  <span class="keyword">var</span> y = e.clientY - canvas.getBoundingClientRect().top;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;balls.length; i++) &#123;</span><br><span class="line">    context.beginPath();</span><br><span class="line">    context.arc(balls[i].x, balls[i].y, balls[i].r, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">    <span class="keyword">if</span> (context.isPointInPath(x, y)) &#123;</span><br><span class="line">      context.fillStyle=<span class="string">"#f00"</span>;</span><br><span class="line">      context.fill();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>clearRect(x, y, width, height)</strong><br>用于清空一个矩形的内部元素，参数与rect()一致。这个方法之前我们在 globalCompositeOperation 这一小节用到过，我们在每一次绘制之前都清空一下画布中的元素。</p>
+</li>
+</ul>
+<h2 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h2><p>前面我们介绍了如何在canvas上自定义绘制一些图形，那么如何在canvas上绘制一张已有的图片呢？有的朋友可能会想到用fillStyle那一小节的填充图像的方式，但是这样无法处理复杂问题，而且有点像是一种临时解决的办法。其实canvas有它自己专门绘制图像的方法drawImage()，它有三种用法，下面我们来一一介绍</p>
+<ul>
+<li><p><strong>drawImage(img, x, y)</strong><br>img表示绘制的图像源，它可以是HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D, 或 ImageBitmap中任意一个对象，我们这一节主要是使用HTMLImageElement对象。后面两个参数表示在canvas画布的(x,y)位置处开始绘制图像</p>
+</li>
+<li><p><strong>drawImage(img, x, y, width, height)</strong><br>width和height表示绘制在画布上的图像的宽度和高度，其余参数和上面一致</p>
+</li>
+<li><p><strong>drawImage(img, sx, sy, swidth, sheight, x, y, width, height)</strong><br>sx和sy表示裁剪图像的起始点位置，swidth和sheight表示裁剪图像的宽度和高度，其余参数和上面一致。这里参数比较多，记住顺序就很好理解了，是先裁剪图像，再绘制图像</p>
+</li>
+</ul>
+<p>简单改造一下W3C的实例
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>)</span><br><span class="line"><span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>)</span><br><span class="line"><span class="keyword">var</span> image = <span class="keyword">new</span> Image()</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  canvas.width = <span class="number">1300</span></span><br><span class="line">  canvas.height = <span class="number">800</span></span><br><span class="line"></span><br><span class="line">  image.src = <span class="string">"img.jpg"</span></span><br><span class="line">  image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    context.drawImage(image, <span class="number">100</span>, <span class="number">100</span>, (image.width<span class="number">-100</span>)/<span class="number">2</span>, (image.height<span class="number">-100</span>)/<span class="number">2</span>, <span class="number">200</span>, <span class="number">200</span>, (image.width<span class="number">-100</span>)/<span class="number">2</span>, (image.height<span class="number">-100</span>)/<span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外，canvas在图像处理中还有三个比较重要的方法：getImageData()、putImageData()、createImageData()  </p>
+<ul>
+<li><strong>getImageData(x, y, width, height)</strong><br>参数及含义与rect()一致，方法返回 ImageData 对象，对象拷贝了画布指定矩形的像素数据。这个 ImageData 对象中的 data 属性非常有用，它是一个数组，按顺序存储指定矩形中每个像素的 rgba 的值。例如下面的代码就会返回指定矩形的第一个像素的rgba的值：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> imgData=ctx.getImageData(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"><span class="keyword">var</span> red=imgData.data[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> green=imgData.data[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> blue=imgData.data[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> alpha=imgData.data[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当然聪明的你一定能想到使用4个数组把这个指定矩形每个像素的rgba的值封装起来，然后做一些类似 Photoshop 中模糊、反色、去色等非常有意思的操作，哈哈，赶紧动手试试吧！</p>
+<ul>
+<li><p><strong>putImageData(imgData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight)</strong><br>第一个参数是getImageData()方法返回的对象，(x,y)表示绘制的起始点的位置，(dirtyX, dirtyY)表示裁剪图像的起始点位置，(dirtyWidth, dirtyHeight)表示裁剪的图像宽度和高度，这里与drawImage()不同的是最终绘制的时候，x会和dirtyX叠加，y会和dirtyY叠加，下面的代码可以实现图像复制并粘贴的效果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> imageData = context1.getImageData(<span class="number">0</span>, <span class="number">0</span>, canvas1.width, canvas1.height)</span><br><span class="line">context2.putImageData(imageData, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, canvas2.width, canvas2.height)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>createImageData(width,height) 或 createImageData(imageData)</strong><br>这个方法可以创建一个 ImageData 对象，前者可以指定宽度和高度，后者可以指定创建与imageData对象尺寸相同的新 ImageData 对象，此时并不会复制旧imageData的图像数据<br>用法呢，目前我只能想到利用循环设置或修改之前提到的ImageData对象的data属性的数据，从而绘制出一个新的图像</p>
+</li>
+</ul>
+<p><a href="https://github.com/carolyicheng666/canvas-demo" target="_blank" rel="noopener"><strong style="color: red;">代码仓库</strong></a><br><!-- <strong style="color: red;">未完待续...</strong> --></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="易成 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="易成 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    易成
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://carolyicheng666.github.io/2017/12/20/canvas-api/" title="canvas-api">https://carolyicheng666.github.io/2017/12/20/canvas-api/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/map-filter-reduce/" rel="next" title="JavaScript 高阶函数之 map、filter、reduce">
+                <i class="fa fa-chevron-left"></i> JavaScript 高阶函数之 map、filter、reduce
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/28/animation/" rel="prev" title="animation">
+                animation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/main-header.jpg" alt="易成">
+            
+              <p class="site-author-name" itemprop="name">易成</p>
+              <p class="site-description motion-element" itemprop="description">我的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/carolyicheng666" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/2703728590/home" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用moveTo-、lineTo-和stroke-绘制一条直线"><span class="nav-number">3.</span> <span class="nav-text">使用moveTo()、lineTo()和stroke()绘制一条直线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用beginPath-重置当前路径"><span class="nav-number">4.</span> <span class="nav-text">使用beginPath()重置当前路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用closePath-绘制封闭图形"><span class="nav-number">5.</span> <span class="nav-text">使用closePath()绘制封闭图形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用rect-绘制矩形"><span class="nav-number">6.</span> <span class="nav-text">使用rect()绘制矩形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线条的其它样式"><span class="nav-number">7.</span> <span class="nav-text">线条的其它样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形变换"><span class="nav-number">8.</span> <span class="nav-text">图形变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fillStyle-属性设置"><span class="nav-number">9.</span> <span class="nav-text">fillStyle 属性设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制曲线"><span class="nav-number">10.</span> <span class="nav-text">绘制曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文字渲染"><span class="nav-number">11.</span> <span class="nav-text">文字渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级属性"><span class="nav-number">12.</span> <span class="nav-text">高级属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像处理"><span class="nav-number">13.</span> <span class="nav-text">图像处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    <div id="music163player">
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="86" src="https://music.163.com/outchain/player?type=2&id=33875750&auto=0&height=66"></iframe>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">易成</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

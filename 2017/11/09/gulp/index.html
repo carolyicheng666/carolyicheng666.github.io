@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="Gulp,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一成不变" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="员工离职，只有两个真实原因：钱没给到位；心受委屈了 马云">
+<meta name="keywords" content="Gulp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些常用的Gulp插件整理">
+<meta property="og:url" content="https://carolyicheng666.github.io/2017/11/09/gulp/index.html">
+<meta property="og:site_name" content="一成不变">
+<meta property="og:description" content="员工离职，只有两个真实原因：钱没给到位；心受委屈了 马云">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-02T08:52:57.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些常用的Gulp插件整理">
+<meta name="twitter:description" content="员工离职，只有两个真实原因：钱没给到位；心受委屈了 马云">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://carolyicheng666.github.io/2017/11/09/gulp/">
+
+
+
+
+
+  <title>一些常用的Gulp插件整理 | 一成不变</title>
+  
+
+
+
+
+
+
+
+
+  <style>
+    @media (max-width: 950px) {
+      #fork {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <a id="fork" href="https://github.com/carolyicheng666/carolyicheng666.github.io"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 9999;" src="https://camo.githubusercontent.com/c6625ac1f3ee0a12250227cf83ce904423abf351/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png"></a>
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一成不变</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://carolyicheng666.github.io/2017/11/09/gulp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="易成">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/main-header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一成不变">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些常用的Gulp插件整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T11:09:52+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,795
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>员工离职，只有两个真实原因：钱没给到位；心受委屈了</p>
+<p><strong>马云</strong></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Gulp-和-Grunt-对比"><a href="#Gulp-和-Grunt-对比" class="headerlink" title="Gulp 和 Grunt 对比"></a>Gulp 和 Grunt 对比</h2><p>我觉得 <a href="http://slides.com/contra/gulp#/" target="_blank" rel="noopener"><span style="color: red;">这篇对比介绍</span></a> 写的很好，大家可以看看。其中作者提到了为什么 <code>Grunt</code> 不好的原因：</p>
+<ul>
+<li>Plugins do multiple things：Want a banner? Use the javascript minifier</li>
+<li>Plugins do things that don’t need to be plugins：Need to run your tests? Use a plugin</li>
+<li>Grunt config format is a mess that tries to do everything：Not idiomatic with “the node way”</li>
+<li>Headache of temp files/folders due to bad flow control</li>
+</ul>
+<p>作者明确指出：
+<div class="note danger"><p>Your build system should empower not impede.
+It should only manipulate files - let other libraries handle the rest.</p></div>
+这一点我也表示赞同，不过还是看个人喜好吧，这里不做过多讨论。
+下面才是本文的重点，都是目前我用过的插件，点击标题即可跳转至官方文档，持续更新…</p>
+<h2 id="gulp-clean-css"><a href="#gulp-clean-css" class="headerlink" title="gulp-clean-css"></a><a href="https://www.npmjs.com/package/gulp-clean-css" target="_blank" rel="noopener">gulp-clean-css</a></h2><div class="note info"><p>gulp plugin to minify CSS, using clean-css<br>一款压缩css的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">let</span> cleanCSS = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'minify-css'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'styles/*.css'</span>)</span><br><span class="line">    .pipe(cleanCSS(&#123;<span class="attr">compatibility</span>: <span class="string">'ie8'</span>&#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其中<code>compatibility: &#39;ie8&#39;</code>表示兼容模式为 <code>ie8+</code></p>
+<h2 id="gulp-uglify"><a href="#gulp-uglify" class="headerlink" title="gulp-uglify"></a><a href="https://www.npmjs.com/package/gulp-uglify" target="_blank" rel="noopener">gulp-uglify</a></h2><div class="note info"><p>Minify JavaScript with UglifyJS2<br>一款压缩js的插件</p></div>
+<p>官方文档用到了 <code>pump</code>，我这里还是使用原始的做法吧，和压缩 <code>css</code> 一样的写法就行
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'compress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'lib/*.js'</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="gulp-htmlmin"><a href="#gulp-htmlmin" class="headerlink" title="gulp-htmlmin"></a><a href="https://www.npmjs.com/package/gulp-htmlmin" target="_blank" rel="noopener">gulp-htmlmin</a></h2><div class="note info"><p>gulp plugin to minify HTML.<br>一款压缩html的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> htmlmin = <span class="built_in">require</span>(<span class="string">'gulp-htmlmin'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'minify'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'src/*.html'</span>)</span><br><span class="line">    .pipe(htmlmin(&#123;<span class="attr">collapseWhitespace</span>: <span class="literal">true</span>&#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>更多配置选项设置请看 <a href="https://github.com/kangax/html-minifier" target="_blank" rel="noopener"><span style="color: red;">官方文档</span></a></p>
+<h2 id="gulp-rename"><a href="#gulp-rename" class="headerlink" title="gulp-rename"></a><a href="https://github.com/hparra/gulp-rename" target="_blank" rel="noopener">gulp-rename</a></h2><div class="note info"><p>gulp-rename is a gulp plugin to rename files easily.<br>一款重命名文件名的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">"gulp-rename"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// rename via string</span></span><br><span class="line">gulp.src(<span class="string">"./src/main/text/hello.txt"</span>)</span><br><span class="line">  .pipe(rename(<span class="string">"main/text/ciao/goodbye.md"</span>))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">"./dist"</span>)); <span class="comment">// ./dist/main/text/ciao/goodbye.md</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// rename via function</span></span><br><span class="line">gulp.src(<span class="string">"./src/**/hello.txt"</span>)</span><br><span class="line">  .pipe(rename(<span class="function"><span class="keyword">function</span> (<span class="params">path</span>) </span>&#123;</span><br><span class="line">    path.dirname += <span class="string">"/ciao"</span>;</span><br><span class="line">    path.basename += <span class="string">"-goodbye"</span>;</span><br><span class="line">    path.extname = <span class="string">".md"</span>;</span><br><span class="line">  &#125;))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">"./dist"</span>)); <span class="comment">// ./dist/main/text/ciao/hello-goodbye.md</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// rename via hash</span></span><br><span class="line">gulp.src(<span class="string">"./src/main/text/hello.txt"</span>, &#123; <span class="attr">base</span>: process.cwd() &#125;)</span><br><span class="line">  .pipe(rename(&#123;</span><br><span class="line">    dirname: <span class="string">"main/text/ciao"</span>,</span><br><span class="line">    basename: <span class="string">"aloha"</span>,</span><br><span class="line">    prefix: <span class="string">"bonjour-"</span>,</span><br><span class="line">    suffix: <span class="string">"-hola"</span>,</span><br><span class="line">    extname: <span class="string">".md"</span></span><br><span class="line">  &#125;))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">"./dist"</span>)); <span class="comment">// ./dist/main/text/ciao/bonjour-aloha-hola.md</span></span><br></pre></td></tr></table></figure>
+<h2 id="gulp-uncss"><a href="#gulp-uncss" class="headerlink" title="gulp-uncss"></a><a href="https://www.npmjs.com/package/gulp-uncss" target="_blank" rel="noopener">gulp-uncss</a></h2><div class="note info"><p>Remove unused CSS with UnCSS<br>一款移除无用css的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> uncss = <span class="built_in">require</span>(<span class="string">'gulp-uncss'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'site.css'</span>)</span><br><span class="line">    .pipe(uncss(&#123;</span><br><span class="line">        html: [<span class="string">'index.html'</span>, <span class="string">'posts/**/*.html'</span>, <span class="string">'http://example.com'</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./out'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>说明一下，<code>html</code> 中的文件指的是引入了前面的 <code>site.css</code> 的。
+<strong>注意</strong>，虽然 <a href="https://www.npmjs.com/package/gulp-uncss" target="_blank" rel="noopener"><span style="color: red;">官方文档的Example</span></a> 中使用了 <code>gulp-cssnano</code> 插件压缩css，但是相比较于 <code>gulp-clean-css</code> 效果较差，故不推荐使用</p>
+<h2 id="gulp-concat"><a href="#gulp-concat" class="headerlink" title="gulp-concat"></a><a href="https://www.npmjs.com/package/gulp-concat" target="_blank" rel="noopener">gulp-concat</a></h2><div class="note info"><p>Concatenates files<br>一款合并文件的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> concat = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'scripts'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'./lib/*.js'</span>)</span><br><span class="line">    .pipe(concat(<span class="string">'all.js'</span>))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./dist/'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="gulp-imagemin"><a href="#gulp-imagemin" class="headerlink" title="gulp-imagemin"></a><a href="https://www.npmjs.com/package/gulp-imagemin" target="_blank" rel="noopener">gulp-imagemin</a></h2><div class="note info"><p>Minify PNG, JPEG, GIF and SVG images with imagemin<br>一款压缩图片的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//If versions &gt;= 3</span></span><br><span class="line">gulp.task(<span class="string">'default'</span>, () =&gt;</span><br><span class="line">  gulp.src(<span class="string">'src/images/*'</span>)</span><br><span class="line">  .pipe(imagemin([</span><br><span class="line">    imagemin.gifsicle(&#123;<span class="attr">interlaced</span>: <span class="literal">true</span>&#125;),</span><br><span class="line">    imagemin.jpegtran(&#123;<span class="attr">progressive</span>: <span class="literal">true</span>&#125;),</span><br><span class="line">    imagemin.optipng(&#123;<span class="attr">optimizationLevel</span>: <span class="number">5</span>&#125;),</span><br><span class="line">    imagemin.svgo(&#123;</span><br><span class="line">      plugins: [</span><br><span class="line">        &#123;<span class="attr">removeViewBox</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">cleanupIDs</span>: <span class="literal">false</span>&#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;)</span><br><span class="line">  ]))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'dist/images'</span>))</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//If versions &lt; 3</span></span><br><span class="line">gulp.task(<span class="string">'default'</span>, () =&gt;</span><br><span class="line">  gulp.src(<span class="string">'src/images/*'</span>)</span><br><span class="line">  .pipe(imagemin(&#123;</span><br><span class="line">    interlaced: <span class="literal">true</span>,</span><br><span class="line">    progressive: <span class="literal">true</span>,</span><br><span class="line">    optimizationLevel: <span class="number">5</span>,</span><br><span class="line">    svgoPlugins: [&#123;<span class="attr">removeViewBox</span>: <span class="literal">true</span>&#125;]</span><br><span class="line">  &#125;))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'dist/images'</span>))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>看名字就知道啦：</p>
+<ul>
+<li>gifsicle — Compress GIF images</li>
+<li>jpegtran — Compress JPEG images</li>
+<li>optipng — Compress PNG images</li>
+<li>svgo — Compress SVG images</li>
+</ul>
+<p>不过从结果来看，依然比不过强大的 <a href="https://tinypng.com/" target="_blank" rel="noopener"><span style="color: red;">tinypng</span></a> ，如果对压缩的需求不是特别大，或者觉得手动 <code>tinypng</code> 太麻烦的话，就凑合着用吧，hiahia~</p>
+<h2 id="imagemin-pngquant"><a href="#imagemin-pngquant" class="headerlink" title="imagemin-pngquant"></a><a href="https://www.npmjs.com/package/imagemin-pngquant" target="_blank" rel="noopener">imagemin-pngquant</a></h2><div class="note info"><p>pngquant imagemin plugin<br>配合 <code>gulp-imagemin</code> 进一步压缩图片的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> imagemin = <span class="built_in">require</span>(<span class="string">'imagemin'</span>);</span><br><span class="line"><span class="keyword">const</span> imageminPngquant = <span class="built_in">require</span>(<span class="string">'imagemin-pngquant'</span>);</span><br><span class="line"> </span><br><span class="line">imagemin([<span class="string">'images/*.png'</span>], <span class="string">'build/images'</span>, &#123;<span class="attr">use</span>: [imageminPngquant()]&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Images optimized'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="gulp-clean"><a href="#gulp-clean" class="headerlink" title="gulp-clean"></a><a href="https://www.npmjs.com/package/gulp-clean" target="_blank" rel="noopener">gulp-clean</a></h2><div class="note info"><p>Removes files and folders<br>一款移除文件和文件夹的插件</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> clean = <span class="built_in">require</span>(<span class="string">'gulp-clean'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'app/tmp'</span>, &#123;<span class="attr">read</span>: <span class="literal">false</span>&#125;)</span><br><span class="line">    .pipe(clean());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>{read: false}</code>只是为了删除的更快，如果删除文件的内容在同一个工作流中有被用到，那么就不要设置这一项。</p>
+<h2 id="gulp-compass"><a href="#gulp-compass" class="headerlink" title="gulp-compass"></a><a href="https://www.npmjs.com/package/gulp-compass" target="_blank" rel="noopener">gulp-compass</a></h2><div class="note info"><p>Compile Sass to CSS using Compass<br>用 <code>compass</code> 把 <code>sass</code>编译成 <code>css</code> 的插件，即把手动编译的操作集成到 <code>gulp</code> 的 <code>task</code> 中</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> compass = <span class="built_in">require</span>(<span class="string">'gulp-compass'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'compass'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  gulp.src(<span class="string">'./src/*.scss'</span>)</span><br><span class="line">    .pipe(compass(&#123;</span><br><span class="line">      config_file: <span class="string">'./config.rb'</span>,</span><br><span class="line">      css: <span class="string">'stylesheets'</span>,</span><br><span class="line">      sass: <span class="string">'sass'</span></span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'app/assets/temp'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>，<code>stylesheets</code> 和 <code>sass</code> 的值指的是文件路径</p>
+<h2 id="gulp-sass"><a href="#gulp-sass" class="headerlink" title="gulp-sass"></a><a href="https://www.npmjs.com/package/gulp-sass" target="_blank" rel="noopener">gulp-sass</a></h2><div class="note info"><p>Sass plugin for Gulp.<br>为gulp编译sass的插件</p></div>
+<p>弃用compass后，我才开始使用这个，功能比较单一，经常要与PostCSS混合使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'./sass/**/*.scss'</span>)</span><br><span class="line">    .pipe(sass(&#123;<span class="attr">outputStyle</span>: <span class="string">'compressed'</span>&#125;).on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./css'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们可以修改outputStyle，还是我们熟悉的那四种方式：<br>嵌套输出方式——nested<br>展开输出方式——expanded<br>紧凑输出方式——compact<br>压缩输出方式——compressed</p>
+<h2 id="gulp-watch"><a href="#gulp-watch" class="headerlink" title="gulp-watch"></a><a href="https://www.npmjs.com/package/gulp-watch" target="_blank" rel="noopener">gulp-watch</a></h2><div class="note info"><p>File watcher that uses super-fast chokidar and emits vinyl objects<br>文件监控，热更新</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">    watch = <span class="built_in">require</span>(<span class="string">'gulp-watch'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'stream'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Endless stream mode </span></span><br><span class="line">  <span class="keyword">return</span> watch(<span class="string">'css/**/*.css'</span>, &#123; <span class="attr">ignoreInitial</span>: <span class="literal">false</span> &#125;)</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'build'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'callback'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event </span></span><br><span class="line">  <span class="keyword">return</span> watch(<span class="string">'css/**/*.css'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'css/**/*.css'</span>)</span><br><span class="line">      .pipe(gulp.dest(<span class="string">'build'</span>));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>说明：如果 <code>css/**/*.css</code> 发生改变，就执行后面的操作</p>
+<h2 id="gulp-html-replace"><a href="#gulp-html-replace" class="headerlink" title="gulp-html-replace"></a><a href="https://www.npmjs.com/package/gulp-html-replace" target="_blank" rel="noopener">gulp-html-replace</a></h2><div class="note info"><p>Replace build blocks in HTML. Like useref but done right<br>替换 <code>HTML</code> 中的代码块，比 <code>gulp-useref</code> 做的更好</p></div>
+<p>html文件：
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- build:&lt;name&gt; --&gt;</span></span><br><span class="line">Everything here will be replaced</span><br><span class="line"><span class="comment">&lt;!-- endbuild --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>gulpfile.js文件：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Options is a single string </span></span><br><span class="line">htmlreplace(&#123;&lt;name&gt;: <span class="string">'js/main.js'</span>&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Options is an array of strings </span></span><br><span class="line">htmlreplace(&#123;&lt;name&gt;: [<span class="string">'js/monster.js'</span>, <span class="string">'js/hero.js'</span>]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这边的要求有些严格，注释里面只能全是 <code>js</code> 或 <code>css</code> 才能这样写，如果不是，只能套用模板，举个例子：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Options is an object </span></span><br><span class="line">htmlreplace(&#123;</span><br><span class="line">  js: &#123;</span><br><span class="line">    src: <span class="string">'img/avatar.png'</span>,</span><br><span class="line">    tpl: <span class="string">'&lt;img src="%s" align="left" /&gt;'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Multiple tag replacement </span></span><br><span class="line">htmlreplace(&#123;</span><br><span class="line">  js: &#123;</span><br><span class="line">    src: [[<span class="string">'data-main.js'</span>, <span class="string">'require-src.js'</span>]],</span><br><span class="line">    tpl: <span class="string">'&lt;script data-main="%s" src="%s"&gt;&lt;/script&gt;'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>为什么说比 <code>gulp-useref</code> 做的更好呢，请看下一小节~~</p>
+<h2 id="gulp-useref"><a href="#gulp-useref" class="headerlink" title="gulp-useref"></a><a href="https://www.npmjs.com/package/gulp-useref" target="_blank" rel="noopener">gulp-useref</a></h2><div class="note info"><p>Parse build blocks in HTML files to replace references to non-optimized scripts or stylesheets with useref<br>与 <code>gulp-html-replace</code>一样，也是替换 <code>HTML</code> 中的代码块，但是可以创建新的文件，写在注释中即可，说白了就是 <code>gulp-html-replace</code> 和 <code>gulp-concat</code> 的集成，如果同时使用 <code>gulp-if</code> ，可以把 <code>gulp-uglify</code> 和 <code>gulp-clean-css</code> 都写在这个 <code>task</code> 中，相当于把原先的多个 <code>task</code> 合并成一个</p></div>
+<p>输入的html文件：
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- build:css css/combined.css --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/one.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/two.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- endbuild --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- build:js scripts/combined.js --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"scripts/one.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"scripts/two.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- endbuild --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>输出的html文件：
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/combined.css"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"scripts/combined.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>gulpfile.js文件：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">    useref = <span class="built_in">require</span>(<span class="string">'gulp-useref'</span>),</span><br><span class="line">    gulpif = <span class="built_in">require</span>(<span class="string">'gulp-if'</span>),</span><br><span class="line">    uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),</span><br><span class="line">    minifyCss = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'app/*.html'</span>)</span><br><span class="line">    .pipe(useref())</span><br><span class="line">    .pipe(gulpif(<span class="string">'*.js'</span>, uglify()))</span><br><span class="line">    .pipe(gulpif(<span class="string">'*.css'</span>, minifyCss()))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>要注意输出文件的编码格式
+对于<strong>大量集成<code>task</code></strong>的这种做法，我本人持保留态度，毕竟我还是习惯比较灵活的 <code>task</code> 配置方式，想执行哪个就执行哪个，一步到位的集成在 <code>default</code> 里面就 ok 啦~</p>
+<h2 id="browser-sync"><a href="#browser-sync" class="headerlink" title="browser-sync"></a><a href="https://www.npmjs.com/package/browser-sync" target="_blank" rel="noopener">browser-sync</a></h2><div class="note info"><p>Time-saving synchronised browser testing. Keep multiple browsers &amp; devices in sync when building websites.<br>浏览器同步测试，可以保证多个浏览器和设备的同步</p></div>
+<p>关于在 <code>gulp</code> 中的搭建方式建议看 <a href="https://browsersync.io/docs/gulp" target="_blank" rel="noopener"><span style="color: red;">这里</span></a><br>我自己的项目结构一般是这样的，首先，主文件夹下放各种配置文件，比如上面有提到过的 <code>config.rb</code> 、 <code>package.json</code> 、 <code>LICENSE</code> 、 <code>appcache</code> 、 <code>gulpfile.js</code> 等等，其次，主文件夹下有个 <code>dist</code> 文件夹放项目的原文件，执行 <code>gulp</code> 输出到同级的 <code>build</code> 文件夹， <code>build</code> 这个文件夹是可以直接放入生产环境的，所以针对官方文档的样例，我需要改造一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp        = <span class="built_in">require</span>(<span class="string">"gulp"</span>);</span><br><span class="line"><span class="keyword">var</span> sass        = <span class="built_in">require</span>(<span class="string">"gulp-ruby-sass"</span>);</span><br><span class="line"><span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">"browser-sync"</span>).create();</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'reload'</span>, [<span class="string">'default'</span>], () =&gt;</span><br><span class="line">  browserSync.reload()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'watch'</span>, [<span class="string">'default'</span>], () =&gt; &#123;</span><br><span class="line">  browserSync.init(&#123;</span><br><span class="line">      server: <span class="string">'./'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  gulp.watch([<span class="string">'./dist/*'</span>, <span class="string">'./dist/**/*'</span>], [<span class="string">'reload'</span>])</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里面server的值前面一定要加上 <code>./</code> ，大家可以试一试，效果是不一样的</p>
+<h2 id="gulp-autoprefixer"><a href="#gulp-autoprefixer" class="headerlink" title="gulp-autoprefixer"></a><a href="https://www.npmjs.com/package/gulp-autoprefixer" target="_blank" rel="noopener">gulp-autoprefixer</a></h2><div class="note info"><p>Prefix CSS with Autoprefixer<br>增加浏览器的私有前缀，让你不用再考虑为了写浏览器的兼容前缀而头疼</p></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'default'</span>, () =&gt;</span><br><span class="line">  gulp.src(<span class="string">'src/app.css'</span>)</span><br><span class="line">    .pipe(autoprefixer(&#123;</span><br><span class="line">        browsers: [<span class="string">'last 2 versions'</span>],</span><br><span class="line">        cascade: <span class="literal">false</span></span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>autoprefixer 内置有 8 个选项可供配置：
+<div class="note success"><ul>
+<li><code>browsers</code> (array): list of browsers query (like <code>last 2 versions</code>), which are supported in your project. We recommend to use <code>browserslist</code> config or <code>browserslist</code> key in <code>package.json</code>, rather than this option to share browsers with other tools. See <a href="https://github.com/ai/browserslist#queries" target="_blank" rel="noopener">Browserslist docs</a> for available queries and default value.</li>
+<li><code>env</code> (string): environment for Browserslist.</li>
+<li><code>cascade</code> (boolean): should Autoprefixer use Visual Cascade, if CSS is uncompressed. Default: <code>true</code></li>
+<li><code>add</code> (boolean): should Autoprefixer add prefixes. Default is <code>true</code>.</li>
+<li><code>remove</code> (boolean): should Autoprefixer [remove outdated] prefixes. Default is <code>true</code>.</li>
+<li><code>supports</code> (boolean): should Autoprefixer add prefixes for <code>@supports</code> parameters. Default is <code>true</code>.</li>
+<li><code>flexbox</code> (boolean|string): should Autoprefixer add prefixes for flexbox properties. With <code>&quot;no-2009&quot;</code> value Autoprefixer will add prefixes only for final and IE versions of specification. Default is <code>true</code>.</li>
+<li><code>grid</code> (boolean): should Autoprefixer add IE prefixes for Grid Layout properties. Default is <code>false</code>.</li>
+<li><code>stats</code> (object): custom <a href="https://github.com/ai/browserslist#custom-usage-data" target="_blank" rel="noopener">usage statistics</a> for <code>&gt; 10% in my stats</code> browsers query.</li>
+</ul></div></p>
+<p>官方的 Tip 中提到了 PostCSS：
+<div class="note success"><p>If you use other PostCSS based tools, like cssnano, you may want to run them together using gulp-postcss instead of gulp-autoprefixer. It will be faster, as the CSS is parsed only once for all PostCSS based tools, including Autoprefixer.</p></div></p>
+<p>这段话大致是说，如果你只使用autoprefixer这一个插件，那么就用gulp-autoprefixer；如果还要使用别的插件，那就使用 PostCSS ，将其他插件写在它里面，速度更快。关于 PostCSS ，请看下一小节。</p>
+<p><span style="color: red;">更新一下，</span>大家在PostCSS中使用这个插件或者别的插件的时候可能会遇到如下问题：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">Error: [object Object] is not a PostCSS plugin</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>额，这里PostCSS支持的插件列表里并没有gulp-autoprefixer，而支持的是它的原版autoprefixer，我们只要改一下require就行了，用法是一样的，以后遇到这类问题一定得回头找一下PostCSS支持的<a href="https://github.com/postcss/postcss/blob/master/docs/plugins.md" target="_blank" rel="noopener">插件列表</a></p>
+<h2 id="gulp-postcss"><a href="#gulp-postcss" class="headerlink" title="gulp-postcss"></a><a href="https://www.npmjs.com/package/gulp-postcss" target="_blank" rel="noopener">gulp-postcss</a></h2><div class="note info"><p>PostCSS gulp plugin to pipe CSS through several plugins, but parse CSS only once.<br>PostCSS 将许多插件集成在一个 CSS 管道中，但只解析一次 CSS</p></div>
+<p>比如说我们想要集成 autoprefixer 和 cssnano 这两个插件，那就要这么写：
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">'gulp-postcss'</span>);</span><br><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</span><br><span class="line"><span class="keyword">var</span> cssnano = <span class="built_in">require</span>(<span class="string">'cssnano'</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> plugins = [</span><br><span class="line">    autoprefixer(&#123;<span class="attr">browsers</span>: [<span class="string">'last 1 version'</span>]&#125;),</span><br><span class="line">    cssnano()</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'./src/*.css'</span>)</span><br><span class="line">    .pipe(postcss(plugins))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./dest'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>不过需要它的插件列表里有支持这个插件才行，具体支持情况请看 <a href="https://github.com/postcss/postcss/blob/master/docs/plugins.md" target="_blank" rel="noopener"><span style="color: red;">这里</span></a>，当然，不要忘了它始终还是一款 CSS 插件，千万不要让它干别的事情，它也干不了呀，哈哈~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="易成 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="易成 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    易成
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://carolyicheng666.github.io/2017/11/09/gulp/" title="一些常用的Gulp插件整理">https://carolyicheng666.github.io/2017/11/09/gulp/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gulp/" rel="tag"># Gulp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/08/themes/" rel="next" title="关于themes/next无法上传github备份">
+                <i class="fa fa-chevron-left"></i> 关于themes/next无法上传github备份
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/15/javascript-shorthand/" rel="prev" title="JavaScript的一些简写技巧">
+                JavaScript的一些简写技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/main-header.jpg" alt="易成">
+            
+              <p class="site-author-name" itemprop="name">易成</p>
+              <p class="site-description motion-element" itemprop="description">我的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/carolyicheng666" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/2703728590/home" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gulp-和-Grunt-对比"><span class="nav-number">1.</span> <span class="nav-text">Gulp 和 Grunt 对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-clean-css"><span class="nav-number">2.</span> <span class="nav-text">gulp-clean-css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-uglify"><span class="nav-number">3.</span> <span class="nav-text">gulp-uglify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-htmlmin"><span class="nav-number">4.</span> <span class="nav-text">gulp-htmlmin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-rename"><span class="nav-number">5.</span> <span class="nav-text">gulp-rename</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-uncss"><span class="nav-number">6.</span> <span class="nav-text">gulp-uncss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-concat"><span class="nav-number">7.</span> <span class="nav-text">gulp-concat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-imagemin"><span class="nav-number">8.</span> <span class="nav-text">gulp-imagemin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#imagemin-pngquant"><span class="nav-number">9.</span> <span class="nav-text">imagemin-pngquant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-clean"><span class="nav-number">10.</span> <span class="nav-text">gulp-clean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-compass"><span class="nav-number">11.</span> <span class="nav-text">gulp-compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-sass"><span class="nav-number">12.</span> <span class="nav-text">gulp-sass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-watch"><span class="nav-number">13.</span> <span class="nav-text">gulp-watch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-html-replace"><span class="nav-number">14.</span> <span class="nav-text">gulp-html-replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-useref"><span class="nav-number">15.</span> <span class="nav-text">gulp-useref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-sync"><span class="nav-number">16.</span> <span class="nav-text">browser-sync</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-autoprefixer"><span class="nav-number">17.</span> <span class="nav-text">gulp-autoprefixer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-postcss"><span class="nav-number">18.</span> <span class="nav-text">gulp-postcss</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    <div id="music163player">
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="86" src="https://music.163.com/outchain/player?type=2&id=33875750&auto=0&height=66"></iframe>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">易成</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
