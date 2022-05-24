@@ -3280,8 +3280,8 @@ It should only manipulate files - let other libraries handle the rest.</p></div>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
       <tags>
-        <tag>Hello World</tag>
         <tag>Hexo</tag>
+        <tag>Hello World</tag>
       </tags>
   </entry>
 </search>
